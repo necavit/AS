@@ -1,5 +1,6 @@
 package edu.upc.fib.wordguess.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,6 +12,7 @@ public class FooHibernateEntityTest implements java.io.Serializable {
 	@Id
 	private int id;
 	
+	@Column
 	private String name;
 	
 	public FooHibernateEntityTest(int id, String name) {

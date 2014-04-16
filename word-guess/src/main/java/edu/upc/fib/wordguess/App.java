@@ -16,6 +16,7 @@ public class App {
 		FooHibernateEntityTest testEntity = new FooHibernateEntityTest(123, "one_two_three");
 		session.save(testEntity);
 		session.getTransaction().commit();
+		session.close();
 		
 		HibernateUtil.shutdown();
 		System.out.println("Closing... Goodbye!");
