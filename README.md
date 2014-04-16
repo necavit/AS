@@ -1,8 +1,6 @@
 #AS
 
-Repositori del projecte d'Arquitectura del Software
-
-*Software Architechture project repository*
+El codi de la pràctica es troba al directori `project`. L'informe de la pràctica es troba al directori `report`.
 
 
 ##Setup
