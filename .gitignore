@@ -1,9 +1,24 @@
+# Java & Eclipse stuff:
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+RemoteSystemsTempFiles/*
+.classpath
+.project
+
 *.class
 
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
 *.jar
 *.war
 *.ear
