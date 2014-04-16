@@ -1,6 +1,6 @@
 #AS
 
-El codi de la pràctica es troba al directori `project`. L'informe de la pràctica es troba al directori `report`.
+El codi de la pràctica es troba al directori `word-guess`. L'informe de la pràctica es troba al directori `report`.
 
 
 ##Setup
