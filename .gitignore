@@ -50,6 +50,7 @@ hs_err_pid*
 *.mtc1
 *.out
 *.synctex.gz
+*.pyg
 
 #pdf
 *.pdf

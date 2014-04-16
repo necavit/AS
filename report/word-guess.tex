@@ -1,0 +1,43 @@
+% !TeX document-id = {c8997a6a-2921-4608-9b2d-78af17b6575a}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{minted}
+\usepackage{todonotes}
+\usepackage[section]{placeins}
+\usepackage{authblk}
+
+
+\title{Endevina Paraules (I)}
+\date{Abril 2014}
+\author{Daniel Ariñez Soriano}
+\author{David Martínez Rodríguez}
+\author{Miquel Masriera Quevedo}
+\author{Marcel Pujol Navarro\vspace{11cm}}
+\affil{Arquitectura del Software\\Facultat d'Informàtica de Barcelona, UPC}
+
+\renewcommand\Authands{ i }
+
+\begin{document}
+	
+	\maketitle
+	\newpage
+	\tableofcontents % Content Index
+	\cleardoublepage
+
+\section{Foo Section} 
+\input{foo_section}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
