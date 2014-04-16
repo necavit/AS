@@ -7,8 +7,10 @@
   <property name="hibernate.connection.password">postgres</property>
   <property name="hibernate.connection.url">jdbc:postgresql:template1</property>
   <property name="hibernate.connection.username">postgres</property>
-  <property name="hibernate.default_schema">asdb</property>
+  <property name="hibernate.default_schema">public</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <mapping class="edu.upc.fib.wordguess.domain.model.FooHibernateEntityTest"/>
  </session-factory>
 </hibernate-configuration>

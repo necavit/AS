@@ -1,11 +1,11 @@
 package edu.upc.fib.wordguess.domain.model;
 
 public abstract class RegisteredUser {
-
+	
 	private String name;
 	
 	private String surname;
-	
+
 	private String username;
 	
 	private String password;
