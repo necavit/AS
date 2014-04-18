@@ -57,3 +57,4 @@ sudo -u postgres createdb asdb
 ```
 
 Un cop engegat el servidor PostgreSQL, podem continuar amb Hibernate.
+
