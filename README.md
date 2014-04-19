@@ -56,5 +56,13 @@ Creem també una base de dades que anomenarem 'asdb' (important per a que no hag
 sudo -u postgres createdb asdb
 ```
 
-Un cop engegat el servidor PostgreSQL, podem continuar amb Hibernate.
+Per tal de fer testing de l'aplicació, crearem també una base de dades de test, on podrem mantenir un estat conegut al llarg de l'execució de les suites de test:
+
+```bash
+sudo -u postgres createdb astest
+```
+
+D'aquesta manera, disposarem de dos esquemes on podrem executar la nostra aplicació o els tests, de la manera que volguem.
+
+Un cop engegat i configurat el servidor PostgreSQL, podem continuar amb Hibernate.
 
