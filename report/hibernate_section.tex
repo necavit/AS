@@ -8,6 +8,46 @@ Hibernate és un \emph{framework} que ens permet fer una assignació o "mapeig" 
 Val a dir que Hibernate no és la única eina que ens permet realitzar una tasca similar. De fet, totes aquestes eines es coneixen com a ORMs, de l'anglès \emph{Object-Relational Mapper}. Altres ORMs, tant OpenSource com comercials i per diversos llenguatges orientats a objectes poden ser: \hyperlink{http://ormlite.com/}{ORMLite}, \href{https://developer.apple.com/technologies/mac/data-management.html}{CoreData}, \href{https://www.djangoproject.com/}{Django}, \href{http://cakephp.org/}{CakePHP}, \href{http://openjpa.apache.org/}{OpenJPA}, etc.
 
 \subsection{Configurant Hibernate}
-En primer lloc, caldrà que el projecte de Java que hem creat contingui les llibreries necessàries que composen el paquet de Hibernate. Aquestes inclusions les fem mitjançant l'eina Maven, com ja hem explicat abans. Concretament, hem d'afegir un driver JDBC de connexió per la base de dades concreta que estem fent servir, a més del nucli del framewor
+En primer lloc, caldrà que el projecte de Java que hem creat contingui les llibreries necessàries que composen el paquet de Hibernate. Aquestes inclusions les fem mitjançant l'eina Maven, com ja hem explicat abans. Concretament, hem d'afegir un driver JDBC de connexió per la base de dades concreta que estem fent servir, a més del nucli del propi framework i una llibreria externa (\texttt{javassist}) que és necessària per donar suport a la \emph{reflexió estructural}, de la qual Hibernate fa ús.
 
-Per tal que Hibernate persisteixi el model del nostre domini, cal que li proporcionem una mínima configuració. Fonamentalment, ens cal donar-li l'adreça a la qual ha de fer la connexió amb la base de dades relacional, l'usuari i la contrasenya amb els quals ens connectarem i l'esquema contra el qual voldrem executar el nostre sistema. Tot això d'indica al fitxer
+Per tal que Hibernate persisteixi el model del nostre domini, cal que li proporcionem una mínima configuració. Fonamentalment, ens cal donar-li l'adreça a la qual ha de fer la connexió amb la base de dades relacional, l'usuari i la contrasenya amb els quals ens connectarem i l'esquema contra el qual voldrem executar el nostre sistema. Tot això s'indica al fitxer \texttt{hibernate.cfg.xml}. També configurem en aquest fitxer algunes propietats que necessitem perquè funcioni correctament o perquè ens poden resultar útils. La configuració que apliquem finalment a Hibernate és la següent:
+
+\begin{minted}{xml}
+<hibernate-configuration>
+    <session-factory name="HibernateUtil">
+        <!-- Connection parameters -->
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+        <property name="hibernate.connection.url">
+            jdbc:postgresql://localhost:5432/asdb
+        </property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgres</property>
+        <!-- Hibernate properties -->
+        <property name="hibernate.default_schema">public</property>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+        </property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+    </session-factory>
+</hibernate-configuration>
+\end{minted}
+
+\begin{itemize}
+	\item \textbf{\texttt{default\_schema}:} és el nom de l'esquema que atacarà Hibernate, a la base de dades \texttt{asdb}. El valor és \texttt{public}, perquè és el que defineix per defecte PostgreSQL quan crea una base de dades.
+	\item \textbf{\texttt{dialect}:} per tal que Hibernate pugui fer les associacions correctes segons els tipus de dades, cal indicar-li quin \emph{dialecte} de SQL és l'emprat per la base de dades.
+	\item \textbf{\texttt{show\_sql}:} ens permet habilitar l'enregistrament a la consola de les sentències SQL que genera Hibernate.
+	\item \textbf{\texttt{hbm2ddl.auto}:} aquesta opció és necessària per poder modificar l'esquema de la base de dades quan s'executa el nostre sistema, de manera que si afegim una nova classe al model conceptual, Hibernate s'ocupa de crear la taula o taules necessàries per a reflectir els canvis. Cal notar que aquesta propietat pot ser perillosa si es deixa amb el valor \texttt{update} en un codi de producció, donat que es podria modificar sense voler o amb efectes colaterals l'esquema d'una base de dades en explotació. Per evitar-ho, també es poden aplicar altres valors, com ara \texttt{validate}, el qual només valida l'esquema, però no el modifica.
+\end{itemize}
+
+
+A més a més d'aquestes propietats, també ens cal indicar en aquest fitxer quines són les classes del model conceptual del nostre domini de les quals volem que Hibernate en gestioni la persistència. Per fer-ho, simplement ens cal afegir un element de tipus \texttt{mapping} a l'element \texttt{session-factory} que ja tenim definit al fitxer.
+
+
+
+
+
+
+

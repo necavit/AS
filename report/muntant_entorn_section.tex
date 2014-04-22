@@ -19,25 +19,25 @@ La configuració de Maven pel projecte es duu a terme mitjançant el fitxer \tex
 
 \begin{minted}{xml}
 <dependencies>
- 	<!-- PostgreSQL driver -->
- 	<dependency>
-  		<groupId>postgresql</groupId>
-  		<artifactId>postgresql</artifactId>
-  		<version>9.1-901.jdbc4</version>
-	</dependency>
- 	<!-- Hibernate dependencies -->
- 	<!--   NOTE: no need to add annotations artifact: since version 3.6
+    <!-- PostgreSQL driver -->
+    <dependency>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.1-901.jdbc4</version>
+    </dependency>
+    <!-- Hibernate dependencies -->
+    <!--   NOTE: no need to add annotations artifact: since version 3.6
         annotations are included in the Hibernate core -->
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-core</artifactId>
-		<version>3.6.3.Final</version>
-	</dependency>
-	<dependency>
-		<groupId>javassist</groupId>
-		<artifactId>javassist</artifactId>
-		<version>3.12.1.GA</version>
-	</dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>3.6.3.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.12.1.GA</version>
+    </dependency>
 </dependencies>
 \end{minted}
 
