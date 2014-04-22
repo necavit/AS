@@ -1,0 +1,44 @@
+Donat que hem de començar a implementar una part del projecte per aquesta entrega, hem decidit muntar tota l'infraestructura del mateix, per poder agilitzar el posterior desenvolupament. Descrivim tot seguit quins són els components i les eines que farem servir al llarg de tot el projecte.
+
+\subsection{PostgreSQL}
+El sistema gestor de bases de dades que farem servir al llarg de la pràctica és el projecte OpenSource PostgreSQL (\url{http://www.postgresql.org/}), que ja coneixem d'assignatures anteriors del pla d'estudis.
+
+El desplegament de la base de dades és local, és a dir, cada desenvolupador té un servidor de PostgreSQL a la seva màquina, de manera que no haguem de configurar accessos remots ni servidors externs. En aquest servidor iniciem un esquema que anomenem \texttt{asdb} al qual conectarem el sistema a desenvolupar.
+
+\subsection{Repositori de codi}
+Un element indispensable per dur a terme un projecte de desenvolupament de software és un repositori distribuït de codi que ens faciliti la gestió de les diverses versions del nostre sistema. A tal efecte, hem escollit l'eina Git, per ser un dels sistemes de control de versions més actuals i potents.
+
+Per a allotjar de forma remota i distribuïda la base de codi del projecte, hem optat per la plataforma lliure GitHub, que ens ofereix la possibilitat de mantenir un nombre il·limitat de repositoris públics. Concretament, el repositori del projecte es troba a la següent URL: \url{https://github.com/necavit/AS}.
+
+\subsection{Apache Maven}
+La gestió del cicle de vida d'un sistema software pot arribar a ser força complexa, sobretot si el sistema que estem desenvolupant depèn d'una gran quantitat d'altres paquets o llibreries. A més a més de la gestió de dependències, l'execució d'un sistema va precedida d'una sèrie de fases que desitgem automatitzar al màxim: validació de codi, testeig unitari i d'integració, empaquetament, instal·lació en repositoris locals o fins i tot el desplegament del sistema en un entorn remot.
+
+Apache Maven és una eina que ens permet la gestió de totes aquestes fases, a més de facilitar la inclusió de dependències al projecte. Nosaltres el farem servir per al manteniment dinàmic de les llibreries d'Hibernate que fem servir. D'aquesta manera, en un futur serà força més senzill incloure una nova llibreria.
+
+La configuració de Maven pel projecte es duu a terme mitjançant el fitxer \texttt{pom.xml} (de l'anglès \emph{Project Object Model}), on definim les llibreries a incloure:
+
+\begin{minted}{xml}
+<dependencies>
+ 	<!-- PostgreSQL driver -->
+ 	<dependency>
+  		<groupId>postgresql</groupId>
+  		<artifactId>postgresql</artifactId>
+  		<version>9.1-901.jdbc4</version>
+	</dependency>
+ 	<!-- Hibernate dependencies -->
+ 	<!--   NOTE: no need to add annotations artifact: since version 3.6
+        annotations are included in the Hibernate core -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>3.6.3.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.12.1.GA</version>
+	</dependency>
+</dependencies>
+\end{minted}
+
+Un cop acabada la configuració del projecte al \texttt{pom.xml}, tots els desenvolupadors podem construïr el paquet sense por a tenir discrepàncies entre les versions de les llibreries que s'utilitzen, perquè Maven descarrega els artefactes d'un mateix repositori central.

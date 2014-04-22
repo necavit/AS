@@ -1,0 +1,13 @@
+\subsection{Persistència, Domain Model i ORM's}
+En el context de la pràctica, el patró arquitectònic triat és el de \emph{Domain Model}, en el sentit que focalitzem la lògica del sistema en el propi model del domini, en comptes de relegar-la a la capa de persistència, per exemple. Precisament, en aquest sentit, escollim un sistema de gestió de persistència relacional, fet que ens determinarà una gran part del disseny del nostre software.
+
+Per poder seguir el model de desenvolupament descrit, hem d'abstreure'ns al màxim del feixuc problema de mantenir la consistència entre dos tipus de models que ens trobem al nostre sistema: el model \emph{relacional} i el model \emph{orientat a objectes}. Per fer-ho, comptem amb Hibernate, un component que ens facilitarà molt aquesta tasca.
+
+Hibernate és un \emph{framework} que ens permet fer una assignació o "mapeig" del nostre model orientat a objectes al model relacional, utilitzant anotacions a les classes del nostre model en Java o fitxers de configuració XML. Al llarg de la pràctica ens centrarem en l'ús de la primera alternativa.
+
+Val a dir que Hibernate no és la única eina que ens permet realitzar una tasca similar. De fet, totes aquestes eines es coneixen com a ORMs, de l'anglès \emph{Object-Relational Mapper}. Altres ORMs, tant OpenSource com comercials i per diversos llenguatges orientats a objectes poden ser: \hyperlink{http://ormlite.com/}{ORMLite}, \href{https://developer.apple.com/technologies/mac/data-management.html}{CoreData}, \href{https://www.djangoproject.com/}{Django}, \href{http://cakephp.org/}{CakePHP}, \href{http://openjpa.apache.org/}{OpenJPA}, etc.
+
+\subsection{Configurant Hibernate}
+En primer lloc, caldrà que el projecte de Java que hem creat contingui les llibreries necessàries que composen el paquet de Hibernate. Aquestes inclusions les fem mitjançant l'eina Maven, com ja hem explicat abans. Concretament, hem d'afegir un driver JDBC de connexió per la base de dades concreta que estem fent servir, a més del nucli del framewor
+
+Per tal que Hibernate persisteixi el model del nostre domini, cal que li proporcionem una mínima configuració. Fonamentalment, ens cal donar-li l'adreça a la qual ha de fer la connexió amb la base de dades relacional, l'usuari i la contrasenya amb els quals ens connectarem i l'esquema contra el qual voldrem executar el nostre sistema. Tot això d'indica al fitxer
