@@ -1,24 +1,17 @@
-4. Patrons de disseny utilitzats i la seva justificació
+Expliquem tot seguit els patrons de disseny que hem fet servir al llarg dels diagrames de seqüència de disseny.
 
-Pattern Adapter
+\subsection{Patró Adaptador (\emph{Adapter})}
+Hem utilitzat el patró adaptador a la crida al servei extern de missatgeria. El motiu pel qual l’usem és per no crear un acoblament entre les classes del domini i el mateix servei. És a dir, en cas de modificació de la crida que exposa l'API del servei, únicament és veurà afectada la classe que implementa el contracte de l'adaptador i, per tant, no quedaran afectades la resta de classes que utilitzen aquest servei.
+A més a més, a través de l’ús d’un adaptador podem modificar i/o filtrar les dades obtingudes d’una crida, definida pel servei extern, per tal d’adequar-les a les nostres preferències.
 
-Hem utilitzat el patró adaptador en la crida al servei extern de missatgeria. El motiu pel qual l’usem és per no crear un acoblament entre les classes del domini i el mateix servei. És a dir, en cas de modificació sobre la crida de l'API, únicament és veuran afectats els canvis sobre la classe adaptador, per tant no quedaran afectades la resta de classes que utilitzen aquest servei.
-A més, a través de l’ús d’un adaptador podem modificar i/o filtrar les dades obtingudes d’una crida, definida pel servei extern, per tal d’adequar-les a les nostres preferències.
+\subsection{Patró Estratègia (\emph{Strategy})}
+Hem utilitzat el patró estràtegia per dissenyar les dues modalitats diferents de puntuació d'una partida. Les dues classes, que implementen el mateix contracte, únicament difereixen en el seu comportament, és a dir, en la manera com calculen la puntuació. El tipus d’estratègia de puntuació s’aplica a una nova partida en funció del nombre de partides guanyades per part de l'usuari. L'avantatge de fer servir aquest patró és que ens assegurem que de cara a un futur serà possible afegir noves estrategies de puntuació amb modificacions mínimes sobre l’esquema conceptual i sobre el codi.
 
-Pattern Strategy
+\subsection{Patró \emph{Singleton}}
+Hem utilitzat el patró singleton per totes aquelles classes que únicament presenten una sola instància, perquè el seu accés és crític o bé perquè han de ser accessibles des d'un únic punt conegut o bé perquè la lògica que implementen ha d'estar protegida, com és el cas de l'accés a la capa de persistència. El patró també l'apliquem a aquelles classes que representen dades globals a tot el sistema, com en el cas de la classe \texttt{Paràmetres}.
 
-Hem utilitzat el patró estràtegia, ja que existeixen dues modalitats diferents de puntuació. Aquestes dues classes únicament difereixen en el seu comportament. El tipus d’estratègia de puntuació s’aplica en funció del nombre de partides guanyades per part de l'usuari. A més utilitzant aquest tipus de patró ens assegurem que de cara a un futur serà possible afegir noves estrategies de puntuació amb les mínimes modificacions sobre l’esquema i el codi possibles.
+\subsection{Patró Factoria (\emph{Factory})}
+Hem utilitzat el patró factoria, ja que així s’allibera a les classes creades d’aquelles responsabilitats que no li corresponen però que són necessàries per a la seva creació, mantenint la seva independència i no creant un grau d'acoblament més gran. L’utilitzem, doncs, en aquells casos en què la creació d’un objecte implica quelcom més que una simple instanciació. Per exemple, en el cas de la creació d’un controlador, ens referim a l’accés que s’ha de realitzar a la capa de dades.
 
-Pattern Singleton
-
-Hem utilitzat el patró singleton, ja que hi ha classes que únicament presenten una sola instància, a més en les classes a on s’aplica aquest patró únicament és crearan els objectes si prèviament no han estat creats, altrament si ja han estat creats, no els crea de nou.
-En el nostre esquema s’ha aplicat aquest patró en les següents classes: Paràmetres, SeviceLocator, Factoria i CtrlDataFactoria. I aquestes han de ser accessibles per la resta de classes des d’un punt d’accés conegut.
-
-Pattern Factory
-
-Hem utilitzat el patró factoria, ja que així s’allibera a les classes creades d’aquelles responsabilitats que no li corresponen però que són necessàries per a la seva creació, mantenint la seva independència i no creant acoblament.
-És a dir, l’utilitzem en aquells casos en què la creació d’un objecte implica quelcom més que una simple instanciació, per exemple, en el cas de la creació d’un controlador ens referim a l’accés que s’ha de realitzar a la capa de dades.
-
-Access to the Data Layer
-
-Hem utilitzat accessos a la capa de dades des dels controladors per tal de mantenir una bona cohesió entre les classes i no augmentar l’acoblament entre aquestes. Així únicament són els controladors els encarregats de realitzar aquests accessos mentre que les classes desconeixen l’existència de la resta de tipus.
+\subsection{Accés a la capa de dades}
+Hem utilitzat accessos a la capa de dades des dels controladors per tal de mantenir una bona cohesió entre les classes i no augmentar l’acoblament entre aquestes. Així, únicament són els controladors els encarregats de realitzar aquests accessos mentre que les classes desconeixen l’existència de la resta de tipus.
