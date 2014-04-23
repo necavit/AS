@@ -16,6 +16,15 @@
 \usepackage[section]{placeins}
 \usepackage{authblk}
 
+\usepackage{ifthen}
+
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
 
 \title{Endevina Paraules (I)}
 \date{Abril 2014}
@@ -43,5 +52,12 @@
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
+
+\appendix
+\section{Classes Java}
+\input{apendix_java}
+
+\section{Fitxers de configuració}
+\input{apendix_config}
 
 \end{document}

@@ -1,0 +1,91 @@
+\subsection{\texttt{hibernate.cfg.xml}}
+\begin{minted}[fontsize=\small]{java}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory name="HibernateUtil">
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.password">postgres</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/asdb</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.default_schema">public</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="edu.upc.fib.wordguess.domain.model.Match"/>
+    <mapping class="edu.upc.fib.wordguess.domain.model.Word"/>
+  </session-factory>
+</hibernate-configuration>
+\end{minted}
+
+\subsection{\texttt{pom.xml}}
+\begin{minted}[fontsize=\small]{java}
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+      http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project properties -->
+    <groupId>edu.upc.fib.wordguess</groupId>
+    <artifactId>word-guess</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version> <!-- DO NOT CHANGE THIS -->
+    <name>word-guess</name>
+
+    <!-- JBoss repository for Hibernate -->
+    <repositories>
+        <repository>
+            <id>JBoss repository</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- PostgreSQL driver -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+        </dependency>
+        <!-- Hibernate dependencies -->
+        <!--   NOTE: no need to add annotations artifact: since version 3.6
+        annotations are included in the Hibernate core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>3.6.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+        </dependency>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
+\end{minted}
