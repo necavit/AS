@@ -8,7 +8,7 @@ Per poder provar la configuració que fem de Hibernate i executar un petit progr
 	\label{fig:conceptmodel}
 \end{figure}
 
-Tal i com podem veure a la figura \ref{fig:conceptmodel}, implementem la classe Partida (Match) i Paraula (Word), amb els seus atributs simples i la relació entre elles. Ja podem procedir a configurar Hibernate.
+Tal i com podem veure a la figura \ref{fig:conceptmodel}, implementem la classe Partida (Match) i Paraula (Word), amb els seus atributs simples i la relació entre elles. Ara ja podem procedir a configurar Hibernate.
 
 \subsubsection{Configurant Hibernate}
 En primer lloc, caldrà que el projecte de Java que hem creat contingui les llibreries necessàries que composen el paquet de Hibernate. Aquestes inclusions les fem mitjançant l'eina Maven, com ja hem explicat abans. Concretament, hem d'afegir un driver JDBC de connexió per la base de dades concreta que estem fent servir, a més del nucli del propi framework i una llibreria externa (\texttt{javassist}) que és necessària per donar suport a la \emph{reflexió estructural}, de la qual Hibernate fa ús.
@@ -46,7 +46,7 @@ Per tal que Hibernate persisteixi el model del nostre domini, cal que li proporc
 \end{itemize}
 
 \subsubsection{Anotant les classes}
-Tal i com hem dit, per aquesta pràctica farem servir el model d'anotacions que ens ofereix JPA (\emph{Java Persistence API}) i que Hibernate suporta. Tot seguit mostrem com queden anotades les classes \texttt{Match} i \texttt{Word}, amb els seus membres corresponents:
+Tal i com hem dit, per aquesta pràctica farem servir el model d'anotacions que ens ofereix JPA (\emph{Java Persistence API}) i que Hibernate suporta. Tot seguit mostrem com queden anotades les classes \texttt{Match} i \texttt{Word}, amb els seus membres corresponents\footnote{El codi complet de les classes el podem trobar a l'apèndix.}:
 
 \begin{minted}{java}
     @Entity
@@ -113,4 +113,71 @@ Implementem tot seguit un petit programa de prova per inserir un objecte de la c
     }
 \end{minted}
 
-Un cop executem aquest codi, podem esbrinar fàcilment quin ha estat l'efecte obrint una connexió amb la base de dades. Per fer-ho, podem TODO!!!!!
+Un cop executem aquest codi, podem esbrinar fàcilment quin ha estat l'efecte obrint una connexió amb la base de dades. Si fem servir el paquet d'administració de PostgreSQL, pgAdmin, podem explorar l'esquema que s'ha generat a la base de dades i veure les definicions de les taules que Hibernate ha creat:
+
+\begin{minted}{sql}
+    CREATE TABLE match
+    (
+      matchid integer NOT NULL,
+      isfinished boolean,
+      iswon boolean,
+      numerrors integer,
+      word_name character varying(255),
+      CONSTRAINT match_pkey PRIMARY KEY (matchid ),
+      CONSTRAINT fk62dd9c5506269cb FOREIGN KEY (word_name)
+          REFERENCES word (name) MATCH SIMPLE
+          ON UPDATE NO ACTION ON DELETE NO ACTION
+    )
+    WITH (
+      OIDS=FALSE
+    );
+    
+    CREATE TABLE word
+    (
+      name character varying(255) NOT NULL,
+      numletters integer,
+      CONSTRAINT word_pkey PRIMARY KEY (name )
+    )
+    WITH (
+      OIDS=FALSE
+    );
+\end{minted}
+
+Veiem que la última columna de la taula \texttt{match} es correspon amb la clau primària de la classe \texttt{Word}. Per comprovar que efectivament s'han inserit les dades, podem fer una consulta SQL directament amb el mateix paquet d'administració. Si executem les següents sentències SQL:
+
+\begin{minted}{sql}
+    SELECT * FROM match;
+    SELECT * FROM word;
+\end{minted}
+
+obtenim els següents resultats de les taules \ref{table:selectmatch} i \ref{table:selectword}, respectivament:
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			\texttt{matchid} & \texttt{isfinished} & \texttt{iswon} & \texttt{numerrors} & \texttt{word\_name} \\
+			\hline \hline
+			\texttt{1} & \texttt{f} & \texttt{f} & \texttt{0} & \texttt{'giraffe'} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Files inserides a la taula \texttt{match}.}
+	\label{table:selectmatch}
+\end{table}
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{|l|l|}
+			\hline
+			\texttt{name} & \texttt{numletters} \\
+			\hline \hline
+			\texttt{'giraffe'} & \texttt{7} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Files inserides a la taula \texttt{word}.}
+	\label{table:selectword}
+\end{table}
+
+Així doncs, hem aconseguit persistir correctament un parell d'objectesa la base de dades amb Hibernate, de manera força senzilla.
