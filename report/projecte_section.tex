@@ -1,16 +1,10 @@
 En aquesta primera entrega desenvolupem també una petita part del projecte que durem a terme al llarg de l'assignatura. Ens centrem ara en provar una estratègia arquitectònica de persistència, que introduïm tot seguit. Després de revisar l'entorn de desenvolupament que muntem, expliquem més detalls de la implementació d'aquesta estratègia al nostre projecte.
 
 \subsection{Persistència, Domain Model i ORM's}
-En el context de la pràctica, el patró arquitectònic triat és el de \emph{Domain Model}, en el sentit que focalitzem la lògica del sistema en el propi model del domini, en comptes de relegar-la a la capa de persistència, per exemple. Precisament, en aquest sentit, escollim un sistema de gestió de persistència relacional, fet que ens determinarà una gran part del disseny del nostre software.
-
-Per poder seguir el model de desenvolupament descrit, hem d'abstreure'ns al màxim del feixuc problema de mantenir la consistència entre dos tipus de models que ens trobem al nostre sistema: el model \emph{relacional} i el model \emph{orientat a objectes}. Per fer-ho, comptem amb \textbf{Hibernate}, un component que ens facilitarà molt aquesta tasca.
-
-Hibernate \cite{website:Hibernate} és un \emph{framework} que ens permet fer una assignació o "mapeig" del nostre model orientat a objectes al model relacional, utilitzant anotacions a les classes del nostre model en Java o fitxers de configuració XML. Al llarg de la pràctica ens centrarem en l'ús de la primera alternativa.
-
-Val a dir que Hibernate no és la única eina que ens permet realitzar una tasca similar. De fet, totes aquestes eines es coneixen com a ORMs, de l'anglès \emph{Object-Relational Mapper}. Altres ORMs, tant OpenSource com comercials i per diversos llenguatges orientats a objectes poden ser: \hyperlink{http://ormlite.com/}{ORMLite}, \href{https://developer.apple.com/technologies/mac/data-management.html}{CoreData}, \href{https://www.djangoproject.com/}{Django}, \href{http://cakephp.org/}{CakePHP}, \href{http://openjpa.apache.org/}{OpenJPA}, etc.
+\input{persistencia_domain_model_subsection}
 
 \subsection{Muntant l'entorn}
-\input{muntant_entorn_section}
+\input{muntant_entorn_subsection}
 
 \subsection{Hibernate}
-\input{hibernate_section}
+\input{hibernate_subsection}
