@@ -15,7 +15,7 @@
 \usepackage{todonotes}
 \usepackage[section]{placeins}
 \usepackage{authblk}
-
+\usepackage{titlesec}
 \usepackage{ifthen}
 
 \newcommand*{\appendixmore}{%
@@ -35,6 +35,7 @@
 \affil{Arquitectura del Software\\Facultat d'Informàtica de Barcelona, UPC}
 
 \renewcommand\Authands{ i }
+\newcommand{\sectionbreak}{\clearpage}
 
 \begin{document}
 	
@@ -43,8 +44,8 @@
 	\tableofcontents % Content Index
 	\cleardoublepage
 
-\section{Foo Section} 
-\input{foo_section}
+\section{Diagrames de la capa de domini}
+\input{diagrames_section}
 
 \section{Patrons de disseny}
 \input{patrons_disseny_section}

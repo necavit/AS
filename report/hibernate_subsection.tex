@@ -3,7 +3,7 @@ Per poder provar la configuració que fem de Hibernate i executar un petit progr
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/concept_model_impl.pdf}
+	\includegraphics[width=0.7\linewidth]{figures/concept_model_impl.pdf}
 	\caption{Diagrama del model conceptual implementat}
 	\label{fig:conceptmodel}
 \end{figure}
@@ -115,7 +115,7 @@ Implementem tot seguit un petit programa de prova per inserir un objecte de la c
 
 Un cop executem aquest codi, podem esbrinar fàcilment quin ha estat l'efecte obrint una connexió amb la base de dades. Si fem servir el paquet d'administració de PostgreSQL, pgAdmin, podem explorar l'esquema que s'ha generat a la base de dades i veure les definicions de les taules que Hibernate ha creat:
 
-\begin{minted}{sql}
+\begin{minted}[fontsize=\small]{sql}
     CREATE TABLE match
     (
       matchid integer NOT NULL,
