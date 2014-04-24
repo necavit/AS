@@ -180,4 +180,18 @@ obtenim els següents resultats de les taules \ref{table:selectmatch} i \ref{tab
 	\label{table:selectword}
 \end{table}
 
+D'una altra banda, també podem obtenir els objectes persistits mitjançant un petit programa, connectant amb la base de dades a través de Hibernate:
+
+\begin{minted}{java}
+    session.beginTransaction();
+    Match dbMatch = (Match) session.get(Match.class, match.getMatchId());
+    System.out.println("Database retreived match has id=" +
+            dbMatch.getMatchId() + " and its associated word is: '" +
+            dbMatch.getWord().getName() + "'");
+    session.getTransaction().commit();
+\end{minted}
+
+Quan executem aquest codi, el resultat mostrat per la consola és:
+\texttt{Database retreived match has id=1 and its associated word is: 'giraffe'}
+
 Així doncs, hem aconseguit persistir correctament un parell d'objectesa la base de dades amb Hibernate, de manera força senzilla.

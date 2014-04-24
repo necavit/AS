@@ -12,15 +12,21 @@ public class TestApp {
     public static void main( String[] args ) {
         Session session = 
             HibernateUtil.getSessionFactory().openSession();
+        
         session.beginTransaction();
-
         Word word = new Word("giraffe");
         Match match = new Match(1, word);
-
         session.save(word);
         session.save(match);
-
         session.getTransaction().commit();
+        
+        session.beginTransaction();
+        Match dbMatch = (Match) session.get(Match.class, match.getMatchId());
+        System.out.println("Database retreived match has id=" +
+                    dbMatch.getMatchId() + " and its associated word is: '" +
+                    dbMatch.getWord().getName() + "'");
+        session.getTransaction().commit();
+        
         session.close();
         HibernateUtil.shutdown();
     }
