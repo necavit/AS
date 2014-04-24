@@ -11,33 +11,31 @@ import javax.persistence.Table;
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
 
-	private static final long serialVersionUID = -7024212638179206833L;
+    private static final long serialVersionUID = -7024212638179206833L;
+    public static final String TABLE = "word";
 
-	public static final String TABLE = "word";
-	
-	@Id
-	@Column
-	private String name;
-	
-	@Column
-	private int numLetters;
-	
-	public Word(String name) {
-		this.name = name;
-		this.numLetters = name.length();
-	}
+    @Id
+    @Column
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    @Column
+    private int numLetters;
 
-	public void setName(String name) {
-		this.name = name;
-		this.numLetters = name.length();
-	}
+    public Word(String name) {
+        this.name = name;
+        this.numLetters = name.length();
+    }
 
-	public int getNumLetters() {
-		return numLetters;
-	}
-	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        this.numLetters = name.length();
+    }
+
+    public int getNumLetters() {
+        return numLetters;
+    }
 }
