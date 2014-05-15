@@ -1,0 +1,50 @@
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{minted}
+\usemintedstyle{friendly}
+\usepackage{todonotes}
+\usepackage[section]{placeins}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{ifthen}
+
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
+\title{Endevina Paraules (II)}
+\date{15 de Maig del 2014}
+\author{\\Daniel Ariñez Soriano}
+\author{\\David Martínez Rodríguez}
+\author{\\Miquel Masriera Quevedo}
+\author{\\Marcel Pujol Navarro\vspace{11cm}}
+\affil{Arquitectura del Software\\Facultat d'Informàtica de Barcelona, UPC}
+
+\renewcommand\Authands{ i }
+\newcommand{\sectionbreak}{\clearpage}
+
+\begin{document}
+
+	\maketitle
+	\newpage
+	\tableofcontents % Content Index
+	\cleardoublepage
+
+\input{mapa_navegacional}
+
+\input{diagrama_classes}
+
+\input{diagrames_sequencia}
+
+\end{document}
