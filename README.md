@@ -1,6 +1,8 @@
 #AS
 
-El codi de la pràctica es troba al directori `word-guess`. L'informe de la pràctica es troba al directori `report`.
+El codi de la pràctica es troba al directori `word-guess`.
+L'informe de la primera entrega es troba al directori `report1`.
+L'informe de la segona entrega es troba al directori `report2`.
 
 
 ##Setup
