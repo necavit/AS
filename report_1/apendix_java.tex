@@ -1,0 +1,200 @@
+\subsection{\texttt{TestApp.java}}
+\begin{minted}[fontsize=\small]{java}
+package edu.upc.fib.wordguess;
+
+import org.hibernate.Session;
+
+import edu.upc.fib.wordguess.domain.model.Match;
+import edu.upc.fib.wordguess.domain.model.Word;
+import edu.upc.fib.wordguess.util.HibernateUtil;
+
+public class TestApp {
+    public static void main( String[] args ) {
+        Session session = 
+            HibernateUtil.getSessionFactory().openSession();
+        
+        session.beginTransaction();
+        Word word = new Word("giraffe");
+        Match match = new Match(1, word);
+        session.save(word);
+        session.save(match);
+        session.getTransaction().commit();
+        
+        session.beginTransaction();
+        Match dbMatch = (Match) session.get(Match.class, match.getMatchId());
+        System.out.println("Database retreived match has id=" +
+                    dbMatch.getMatchId() + " and its associated word is: '" +
+                    dbMatch.getWord().getName() + "'");
+        session.getTransaction().commit();
+        
+        session.close();
+        HibernateUtil.shutdown();
+    }
+}
+\end{minted}{java}
+
+
+\subsection{\texttt{Word.java}}
+\begin{minted}[fontsize=\small]{java}
+package edu.upc.fib.wordguess.domain.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=Word.TABLE)
+public class Word implements Serializable {
+
+    private static final long serialVersionUID = -7024212638179206833L;
+    public static final String TABLE = "word";
+
+    @Id
+    @Column
+    private String name;
+
+    @Column
+    private int numLetters;
+
+    public Word(String name) {
+        this.name = name;
+        this.numLetters = name.length();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        this.numLetters = name.length();
+    }
+
+    public int getNumLetters() {
+        return numLetters;
+    }
+}
+\end{minted}{java}
+
+
+\subsection{\texttt{Match.java}}
+\begin{minted}[fontsize=\small]{java}
+package edu.upc.fib.wordguess.domain.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=Match.TABLE)
+public class Match implements Serializable {
+
+    private static final long serialVersionUID = -5210486939375055839L;
+    public static final String TABLE = "match";
+
+    @Id
+    @Column
+    private int matchId;
+
+    @Column
+    private int numErrors;
+
+    @Column
+    private boolean isFinished;
+
+    @Column
+    private boolean isWon;
+
+    @ManyToOne
+    private Word word;
+
+    public Match(int matchId, Word word) {
+        this.matchId = matchId;
+        this.word = word;
+        this.numErrors = 0;
+        this.isFinished = false;
+        this.isWon = false;
+    }
+
+    public int getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(int matchId) {
+        this.matchId = matchId;
+    }
+
+    public int getNumErrors() {
+        return numErrors;
+    }
+
+    public void setNumErrors(int numErrors) {
+        this.numErrors = numErrors;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
+    public boolean isWon() {
+        return isWon;
+    }
+
+    public void setWon(boolean isWon) {
+        this.isWon = isWon;
+    }
+
+    public Word getWord() {
+        return word;
+    }
+
+    public void setWord(Word word) {
+        this.word = word;
+    }
+}
+\end{minted}{java}
+
+
+\subsection{\texttt{HibernateUtil.java}}
+\begin{minted}[fontsize=\small]{java}
+package edu.upc.fib.wordguess.util;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateUtil {
+
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            return new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void shutdown() {
+        // Close caches and connection pools
+        getSessionFactory().close();
+    }
+}
+\end{minted}
