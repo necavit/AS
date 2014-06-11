@@ -1,0 +1,125 @@
+\section{Segon exercici}
+
+\textbf{Feu una taula completa on s’indiqui l’assignació de responsabilitats a la capa de gestió de dades i, en concret, a l’esquema de la base de dades (taules, camps, etc...), per a cada element de la capa de domini (classes, atributs, associacions, restriccions d’integritat, regles de derivació, etc...). Indiqueu com és aquesta correspondència. Per exemple, la comprovació de la restricció d’integritat x s’assigna a l’esquema de la base de dades mitjançant la definició d’un check a la taula y. A la pràctica 1 havíem suposat que les úniques responsabilitats que estaven assignades a la base de dades eren les de clau primària. Després de fer aquest apartat és possible que en algun cas l’assignació de responsabilitats impliqui modificar alguns dels diagrames de seqüència que heu fet a la capa de domini (no cal entregar-los però heu de tenir en compte aquests canvis a l’hora de fer la implementació). Per exemple, algunes restriccions d’integritat que havíeu comprovat als diagrames de seqüència de la capa de domini és possible que es puguin comprovar a la base de dades.}\\
+
+Donat que ara disposem d’una base de dades relacional que implementa la capa de persistència, reassignem les següents responsabilitats a les capes que els pertoca:
+
+\textbf{Classes i atributs}
+\begin{itemize}
+	\item La classe \texttt{UsuariRegistrat} juntament amb els seus atributs, s’ha mapejat seguint el mètode Class Table Inheritance, tal i com s’indica a l’enunciat. Així, la classe es tradueix a una taula anomenada \texttt{UsuariRegistrat} amb els següents atributs: \texttt{username}, \texttt{nom}, \texttt{cognom}, \texttt{pwd}. El camp \texttt{username} és la clau primària.
+	
+	\item La classe \texttt{Administrador} s’ha mapejat seguint el mètode Class Table Inheritance, així, té com a clau primària la de la superclasse (\texttt{username}), que a més actúa de clau forana de la taula \texttt{UsuariRegistrat} i com a camps atributs: \texttt{tlfn} (el qual és l’atribut pròpi de la subclasse en qüestió).
+	
+	\item La classe \texttt{Jugador} s’ha mapejat seguint el mètode Class Table Inheritance, així, té com a clau primària la de la superclasse (\texttt{username}) i a més el camp atribut propi \texttt{email}, a més el camp \texttt{username} actúa de clau forana de la taula \texttt{UsuariRegistrat}.
+	
+	\item La classe \texttt{Partida} té com a clau primària \texttt{idPartida} i com a camps de la taula els seus atributs (\texttt{acabada}, \texttt{guanyada}, \texttt{errors}, \texttt{nomParaula}), a més hem afegit el camp \texttt{username} que és clau forana de \texttt{Jugador} per conservar la relació entre les dues classes.
+	
+	\item La classe \texttt{Paraula} té com a clau primària el seu nom i com a camp atribut de la taula, el seu atribut \texttt{nombreLletres}, a més hem afegit el camp \texttt{nomCat}, que és clau forana de \texttt{Categoria}, per a mantenir la relació entre les classes.
+	
+	\item La classe \texttt{Categoria} té com a clau primària el seu \texttt{nom}.
+	
+	\item La classe \texttt{Casella} té com a clau primària \texttt{idPartida} i \texttt{Posició} i com a camps de la taula els seus atributs \texttt{lletraCorrecta}, \texttt{encert}, \texttt{lletresErronies}. A més \texttt{idPartida} és clau forana de \texttt{Partida} com a conseqüència de la composició entre les dues classes.
+	
+	\item La classe \texttt{Paràmetres}, l’hem mapejat com a una taula a on nomès hi haurà una única fila degut a la seva condició de Singleton.
+\end{itemize}
+
+\textbf{Relacions o associacions}
+\begin{itemize}
+	\item \texttt{Jugador-Partida}: Les relacions \texttt{partidaActual} i \texttt{partidaJugada} les hem expressat afegint el camp \texttt{username} a la taula \texttt{Partida}, on aquest camp serà clau forana de la taula \texttt{Jugador}. hHo hem fet així degut a la cardinalitat 1 al extrem de la relació a la classe \texttt{Jugador}.
+	
+	\item \texttt{Té}: La relació \texttt{Té} entre \texttt{Paraula} i \texttt{Partida}, l'hem expressat afegint el camp \texttt{nomParaula} a la taula \texttt{Partida}, on aquest camp serà clau forana de la taula \texttt{Paraula}. Ho hem fet així, degut a la cardinalitat 1 al extrem de la relació a la classe \texttt{Paraula}.
+	
+	\item \texttt{EsD’Una}: La relació \texttt{EsD’Una} entre \texttt{Paraula} i \texttt{Categoria}, la hem expressat afegint el camp \texttt{nomCat} a la taula \texttt{Paraula}, on aquest camp serà clau forana de la taula \texttt{Categoria}, ho hem fet així, degut a la cardinalitat 1 al extrem de la relació a la classe \texttt{Categoria}.
+\end{itemize}
+
+\textbf{Restriccions d'integritat textuals}
+\begin{itemize}
+	\item \texttt{UsuariRegistrat} s’identifica per \texttt{username}.
+		\begin{itemize}
+			\item \texttt{username} clau primària de la taula \texttt{UsuariRegistrat}.
+			\item \texttt{PRIMARY KEY(username)}
+		\end{itemize}
+	\item \texttt{Jugador} s’identifica també pel seu \texttt{email}.
+		\begin{itemize}
+			\item \texttt{username} i \texttt{email} clau primària de la taula \texttt{Jugador}.
+			\item \texttt{PRIMARY KEY(username,email)}
+		\end{itemize}
+	\item \texttt{Paraula} s’identifica per \texttt{nom}.
+		\begin{itemize}
+			\item \texttt{nom} clau primària de la taula \texttt{Paraula}.
+			\item \texttt{PRIMARY KEY(nom)}
+		\end{itemize}
+	\item \texttt{Partida} s’identifica per \texttt{idPartida}.
+		\begin{itemize}
+			\item \texttt{idPartida} clau primària de la taula \texttt{Partida}.
+			\item \texttt{PRIMARY KEY(idPartida)}
+		\end{itemize}
+	\item \texttt{Categoria} s’identifica per \texttt{nom}.
+		\begin{itemize}
+			\item \texttt{nom} clau primària de la taula \texttt{Categoria}.
+			\item \texttt{PRIMARY KEY(nom)}
+		\end{itemize}
+	\item \texttt{Casella} s’identifica per \texttt{idPartida}, \texttt{posició}.
+		\begin{itemize}
+			\item \texttt{idPartida} i \texttt{posició} clau primària de la taula \texttt{Casella}.
+			\item \texttt{PRIMARY KEY(idPartida,posicio)}
+		\end{itemize}
+	\item El nom d’una paraula ha de tenir entre 2 i 9 lletres.
+		\begin{itemize}
+			\item \texttt{CHECK LENGTH(nom) <= 2 AND LENGTH(nom) <= 9 FROM Paraula}
+			\item \texttt{CHECK LENGHT(nom) BETWEEN 2 AND 9}
+		\end{itemize}
+	\item Una partida d’un jugador no pot ser alhora actual i jugada.
+		\begin{itemize}
+			\item Farem un trigger que comprovi si el valor \texttt{jpActual} no és \texttt{NULL} llavors el valor \texttt{jpJugada} ha de ser \texttt{NOT NULL} i viceversa.
+		\end{itemize}
+	\item El \texttt{nombreMàximErrors} de la classe \texttt{Paràmetres} i els errors de la classe \texttt{Partida} han de ser més grans o iguals que 0.
+		\begin{itemize}
+			\item \texttt{CHECK (nombreMaximErrors >= 0) FROM Parametres}
+			\item \texttt{CHECK (errors >= 0) FROM Partida}
+		\end{itemize}
+	\item El nombre d’errors d’una partida ha de ser més petit o igual que el \texttt{nombreMàximErrors} +1.
+		\begin{itemize}
+			\item S’encarrega la capa de Domini.
+		\end{itemize}
+	\item Dins del conjunt de lletres errònies d’una casella no pot estar la \texttt{lletraCorrecta}.
+		\begin{itemize}
+			\item S’encarrega la capa de Domini.
+		\end{itemize}
+	\item El nombre d’errors d’una partida ha de ser més gran o igual que el sumatori de les \texttt{lletreErrònies} de cada casella.
+		\begin{itemize}
+			\item S’encarrega la capa de Domini.
+		\end{itemize}
+\end{itemize}
+
+\textbf{Restriccions d'integritat gràfiques}
+\begin{itemize}
+	\item {disjoint,complete}
+		\begin{itemize}
+			\item Implicit a la traducció del model conceptual a l’esquema de la base de dades. En aquest cas s’ha utilitzat l’estratègia CLASS TABLE INHERITANCE
+		\end{itemize}
+	\item El camps tlfn de la taula Administrador pot tenir valor null.
+		\begin{itemize}
+			\item A la creació de la taula Administrador indicarem que el camp tlfn pot ser NULL.
+			\item tlfn IS NULL
+		\end{itemize}
+	\item El camp encert de la taula Casella pot tenir valor null.
+		\begin{itemize}
+			\item A la creació de la taula Casella indicarem que el camp encert pot ser NULL.
+			\item encert IS NULL
+		\end{itemize}
+	\item El camp lletresErronies de la taula Casella pot tenir valor null.
+		\begin{itemize}
+			\item A la creació de la taula Casella indicarem que el camp encert pot ser NULL.
+			\item lletresErronies IS NULL
+		\end{itemize}
+	\item El camps lletresErronies pot pendre valors null o fins a 27 lletres, totes elles diferents.
+		\begin{itemize}
+			\item Comprovació a través d’un trigger sobre la taula Casella.
+		\end{itemize}
+\end{itemize}
+
+\textbf{Regles de derivació}
+\begin{itemize}
+	\item Afegim la següent regla: \texttt{CHECK nombreLletres = LENGHT(nom) FROM Paraula}
+\end{itemize}

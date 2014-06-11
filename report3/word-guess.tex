@@ -1,0 +1,60 @@
+% !TeX document-id = {c8997a6a-2921-4608-9b2d-78af17b6575a}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{minted}
+\usemintedstyle{friendly}
+\usepackage{todonotes}
+\usepackage[section]{placeins}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{ifthen}
+
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
+\titlehead{\centering\includegraphics[width=3cm]{images/logo.png}}
+\title{Endevina Paraules (III)}
+\date{Abril 2014}
+\author{Daniel Ariñez Soriano}
+\author{David Martínez Rodríguez}
+\author{Miquel Masriera Quevedo}
+\author{Marcel Pujol Navarro\vspace{11cm}}
+\affil{Arquitectura del Software\\Facultat d'Informàtica de Barcelona, UPC}
+
+\renewcommand\Authands{ i }
+\newcommand{\sectionbreak}{\clearpage}
+
+\begin{document}
+	
+	\maketitle
+	%\begin{center}
+	%	\includegraphics[width=3cm]{images/logo.png}
+	%\end{center}
+	\thispagestyle{empty}
+	\newpage
+	\tableofcontents % Content Index
+	\cleardoublepage
+
+	\input{ex1.tex}
+
+    \input{ex2.tex}
+    
+    \input{ex3.tex}
+    
+    \input{ex4.tex}
+
+\end{document}

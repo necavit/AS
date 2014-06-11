@@ -1,0 +1,31 @@
+\section{Primer exercici}
+
+\textbf{Dissenyeu l’esquema de la base de dades. Useu l’estratègia Class Table Inheritance per a la jerarquia d’Usuari Registrat}\\\\
+Suposem que la informació derivada es materialitza.
+
+\begin{itemize}
+    \item \textbf{UsuariRegistrat} (\underline{username},nom, cognom, pwd) 
+    
+    \item \textbf{Administrador} (\underline{username}, tlfn) username FK UsuariRegistrat, tlfn pot tenir valor null
+    \item \textbf{Jugador} (\underline{username, email}) username FK UsuariRegistrat
+    
+    \item \textbf{Paràmetres} (nombreMaximErrors, idpartida)
+    
+    \item \textbf{Categoria} (\underline{nom})
+    
+    \item \textbf{Paraula} (\underline{nom}, nombreLletres, nomC) nomC FK Categoria
+    
+    \item \textbf{Partida} (\underline{idPartida}, guanyada, perduda, errors, nomP, jpActual, jpJugada) nomP FK Paraula, (jpActual, jpJugada) FK Jugador
+    
+    \item \textbf{Casella} (\underline{posició, idPar}, lletraCorrecta, encert, lletreErronies) idPar FK Partida, encert i lletresErronies poden tenir valors nuls
+    
+\end{itemize}
+
+UsuariRegistrat(username, nom, cognom, pwd)
+Administrador(username, tlfn) on username forana UsuariRegistrat, tlfn pot tenir valors nuls
+Jugador(username,email) on username forana UsuariRegistrat
+Partida(idPartida, acabada, guanyada, errors, nomParaula, jpActual, jpJugada) on jpActual i jpJugada foranes Jugador, nomParaula FK Paraula
+Paraula(nom, nombreLletres, nomCat) on nomCat forana Categoria
+Categoria(nom)
+Casella(idPartida,posicio,lletraCorrecta,encert,lletresErronies) on idPartida forana Partida , encert i lletresErronies poden tenir valors nulls
+Parametres(nombreMaximErrors, idPartida) on idPartida forana de Partida
