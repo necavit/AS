@@ -18,13 +18,13 @@
 	</repositories>
 	
 	<dependencies>
-	    <!-- PostgreSQL driver -->
+	    <!-- PostgreSQL jdbc driver -->
 	    <dependency>
 		    <groupId>postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>9.1-901.jdbc4</version>
 		</dependency>
-	    <!-- Hibernate dependencies -->
+	<!-- Hibernate dependencies -->
 	    <!--   NOTE: no need to add annotations artifact: since version 3.6
 	           annotations are included in the Hibernate core -->
 		<dependency>
@@ -37,7 +37,19 @@
 			<artifactId>javassist</artifactId>
 			<version>3.12.1.GA</version>
 		</dependency>
-	    <!-- Test dependencies -->
+	<!-- Test dependencies -->
+	    <!-- Cucumber integration test framework -->
+	    <dependency>
+	        <groupId>info.cukes</groupId>
+	        <artifactId>cucumber-java</artifactId>
+	        <version>1.1.5</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>info.cukes</groupId>
+	        <artifactId>cucumber-junit</artifactId>
+	        <version>1.1.5</version>
+	        <scope>test</scope>
+	    </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
