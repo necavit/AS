@@ -1,8 +1,12 @@
 #AS
 
-El codi de la pràctica es troba al directori `word-guess`.<br>
-L'informe de la primera entrega es troba al directori `report1`.<br>
+El codi de la pràctica es troba al directori `word-guess`.
+
+L'informe de la primera entrega es troba al directori `report1`.
+
 L'informe de la segona entrega es troba al directori `report2`.
+
+L'informe de la tercera entrega es troba al directori `report3`.
 
 
 ##Setup
@@ -21,7 +25,7 @@ Si tenim les capçaleres ben actualitzades, s'hauria de descarregar la versió 3
 sudo apt-get install maven
 ```
 
-Si exeutem `mvn --version` en un terminal ens ha de dir: `Apache Maven 3.0.4 ...`.
+Si executem `mvn --version` en un terminal ens ha de dir: `Apache Maven 3.0.4 ...`.
 
 **Integració amb Eclipse**
 
