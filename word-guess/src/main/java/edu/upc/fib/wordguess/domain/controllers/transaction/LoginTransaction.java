@@ -1,8 +1,8 @@
 package edu.upc.fib.wordguess.domain.controllers.transaction;
 
-import edu.upc.fib.wordguess.domain.data.DataControllersFactory;
-import edu.upc.fib.wordguess.domain.data.controllers.RegisteredUserController;
-import edu.upc.fib.wordguess.domain.data.exception.UsernameNotExists;
+import edu.upc.fib.wordguess.data.DataControllersFactory;
+import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
+import edu.upc.fib.wordguess.data.exception.UsernameNotExists;
 import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 
 public class LoginTransaction implements Transaction<Boolean> {
@@ -19,7 +19,7 @@ public class LoginTransaction implements Transaction<Boolean> {
 	public Boolean execute() throws UsernameNotExists {
 		//data controllers acquisition
 		DataControllersFactory dataFactory = DataControllersFactory.getInstance();
-		RegisteredUserController userController = dataFactory.getRegisteredUserController();
+		RegisteredUserDAO userController = dataFactory.getRegisteredUserDAO();
 		
 		//fetch user
 		RegisteredUser user = userController.getUser(username);

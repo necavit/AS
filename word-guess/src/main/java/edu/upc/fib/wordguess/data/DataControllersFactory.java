@@ -1,19 +1,20 @@
-package edu.upc.fib.wordguess.domain.data;
+package edu.upc.fib.wordguess.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import edu.upc.fib.wordguess.domain.data.controllers.RegisteredUserController;
-import edu.upc.fib.wordguess.domain.data.exception.UsernameNotExists;
+import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
+import edu.upc.fib.wordguess.data.exception.UsernameNotExists;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 
 public class DataControllersFactory {
 
 	/* **** **** MEMBERS ***** **** */
-	private RegisteredUserController registeredUserController;
+	private RegisteredUserDAO registeredUserDAO;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
@@ -25,25 +26,24 @@ public class DataControllersFactory {
 		//TODO add other controllers and initialize them
 		
 		//FIXME delete this mocked UserController:
-		registeredUserController = new RegisteredUserController() {
+		registeredUserDAO = new RegisteredUserDAO() {
+			
+			private Map<String, RegisteredUser> users = new HashMap<String, RegisteredUser>(){{
+				put("john.doe", new Player("John", "Doe", "john.doe", "john.doe.pass", "john.doe@example.com"));
+				put("testuser", new Player("Test", "User", "testuser", "test1234", "testuser@example.com"));
+			}};
 			
 			@Override
 			public List<RegisteredUser> getAll() {
-				List<RegisteredUser> users = new ArrayList<RegisteredUser>();
-				RegisteredUser john = new Player("John", "Doe", "john.doe", "john.doe.pass", "john.doe@example.com");
-				RegisteredUser test = new Player("Test", "User", "testuser", "test1234", "testuser@example.com");
-				users.add(john);
-				users.add(test);
-				return users;
+				List<RegisteredUser> usersList = new ArrayList<RegisteredUser>(users.size());
+				for (Entry<String, RegisteredUser> entry : users.entrySet()) {
+					usersList.add(entry.getValue());
+				}
+				return usersList;
 			}
 			
 			@Override
 			public RegisteredUser getUser(String username) throws UsernameNotExists {
-				Map<String, RegisteredUser> users = new HashMap<String, RegisteredUser>();
-				RegisteredUser john = new Player("John", "Doe", "john.doe", "john.doe.pass", "john.doe@example.com");
-				RegisteredUser test = new Player("Test", "User", "testuser", "test1234", "testuser@example.com");
-				users.put("john.doe", john);
-				users.put("testuser", test);
 				if (users.containsKey(username)) {
 					RegisteredUser user = users.get(username);
 					return user;
@@ -51,6 +51,11 @@ public class DataControllersFactory {
 				else {
 					throw new UsernameNotExists();
 				}
+			}
+
+			@Override
+			public boolean exists(String username) {
+				return users.containsKey(username);
 			}
 		};
 	}
@@ -62,8 +67,8 @@ public class DataControllersFactory {
 	
 	/* **** **** METHODS ***** **** */
 	
-	public RegisteredUserController getRegisteredUserController() {
-		return registeredUserController; 
+	public RegisteredUserDAO getRegisteredUserDAO() {
+		return registeredUserDAO;
 	}
 	
 }

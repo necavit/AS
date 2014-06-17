@@ -29,7 +29,7 @@ public class Word implements Serializable {
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
         this.numLetters = name.length();

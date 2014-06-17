@@ -1,4 +1,4 @@
-package edu.upc.fib.wordguess.domain.data.exception;
+package edu.upc.fib.wordguess.data.exception;
 
 public class UsernameNotExists extends Exception {
 

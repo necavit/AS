@@ -2,10 +2,11 @@ package edu.upc.fib.wordguess.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.classic.Session;
 
 public class HibernateUtil {
 
-private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static final SessionFactory sessionFactory = buildSessionFactory();
 
 	private static SessionFactory buildSessionFactory() {
 		try {
@@ -25,5 +26,51 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	public static void shutdown() {
 		// Close caches and connection pools
 		getSessionFactory().close();
+	}
+	
+	public static Object store(Object object) {
+		//open session
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		//transaction
+		session.beginTransaction();
+		session.save(object);
+		session.getTransaction().commit();
+		
+		//close session
+		session.close();
+		
+		return object;
+	}
+	
+	public static Object update(Object object) {
+		//open session
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		//transaction
+		session.beginTransaction();
+		session.merge(object);
+		session.getTransaction().commit();
+		
+		//close session
+		session.close();
+		
+		return object;
+	}
+	
+	public static void delete(Object object) {
+		//open session
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		//transaction
+		session.beginTransaction();
+		session.delete(object);
+		session.getTransaction().commit();
+		
+		//close session
+		session.close();
 	}
 }

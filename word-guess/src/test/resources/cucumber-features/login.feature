@@ -12,7 +12,13 @@ Feature: Login
 		When the user tries to log in
 		Then the system logs the user in
 	
-	Scenario: Invalid login
+	Scenario: Non-existent username
+		Given the username "foonouser"
+		And the password "whateverpassword"
+		When the user tries to log in
+		Then the system warns that no such username exists
+	
+	Scenario: Invalid password
 		Given the username "testuser"
 		And the password "foowrongpassword"
 		When the user tries to log in
