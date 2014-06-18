@@ -47,7 +47,7 @@ public class LetterBox implements Serializable {
 	}
 
 	public void setSuccess(Boolean success) {
-		this.success = success;
+		this.success =  success;
 	}
 
 	public List<Character> getWrongLetters() {
