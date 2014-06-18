@@ -8,6 +8,11 @@ public class Admin extends RegisteredUser implements Serializable {
 
 	private String telephone;
 	
+	public Admin(String name, String surname, String username, String password, String telephone) {
+		initialize(name, surname, username, password);
+		this.telephone = telephone;
+	}
+	
 	public String getTelephone() {
 		return telephone;
 	}
