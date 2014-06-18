@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 public class WordGuess extends JPanel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5918244734376770020L;
+
+	/**
 	 * Create the panel.
 	 */
 	public WordGuess() {
