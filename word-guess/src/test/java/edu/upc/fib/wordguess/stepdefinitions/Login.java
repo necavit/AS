@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import edu.upc.fib.wordguess.data.exception.UsernameNotExists;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 
-public class Login extends WordGuessStepDefinition {
+public class Login {
 	
 	private String username;
 	private String password;
