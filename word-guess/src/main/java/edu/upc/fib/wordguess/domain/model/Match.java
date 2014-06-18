@@ -1,6 +1,7 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,8 @@ public class Match implements Serializable {
 
     @ManyToOne
     private Word word;
+    
+    private List<LetterBox> letterBoxes;
 
     public Match(int matchId, Word word) {
         this.matchId = matchId;
