@@ -2,10 +2,6 @@ package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
-@Entity
-//TODO JPA annotations
 public abstract class RegisteredUser implements Serializable {
 	
 	private static final long serialVersionUID = -283532121656300725L;

@@ -7,8 +7,8 @@ import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 public class TestApp {
-    public static void main( String[] args ) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+    public static void main( String[] args ) {    	
+    	Session session = HibernateUtil.getSessionFactory().openSession();
         
         //store objects
         session.beginTransaction();
