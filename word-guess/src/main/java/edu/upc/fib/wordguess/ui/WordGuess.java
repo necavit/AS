@@ -12,7 +12,7 @@ public class WordGuess extends JPanel {
 	 */
 	public WordGuess() {
 		
-		JButton btnRabosw = new JButton("Boobs");
+		JButton btnRabosw = new JButton("Boton1");
 		btnRabosw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
