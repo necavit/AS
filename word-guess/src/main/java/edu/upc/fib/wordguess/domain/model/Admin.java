@@ -14,7 +14,7 @@ public class Admin extends RegisteredUser implements Serializable {
 	}
 	
 	public String getTelephone() {
-		return telephone;
+		return   telephone;
 	}
 	
 	public void setTelephone(String telephone) {
