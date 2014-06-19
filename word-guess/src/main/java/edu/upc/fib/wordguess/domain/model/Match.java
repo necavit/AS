@@ -1,13 +1,18 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
 @Table(name=Match.TABLE)
@@ -32,14 +37,28 @@ public class Match implements Serializable {
     @ManyToOne
     private Word word;
     
-    //private List<LetterBox> letterBoxes;
-
-    public Match(int matchId, Word word) {
+    public static final String PLAYER = "player";
+    @ManyToOne
+    @JoinColumn
+    private Player player;
+    
+    @OneToMany(mappedBy=LetterBox.MATCH_ID)
+	private List<LetterBox> letterBoxes;
+	
+    public Match(int matchId, Word word, Player player) {
         this.matchId = matchId;
         this.word = word;
         this.numErrors = 0;
         this.isFinished = false;
         this.isWon = false;
+        this.player = player;
+        
+        letterBoxes = new ArrayList<LetterBox>();
+        for (int i = 0; i < word.getName().length(); ++i) {
+        	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
+        }
+        
+        HibernateUtil.store(this);
     }
 
     public int getMatchId() {
@@ -49,6 +68,14 @@ public class Match implements Serializable {
     public void setMatchId(int matchId) {
         this.matchId = matchId;
     }
+    
+    public Player getPlayer() {
+		return player;
+	}
+    
+    public void setPlayer(Player player) {
+		this.player = player;
+	}
 
     public int getNumErrors() {
         return numErrors;
@@ -81,5 +108,13 @@ public class Match implements Serializable {
     public void setWord(Word word) {
         this.word = word;
     }
+
+	public List<LetterBox> getLetterBoxes() {
+		return letterBoxes;
+	}
+	
+	public void setLetterBoxes(List<LetterBox> letterBoxes) {
+		this.letterBoxes = letterBoxes;
+	}
 	
 }

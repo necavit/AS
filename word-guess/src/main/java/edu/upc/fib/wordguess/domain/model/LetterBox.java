@@ -7,23 +7,30 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
 @Table(name=LetterBox.TABLE)
-@IdClass(LetterBoxPK.class)
+@IdClass(value=LetterBoxPK.class)
 public class LetterBox implements Serializable {
 
 	public static final String TABLE = "letter_box";
 	
 	private static final long serialVersionUID = -6982945784764306460L;
-
+	
 	@Id
 	@Column
 	private int position;
 	
+	public static final String MATCH_ID = "matchId";
+	
 	@Id
-	@Column
+	@ManyToOne
+	@JoinColumn
 	private int matchId;
 	
 	@Column(nullable=false)
@@ -32,17 +39,19 @@ public class LetterBox implements Serializable {
 	@Column
 	private Boolean success;
 	
-	private List<Character> wrongLetters;
+	
+	//TODO private List<Character> wrongLetters;
 
-	public LetterBox(int position, char correctLetter) {
-		this.position = position;
-		this.correctLetter = correctLetter;
+	public LetterBox() {
+		//
 	}
 	
-	public LetterBox(int position, char correctLetter, Boolean success) {
+	public LetterBox(int matchId, int position, char correctLetter) {
+		this.matchId = matchId;
 		this.position = position;
 		this.correctLetter = correctLetter;
-		this.success = success;
+		this.success = null;
+		HibernateUtil.store(this);
 	}
 	
 	public int getPosition() {
@@ -51,6 +60,14 @@ public class LetterBox implements Serializable {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+	
+	public int getMatchId() {
+		return matchId;
+	}
+	
+	public void setMatchId(int matchId) {
+		this.matchId = matchId;
 	}
 
 	public char getCorrectLetter() {
@@ -61,7 +78,7 @@ public class LetterBox implements Serializable {
 		this.correctLetter = correctLetter;
 	}
 
-	public Boolean getSuccess() {
+	public Boolean isSuccess() {
 		return success;
 	}
 
@@ -69,6 +86,7 @@ public class LetterBox implements Serializable {
 		this.success =  success;
 	}
 
+	/*
 	public List<Character> getWrongLetters() {
 		return wrongLetters;
 	}
@@ -76,5 +94,6 @@ public class LetterBox implements Serializable {
 	public void setWrongLetters(List<Character> wrongLetters) {
 		this.wrongLetters = wrongLetters;
 	}
+	*/
 	
 }

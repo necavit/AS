@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 
+import edu.upc.fib.wordguess.util.HibernateUtil;
+
 @Entity
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
@@ -40,6 +42,7 @@ public class Word implements Serializable {
         this.name = name;
         this.numLetters = name.length();
         this.category = category;
+        HibernateUtil.store(this);
     }
 
     public String getName() {

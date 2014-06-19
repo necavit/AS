@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 
+import edu.upc.fib.wordguess.util.HibernateUtil;
+
 @Entity
 @Table(name=Admin.TABLE_ADMIN)
 public class Admin extends RegisteredUser implements Serializable {
@@ -31,6 +33,7 @@ public class Admin extends RegisteredUser implements Serializable {
 	public Admin(String name, String surname, String username, String password, String telephone) throws HibernateException {
 		initialize(name, surname, username, password);
 		this.telephone = telephone;
+		HibernateUtil.store(this);
 	}
 	
 	public String getTelephone() {

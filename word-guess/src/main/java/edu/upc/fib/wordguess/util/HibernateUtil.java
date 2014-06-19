@@ -1,5 +1,7 @@
 package edu.upc.fib.wordguess.util;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -13,7 +15,8 @@ public class HibernateUtil {
 			return new Configuration().configure().buildSessionFactory();
 		} catch (Throwable ex) {
 			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
+			System.err.println("Initial SessionFactory creation failed. " + ex);
+			ex.printStackTrace();
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
@@ -33,7 +36,7 @@ public class HibernateUtil {
 		getSessionFactory().close();
 	}
 	
-	/*
+	
 	public static Object store(Object object) throws HibernateException {
 		//open session
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -79,5 +82,5 @@ public class HibernateUtil {
 		//close session
 		session.close();
 	}
-	*/
+	
 }

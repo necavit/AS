@@ -10,6 +10,10 @@ public class LetterBoxPK implements Serializable {
 	
 	private int matchId;
 	
+	public LetterBoxPK() {
+		//
+	}
+	
 	public LetterBoxPK(int position, int matchId) {
 		this.position = position;
 		this.matchId = matchId;
