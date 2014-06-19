@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
@@ -25,6 +26,9 @@ public class Word implements Serializable {
     @Column
     private int numLetters;
 
+    @ManyToOne
+    private Category category;
+    
     /**
      * WARNING! Never use this constructor!
      * 
@@ -34,9 +38,10 @@ public class Word implements Serializable {
     	//empty constructor for Hibernate to work
     }
     
-    public Word(String name) throws HibernateException {
+    public Word(String name, Category category) throws HibernateException {
         this.name = name;
         this.numLetters = name.length();
+        this.category = category;
         HibernateUtil.store(this);
     }
 
@@ -52,4 +57,12 @@ public class Word implements Serializable {
     public int getNumLetters() {
         return numLetters;
     }
+    
+    public Category getCategory() {
+		return category;
+	}
+    
+    public void setCategory(Category category) {
+		this.category = category;
+	}
 }

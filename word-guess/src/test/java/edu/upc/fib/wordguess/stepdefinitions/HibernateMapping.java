@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import edu.upc.fib.wordguess.data.DAOFactory;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Word;
 
 public class HibernateMapping {
@@ -24,7 +25,7 @@ public class HibernateMapping {
 	@When("^the word is inserted$")
 	public void the_word_is_inserted() throws Throwable {
 		try {
-			new Word(name);
+			new Word(name, new Category("foo"));
 		} catch (HibernateException he) {
 			he.printStackTrace();
 		}

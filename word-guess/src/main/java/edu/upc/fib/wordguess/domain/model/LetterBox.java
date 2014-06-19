@@ -3,14 +3,33 @@ package edu.upc.fib.wordguess.domain.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=LetterBox.TABLE)
+@IdClass(LetterBoxPK.class)
 public class LetterBox implements Serializable {
 
+	public static final String TABLE = "letter_box";
+	
 	private static final long serialVersionUID = -6982945784764306460L;
 
+	@Id
+	@Column
 	private int position;
 	
+	@Id
+	@Column
+	private int matchId;
+	
+	@Column(nullable=false)
 	private char correctLetter;
 	
+	@Column
 	private Boolean success;
 	
 	private List<Character> wrongLetters;

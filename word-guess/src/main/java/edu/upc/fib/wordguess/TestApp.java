@@ -1,32 +1,33 @@
 package edu.upc.fib.wordguess;
 
-import org.hibernate.Session;
+import edu.upc.fib.wordguess.data.dao.PlayerDAO;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.domain.model.Player;
 
-import edu.upc.fib.wordguess.domain.model.Match;
-import edu.upc.fib.wordguess.domain.model.Word;
-import edu.upc.fib.wordguess.util.HibernateUtil;
 
 public class TestApp {
-    public static void main( String[] args ) {    	
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        //store objects
-        session.beginTransaction();
-        Word word = new Word("giraffe");
-        Match match = new Match(1, word);
-        session.save(word);
-        session.save(match);
-        session.getTransaction().commit();
-        
-        //retrieve objects
-        session.beginTransaction();
-        Match dbMatch = (Match) session.get(Match.class, match.getMatchId());
-        System.out.println("Database retreived match has id=" +
-        					dbMatch.getMatchId() + " and its associated word is: '" +
-        					dbMatch.getWord().getName() + "'");
-        session.getTransaction().commit();
-        
-        session.close();
-        HibernateUtil.shutdown();
+    
+	public static void main( String[] args ) {    	
+    	PlayerDAO dao = PostgresDAOFactory.getInstance().getPlayerDAO();
+    	
+    	try {
+    		if (!dao.exists("john.doe")) {
+    			new Player("John", "Doe", "john.doe", "passsss", "john@doe.com");
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	Player john = null;
+    	try {
+    		john = dao.get("john.doe");
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	if (john != null) {
+    		System.out.println("john is: " + john.getEmail());
+    	}
     }
+	
 }

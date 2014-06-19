@@ -11,7 +11,16 @@
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
-  <mapping class="edu.upc.fib.wordguess.domain.model.Match"/>
-  <mapping class="edu.upc.fib.wordguess.domain.model.Word"/>
+  
+  <!-- Schema mappings -->
+	  <mapping class="edu.upc.fib.wordguess.domain.model.Admin"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.Category"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.LetterBox"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.Match"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.Player"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.RegisteredUser"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.Word"/>
+  <!-- End Schema mappings -->
+  
  </session-factory>
 </hibernate-configuration>

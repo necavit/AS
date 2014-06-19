@@ -27,7 +27,7 @@ public class PostgresPlayerDAO implements PlayerDAO {
 	public Player get(String username) throws PlayerNotExistsException {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		Player player = (Player) session.get(Word.class, username);
+		Player player = (Player) session.get(Player.class, username);
 		if (player == null) {
 			session.close();
 			throw new PlayerNotExistsException();
