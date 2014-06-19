@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 public class JSelcat extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	JugarPartidaController jpc = new JugarPartidaController();
+	//JugarPartidaController jpc = new JugarPartidaController();
 	
 	public JSelcat() {
 		setLayout(null);

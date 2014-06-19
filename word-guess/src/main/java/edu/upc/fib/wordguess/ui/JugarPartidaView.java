@@ -12,8 +12,9 @@ public class JugarPartidaView extends JFrame {
 	JLogin login = new JLogin();
 	JSelcat selcat = new JSelcat();
 	JPartidaEnJoc partidaenjoc = new JPartidaEnJoc();
+	JugarPartidaController jpc;
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -24,7 +25,7 @@ public class JugarPartidaView extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 	
 	public void mostraCategories(String array[]) {
 		
@@ -59,6 +60,7 @@ public class JugarPartidaView extends JFrame {
 	}
 
 	public JugarPartidaView() {
+		jpc = new JugarPartidaController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600 , 400);
 		setContentPane(login);

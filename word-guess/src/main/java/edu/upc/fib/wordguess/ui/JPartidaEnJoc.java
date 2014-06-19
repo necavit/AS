@@ -21,7 +21,7 @@ import java.awt.event.KeyEvent;
 
 public class JPartidaEnJoc extends JPanel {
 	
-	JugarPartidaController jpc = new JugarPartidaController();
+	//JugarPartidaController jpc = new JugarPartidaController();
 	
 	public void creaParaula(int numlletres) {
 		
@@ -148,7 +148,7 @@ public class JPartidaEnJoc extends JPanel {
 		JButton btn_TancarPartida = new JButton("Tancar Partida");
 		btn_TancarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				jpc.PrTancarPartida();
+				//jpc.PrTancarPartida();
 			}
 		});
 		btn_TancarPartida.setBounds(229, 324, 109, 30);
