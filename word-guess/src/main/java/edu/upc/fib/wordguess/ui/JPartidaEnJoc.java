@@ -28,43 +28,24 @@ public class JPartidaEnJoc extends JFrame {
 		for(int i=0;i<numlletres;i++) {
 			x=x+20;
 			lletres[i]= new JTextField();
-			lletres[i].setBounds(x,183,80,20);
-			lletres[i].addKeyListener(new KeyAdapter() {
+			lletres[i].setBounds(x,183,20,20);
+			/*lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
 
 			      }
 
 			      public void keyTyped(KeyEvent e) {
-			    	  if(this.getText().length()>0) System.out.print("a");
+			    	  if(lletres[i].getText().length()>0) System.out.print("a");
 			      }
 
 			      public void keyPressed(KeyEvent e) {
+			    	  
 			      }
-			    });
+		    });*/
 			add(lletres[i]);//adiciono al contentpane
 		}
 	}
-		
 
-		/*for(int i=0; i<numlletres; i++) {
-			x=x+20;
-			textField = new JTextField();
-			textField.setBounds(x, 183, 20, 20);
-			textField.addKeyListener(new KeyAdapter() {
-			      public void keyReleased(KeyEvent e) {
-
-			      }
-
-			      public void keyTyped(KeyEvent e) {
-			    	  if(textField.getText().length()>0) System.out.print("a");
-			      }
-
-			      public void keyPressed(KeyEvent e) {
-			      }
-			    });
-			getContentPane().add(textField);
-		}
-	}*/
 	
 	public JPartidaEnJoc() {
 		getContentPane().setLayout(null);
