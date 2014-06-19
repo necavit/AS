@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ public class JugarPartidaView extends JFrame {
 	JLogin login;
 	JSelcat selcat;
 	JPartidaEnJoc partenjoc;
+	JTextField [] lletres;
 	
 	public class JLogin extends JPanel {
 
@@ -56,8 +59,10 @@ public class JugarPartidaView extends JFrame {
 			btn_login.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(ipc.PrLogin()) {
-					setContentPane(selcat);	
-					selcat.updateUI();
+					//setContentPane(selcat);	
+					//selcat.updateUI();
+					setContentPane(partenjoc);
+					partenjoc.updateUI();
 					}
 				}
 			});
@@ -78,25 +83,31 @@ public class JugarPartidaView extends JFrame {
 				
 		public void creaParaula(int numlletres) {
 			
-			JTextField [] lletres = new JTextField[numlletres];
+			lletres = new JTextField[numlletres];
 			int x=225;
 			for(int i=0;i<numlletres;i++) {
 				x=x+20;
 				lletres[i]= new JTextField();
+				lletres[i].setName(""+i);
 				lletres[i].setBounds(x,183,20,20);
-				/*lletres[i].addKeyListener(new KeyAdapter() {
+				lletres[i].addKeyListener(new KeyAdapter() {
 				      public void keyReleased(KeyEvent e) {
 
 				      }
 
 				      public void keyTyped(KeyEvent e) {
-				    	  if(lletres[i].getText().length()>0) System.out.print("a");
+				    	  JTextField casella = (JTextField) e.getSource();
+				    	  String pos = casella.getName();
+				    	  System.out.println(pos);
+				    	  System.out.println("comproba("+pos+")");
+				    	  if(casella.getText().length()==1) 
+				    		  e.consume();
 				      }
 
 				      public void keyPressed(KeyEvent e) {
 				    	  
 				      }
-			    });*/
+			    });
 				add(lletres[i]);//adiciono al contentpane
 			}
 		}
