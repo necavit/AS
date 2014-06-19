@@ -6,6 +6,8 @@ public class Category implements Serializable {
 
 	private static final long serialVersionUID = 7847291535698838393L;
 
+	public static final String TABLE = "category";
+
 	private String name;
 	
 	public String getName() {

@@ -7,8 +7,6 @@ import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 
 public interface DAOFactory {
-
-	public RegisteredUserDAO getRegisteredUserDAO();
 	
 	public WordDAO getWordDAO();
 	
@@ -17,5 +15,7 @@ public interface DAOFactory {
 	public PlayerDAO getPlayerDAO();
 	
 	public CategoryDAO getCategoryDAO();
+
+	public RegisteredUserDAO getRegisteredUserDAO();
 	
 }

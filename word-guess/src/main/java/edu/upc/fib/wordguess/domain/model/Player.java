@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Player extends RegisteredUser implements Serializable {
 
 	private static final long serialVersionUID = 2249987917128104143L;
+
+	public static final String TABLE_PLAYER = "player";
 	
 	private String email;
 	

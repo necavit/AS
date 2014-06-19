@@ -2,55 +2,51 @@ package edu.upc.fib.wordguess.data.postgres;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.classic.Session;
 
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
+import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 public class PostgresPlayerDAO implements PlayerDAO {
 	
-	private static PostgresPlayerDAO instance = null;
-	
-	private PostgresPlayerDAO() {
-		//TODO retrieve DB connection or something!
-	}
-	
-	public static PostgresPlayerDAO getInstance() {
-		if (instance == null) instance = new PostgresPlayerDAO();
-		return instance;
-	}
-	
 	@Override
 	public boolean exists(String username) {
-		//TODO see if this is correct
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
 		
-		boolean exists = true;
-		try {
-			session.get(Player.class, username);
-		} catch (HibernateException he) {
-			exists = false;
-		}
+		boolean exists = (session.get(Player.class, username) != null) ? true : false;
 		
-		session.getTransaction().commit();
 		session.close();
 		
 		return exists;
 	}
 	
 	@Override
-	public Player get(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public Player get(String username) throws PlayerNotExistsException {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		Player player = (Player) session.get(Word.class, username);
+		if (player == null) {
+			session.close();
+			throw new PlayerNotExistsException();
+		}
+		
+		session.close();
+		return player;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Player> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		List<Player> players = (List<Player>) session.createQuery("from " + Player.TABLE_PLAYER).list();
+				
+		session.close();
+		
+		return players;
 	}
 	
 }

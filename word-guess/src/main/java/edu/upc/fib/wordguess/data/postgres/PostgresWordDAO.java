@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.classic.Session;
 
 import edu.upc.fib.wordguess.data.dao.WordDAO;
+import edu.upc.fib.wordguess.data.exception.WordNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
@@ -22,15 +23,29 @@ public class PostgresWordDAO implements WordDAO {
 	}
 	
 	@Override
-	public Word get(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Word get(String name) throws WordNotExistsException {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		Word word = (Word) session.get(Word.class, name);
+		if (word == null) {
+			session.close();
+			throw new WordNotExistsException();
+		}
+		
+		session.close();
+		return word;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Word> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		List<Word> words = (List<Word>) session.createQuery("from " + Word.TABLE).list();
+				
+		session.close();
+		
+		return words;
 	}
 	
 }

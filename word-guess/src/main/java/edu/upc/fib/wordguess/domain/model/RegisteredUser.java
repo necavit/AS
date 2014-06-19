@@ -6,7 +6,7 @@ public abstract class RegisteredUser implements Serializable {
 	
 	private static final long serialVersionUID = -283532121656300725L;
 	
-	public static final String TABLE = "registered_user";
+	public static final String TABLE_USER = "registered_user";
 
 	private String name;
 	
