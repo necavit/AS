@@ -3,16 +3,13 @@ package edu.upc.fib.wordguess.ui;
 
 public class JugarPartidaController {
 	
-	private JugarPartidaView jpv = null;
+	private JugarPartidaView jpv;
 	//private CtrlDominio ctrlDominio;
 
 	
 	public JugarPartidaController () {
 		//ctrlDominio = new CtrlDominio();
-		if(jpv==null) {
-			jpv = new JugarPartidaView();
-		}
-		
+			jpv = new JugarPartidaView(this);		
 	}
 	
 	public void inicialitza () {
@@ -20,8 +17,8 @@ public class JugarPartidaController {
 		jpv.setVisible(true);	
 	}
 				
-	public void PrLogin(){
-		
+	public boolean PrLogin(){
+		return true;
 	}
 	
 	public void PrLogout(){
@@ -41,7 +38,7 @@ public class JugarPartidaController {
 	}
 	
 	public void PrTancarPartida(){
-		jpv.tancar();
+		
 	}
 
 }
