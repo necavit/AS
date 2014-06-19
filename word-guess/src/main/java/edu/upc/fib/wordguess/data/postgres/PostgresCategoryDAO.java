@@ -9,7 +9,7 @@ import edu.upc.fib.wordguess.data.exception.CategoryNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
-public class PostgresCategoryDAO implements CategoryDAO {
+public class PostgresCategoryDAO extends PostgresGenericDAO<Category> implements CategoryDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override

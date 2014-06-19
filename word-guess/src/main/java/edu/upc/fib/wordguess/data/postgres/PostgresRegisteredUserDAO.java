@@ -9,7 +9,7 @@ import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
-public class PostgresRegisteredUserDAO implements RegisteredUserDAO {
+public class PostgresRegisteredUserDAO extends PostgresGenericDAO<RegisteredUser> implements RegisteredUserDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override

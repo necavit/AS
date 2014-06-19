@@ -12,7 +12,8 @@ public class TestApp {
     	
     	try {
     		if (!dao.exists("john.doe")) {
-    			new Player("John", "Doe", "john.doe", "passsss", "john@doe.com");
+    			Player player = new Player("John", "Doe", "john.doe", "passsss", "john@doe.com");
+    			dao.store(player);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();

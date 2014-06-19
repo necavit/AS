@@ -9,7 +9,7 @@ import edu.upc.fib.wordguess.data.exception.MatchNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
-public class PostgresMatchDAO implements MatchDAO {
+public class PostgresMatchDAO extends PostgresGenericDAO<Match> implements MatchDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override

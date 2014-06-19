@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import edu.upc.fib.wordguess.util.HibernateUtil;
-
 @Entity
 @Table(name=Player.TABLE_PLAYER)
 public class Player extends RegisteredUser implements Serializable {
@@ -31,7 +29,6 @@ public class Player extends RegisteredUser implements Serializable {
 	public Player(String name, String surname, String username, String password, String email) {
 		initialize(name, surname, username, password);
 		this.email = email;
-		HibernateUtil.store(this);
 	}
 	
 	public String getEmail() {

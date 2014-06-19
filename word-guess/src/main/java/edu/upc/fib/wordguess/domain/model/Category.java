@@ -9,8 +9,6 @@ import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 
-import edu.upc.fib.wordguess.util.HibernateUtil;
-
 @Entity
 @Table(name=Category.TABLE)
 public class Category implements Serializable {
@@ -34,7 +32,6 @@ public class Category implements Serializable {
 	
 	public Category(String name) throws HibernateException {
 		this.name = name;
-		HibernateUtil.store(this);
 	}
 	
 	public String getName() {

@@ -9,7 +9,7 @@ import edu.upc.fib.wordguess.data.exception.WordNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
-public class PostgresWordDAO implements WordDAO {
+public class PostgresWordDAO extends PostgresGenericDAO<Word> implements WordDAO {
 	
 	@Override
 	public boolean exists(String name) {

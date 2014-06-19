@@ -7,10 +7,9 @@ import org.hibernate.classic.Session;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.domain.model.Player;
-import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
-public class PostgresPlayerDAO implements PlayerDAO {
+public class PostgresPlayerDAO extends PostgresGenericDAO<Player> implements PlayerDAO {
 	
 	@Override
 	public boolean exists(String username) {
