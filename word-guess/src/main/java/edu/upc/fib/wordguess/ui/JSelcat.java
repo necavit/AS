@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 public class JSelcat extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	//JugarPartidaController jpc = new JugarPartidaController();
+	JugarPartidaController ipc;
 	
-	public JSelcat() {
+	public JSelcat(JugarPartidaController jpc) {
 		setLayout(null);
 		
 		JLabel lb_Selcat = new JLabel("Tria una categoria:");

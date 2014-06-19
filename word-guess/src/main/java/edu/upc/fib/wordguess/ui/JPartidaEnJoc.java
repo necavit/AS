@@ -19,9 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class JPartidaEnJoc extends JPanel {
+public class JPartidaEnJoc extends JFrame {
 	
-	//JugarPartidaController jpc = new JugarPartidaController();
+	JugarPartidaController ipc;
 	
 	public void creaParaula(int numlletres) {
 		
@@ -49,7 +49,8 @@ public class JPartidaEnJoc extends JPanel {
 	}
 
 	
-	public JPartidaEnJoc() {
+	public JPartidaEnJoc(JugarPartidaController jpc) {
+		ipc=jpc;
 		setLayout(null);
 		JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
 		lbPuntuacioActual.setBounds(31, 42, 253, 30);

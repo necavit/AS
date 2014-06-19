@@ -19,9 +19,10 @@ public class JLogin extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tb_user;
 	private JPasswordField tb_pass;
-	//JugarPartidaController jpc = new JugarPartidaController();
+	JugarPartidaController ipc;
 
-	public JLogin() {
+	public JLogin(JugarPartidaController jpc) {
+		ipc=jpc;
 		setLayout(null);
 		
 		JLabel lb_user = new JLabel("Usuari");
@@ -46,7 +47,7 @@ public class JLogin extends JPanel {
 		JButton btn_login = new JButton("Login");
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//jpc.PrLogin();
+				//ipc.PrLogin();
 			}
 		});
 		btn_login.setBackground(Color.green);
