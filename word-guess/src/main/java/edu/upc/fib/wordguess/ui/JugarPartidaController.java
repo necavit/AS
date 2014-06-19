@@ -2,6 +2,13 @@ package edu.upc.fib.wordguess.ui;
 
 
 public class JugarPartidaController {
+	
+	JugarPartidaView jpv = new JugarPartidaView();
+	
+	public JugarPartidaController () {
+		
+	}
+				
 	public void PrLogin(){
 		
 	}
@@ -23,7 +30,7 @@ public class JugarPartidaController {
 	}
 	
 	public void PrTancarPartida(){
-		
+		jpv.tancar();
 	}
 
 }

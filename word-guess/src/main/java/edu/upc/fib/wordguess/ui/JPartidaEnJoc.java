@@ -19,7 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class JPartidaEnJoc extends JFrame {
+public class JPartidaEnJoc extends JPanel {
+	
+	JugarPartidaController jpc = new JugarPartidaController();
 	
 	public void creaParaula(int numlletres) {
 		
@@ -48,7 +50,7 @@ public class JPartidaEnJoc extends JFrame {
 
 	
 	public JPartidaEnJoc() {
-		getContentPane().setLayout(null);
+		setLayout(null);
 		JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
 		lbPuntuacioActual.setBounds(31, 42, 253, 30);
 		lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
@@ -58,7 +60,7 @@ public class JPartidaEnJoc extends JFrame {
 		lbPuntuacioActual.setBackground(Color.blue);
 		lbPuntuacioActual.setForeground(Color.white);
 		lbPuntuacioActual.setOpaque(true);
-		getContentPane().add(lbPuntuacioActual);
+		add(lbPuntuacioActual);
 		
 		JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
 		lbErrors.setBounds(326, 42, 253, 30);
@@ -67,7 +69,7 @@ public class JPartidaEnJoc extends JFrame {
 		lbErrors.setBackground(Color.gray);
 		lbErrors.setForeground(Color.white);
 		lbErrors.setOpaque(true);
-		getContentPane().add(lbErrors);
+		add(lbErrors);
 		
 		JLabel lbPunts = new JLabel("0",SwingConstants.CENTER);
 		lbPunts.setBounds(31, 72, 253, 30);
@@ -76,7 +78,7 @@ public class JPartidaEnJoc extends JFrame {
 		lbPunts.setBackground(Color.blue);
 		lbPunts.setForeground(Color.white);
 		lbPunts.setOpaque(true);
-		getContentPane().add(lbPunts);
+		add(lbPunts);
 		
 		JLabel lbNumErrors = new JLabel("0 de 3",SwingConstants.CENTER);
 		lbNumErrors.setBounds(326, 72, 253, 30);
@@ -85,11 +87,11 @@ public class JPartidaEnJoc extends JFrame {
 		lbNumErrors.setBackground(Color.gray);
 		lbNumErrors.setForeground(Color.white);
 		lbNumErrors.setOpaque(true);
-		getContentPane().add(lbNumErrors);
+		add(lbNumErrors);
 		
 		JLabel lb_missatges = new JLabel("New label",SwingConstants.CENTER);
 		lb_missatges.setBounds(57, 246, 422, 76);
-		getContentPane().add(lb_missatges);
+		add(lb_missatges);
 		
 		JLabel lb_PuntEncert = new JLabel("+10",SwingConstants.CENTER);
 		lb_PuntEncert.setBounds(31, 113, 62, 30);
@@ -98,7 +100,7 @@ public class JPartidaEnJoc extends JFrame {
 		lb_PuntEncert.setBackground(Color.green);
 		lb_PuntEncert.setForeground(Color.white);
 		lb_PuntEncert.setOpaque(true);
-		getContentPane().add(lb_PuntEncert);
+		add(lb_PuntEncert);
 		
 		JLabel lb_Encerts = new JLabel("Encert",SwingConstants.CENTER);
 		lb_Encerts.setBounds(103, 113, 181, 30);
@@ -107,7 +109,7 @@ public class JPartidaEnJoc extends JFrame {
 		lb_Encerts.setBackground(Color.green);
 		lb_Encerts.setForeground(Color.white);
 		lb_Encerts.setOpaque(true);
-		getContentPane().add(lb_Encerts);
+		add(lb_Encerts);
 		
 		JLabel lb_PuntsError = new JLabel("-5",SwingConstants.CENTER);
 		lb_PuntsError.setBounds(326, 113, 62, 30);
@@ -116,7 +118,7 @@ public class JPartidaEnJoc extends JFrame {
 		lb_PuntsError.setBackground(Color.red);
 		lb_PuntsError.setForeground(Color.white);
 		lb_PuntsError.setOpaque(true);
-		getContentPane().add(lb_PuntsError);
+		add(lb_PuntsError);
 		
 		JLabel lb_Errors = new JLabel("Fallada",SwingConstants.CENTER);
 		lb_Errors.setBounds(398, 113, 181, 30);
@@ -125,7 +127,7 @@ public class JPartidaEnJoc extends JFrame {
 		lb_Errors.setBackground(Color.red);
 		lb_Errors.setForeground(Color.white);
 		lb_Errors.setOpaque(true);
-		getContentPane().add(lb_Errors);
+		add(lb_Errors);
 		
 		JButton btn_AturarPartida = new JButton("Aturar Partida");
 		btn_AturarPartida.addActionListener(new ActionListener() {
@@ -133,7 +135,7 @@ public class JPartidaEnJoc extends JFrame {
 			}
 		});
 		btn_AturarPartida.setBounds(140, 324, 122, 30);
-		getContentPane().add(btn_AturarPartida);
+		add(btn_AturarPartida);
 		
 		JButton btn_Comprovar = new JButton("Comprovar");
 		btn_Comprovar.addActionListener(new ActionListener() {
@@ -141,17 +143,18 @@ public class JPartidaEnJoc extends JFrame {
 			}
 		});
 		btn_Comprovar.setBounds(318, 324, 109, 30);
-		getContentPane().add(btn_Comprovar);
+		add(btn_Comprovar);
 		
 		JButton btn_TancarPartida = new JButton("Tancar Partida");
 		btn_TancarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				jpc.PrTancarPartida();
 			}
 		});
 		btn_TancarPartida.setBounds(229, 324, 109, 30);
-		getContentPane().add(btn_TancarPartida);
+		add(btn_TancarPartida);
 		
-		btn_TancarPartida.setVisible(false);
+		btn_TancarPartida.setVisible(true);
 		
 		creaParaula(5);
 

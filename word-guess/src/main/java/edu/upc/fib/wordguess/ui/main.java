@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class main {
     public static void main( String[] args ) {  
-    		          JFrame login = new JPartidaEnJoc();
+    		          JFrame login = new JLogin();
     		          login.setSize(600, 400);
     		          login.setVisible(true);
     }
