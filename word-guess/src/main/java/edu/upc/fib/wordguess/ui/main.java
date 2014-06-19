@@ -1,5 +1,5 @@
 package edu.upc.fib.wordguess.ui;
 
-public class mainUi {
+public class main {
 
 }
