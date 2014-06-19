@@ -1,4 +1,4 @@
-package edu.upc.fib.wordguess.data;
+package edu.upc.fib.wordguess.data.postgres;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,21 +6,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.CategoryDAO;
+import edu.upc.fib.wordguess.data.dao.MatchDAO;
+import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
+import edu.upc.fib.wordguess.data.dao.WordDAO;
 import edu.upc.fib.wordguess.data.exception.UsernameNotExists;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 
-public class DataControllersFactory {
+public class PostgresDAOFactory implements DAOFactory {
 
 	/* **** **** MEMBERS ***** **** */
-	private RegisteredUserDAO registeredUserDAO;
+	private RegisteredUserDAO registeredUserDAO = null;
+	
+	private MatchDAO matchDAO = null;
+	
+	private WordDAO wordDAO = null;
+	
+	private CategoryDAO categoryDAO = null;
+	
+	private PlayerDAO playerDAO = null;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
-	private static DataControllersFactory instance = null;
+	private static PostgresDAOFactory instance = null;
 	
-	private DataControllersFactory() {
+	private PostgresDAOFactory() {
 		//TODO get a DB connection
 		//TODO initialize registeredUserController
 		//TODO add other controllers and initialize them
@@ -60,15 +73,40 @@ public class DataControllersFactory {
 		};
 	}
 	
-	public static DataControllersFactory getInstance() {
-		if (instance == null) instance = new DataControllersFactory();
+	public static PostgresDAOFactory getInstance() {
+		if (instance == null) instance = new PostgresDAOFactory();
 		return instance;
 	}
 	
-	/* **** **** METHODS ***** **** */
-	
+	/* **** **** PUBLIC METHODS ***** **** */
+	@Override
 	public RegisteredUserDAO getRegisteredUserDAO() {
+		// TODO replace with real implementation
 		return registeredUserDAO;
+	}
+	
+	@Override
+	public CategoryDAO getCategoryDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public MatchDAO getMatchDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public PlayerDAO getPlayerDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public WordDAO getWordDAO() {
+		if (wordDAO == null) wordDAO = new PostgresWordDAO();
+		return wordDAO;
 	}
 	
 }

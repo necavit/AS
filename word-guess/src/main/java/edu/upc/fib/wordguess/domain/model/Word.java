@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.HibernateException;
+
+import edu.upc.fib.wordguess.util.HibernateUtil;
+
 @Entity
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
@@ -21,9 +25,19 @@ public class Word implements Serializable {
     @Column
     private int numLetters;
 
-    public Word(String name) {
+    /**
+     * WARNING! Never use this constructor!
+     * 
+     * Its existence is just for Hibernate to work well.
+     */
+    public Word() {
+    	//empty constructor for Hibernate to work
+    }
+    
+    public Word(String name) throws HibernateException {
         this.name = name;
         this.numLetters = name.length();
+        HibernateUtil.store(this);
     }
 
     public String getName() {

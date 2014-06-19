@@ -1,5 +1,6 @@
 package edu.upc.fib.wordguess.util;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
@@ -19,6 +20,12 @@ public class HibernateUtil {
 		}
 	}
 
+	/**
+	 * Retrieves a configurated Hibernate SessionFactory instance, shared
+	 * among all application components.
+	 * 
+	 * @return the shared SessionFactory
+	 */
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -28,7 +35,13 @@ public class HibernateUtil {
 		getSessionFactory().close();
 	}
 	
-	public static Object store(Object object) {
+	/**
+	 * Stores a generic Object in the session retrieved by {@link getSessionFactory}.
+	 * 
+	 * @param object the Object to be stored
+	 * @return the same Object that was passed in
+	 */
+	public static Object store(Object object) throws HibernateException {
 		//open session
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();

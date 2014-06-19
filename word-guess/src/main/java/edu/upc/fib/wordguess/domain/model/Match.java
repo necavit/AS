@@ -32,7 +32,7 @@ public class Match implements Serializable {
     @ManyToOne
     private Word word;
     
-    private List<LetterBox> letterBoxes;
+    //private List<LetterBox> letterBoxes;
 
     public Match(int matchId, Word word) {
         this.matchId = matchId;
