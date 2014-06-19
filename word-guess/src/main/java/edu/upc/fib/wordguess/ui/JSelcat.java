@@ -1,13 +1,15 @@
 package edu.upc.fib.wordguess.ui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class JSelcat extends JPanel {
+public class JSelcat extends JFrame {
 
 	/**
 	 * 

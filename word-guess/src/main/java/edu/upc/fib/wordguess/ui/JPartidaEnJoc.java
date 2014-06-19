@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -13,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class JPartidaEnJoc extends JPanel {
+public class JPartidaEnJoc extends JFrame {
 	private JTextField textField;
 	
 	public void creaParaula(int numlletres) {

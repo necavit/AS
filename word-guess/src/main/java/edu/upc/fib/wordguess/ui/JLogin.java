@@ -1,5 +1,6 @@
 package edu.upc.fib.wordguess.ui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -13,7 +14,7 @@ import javax.swing.JPasswordField;
 import java.awt.Button;
 import java.awt.Color;
 
-public class JLogin extends JPanel {
+public class JLogin extends JFrame {
 	/**
 	 * 
 	 */
