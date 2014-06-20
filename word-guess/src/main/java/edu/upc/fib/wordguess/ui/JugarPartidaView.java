@@ -52,14 +52,13 @@ public class JugarPartidaView extends JFrame {
 			      }
 
 			      public void keyTyped(KeyEvent e) {
-			    	  JTextField casella = (JTextField) e.getComponent();
+			    	  JTextField casella = (JTextField) e.getSource();
 			    	  String pos = casella.getName();
 			  		  int posint = Integer.parseInt(pos);
-			  		  System.out.print(casella.getText().length());
 			    	  //System.out.println(pos);
 			    	  //System.out.println("comproba("+pos+")");
 			    	  //ipc.PrComprovar(posint,casella.getText());
-			    	  if(casella.getText().length()==6) System.out.print(casella.getText());				    	  
+			    	  if(casella.getText().length()==1) e.consume();				    	  
 			      }
 
 			      public void keyPressed(KeyEvent e) {
