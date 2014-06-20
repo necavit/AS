@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 
+import edu.upc.fib.wordguess.data.dao.WordDAO;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
@@ -38,11 +40,18 @@ public class Word implements Serializable {
     	//empty constructor for Hibernate to work
     }
     
+    private static WordDAO dao = PostgresDAOFactory.getInstance().getWordDAO();
+    
     public Word(String name, Category category) throws HibernateException {
         this.name = name;
         this.numLetters = name.length();
         this.category = category;
-        HibernateUtil.store(this);
+        try {
+			dao.store(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public String getName() {
@@ -52,6 +61,12 @@ public class Word implements Serializable {
     public void setName(String name) {
         this.name = name;
         this.numLetters = name.length();
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public int getNumLetters() {
@@ -64,5 +79,11 @@ public class Word implements Serializable {
     
     public void setCategory(Category category) {
 		this.category = category;
+		try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

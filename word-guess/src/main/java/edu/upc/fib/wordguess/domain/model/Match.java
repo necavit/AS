@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import edu.upc.fib.wordguess.data.dao.MatchDAO;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
@@ -49,6 +51,8 @@ public class Match implements Serializable {
     	
     }
 	
+    private static MatchDAO dao = PostgresDAOFactory.getInstance().getMatchDAO();
+    
     public Match(int matchId, Word word,Player player) {
         this.matchId = matchId;
         this.word = word;
@@ -62,7 +66,12 @@ public class Match implements Serializable {
         	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
         }
         
-        HibernateUtil.store(this);
+        try {
+			dao.store(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public Match(int matchId, Word word) {
@@ -76,6 +85,13 @@ public class Match implements Serializable {
         	System.out.print(word.getName().charAt(1));
         	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
         }
+        
+        try {
+			dao.store(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public boolean play (int pos, char letter) {
@@ -86,12 +102,12 @@ public class Match implements Serializable {
     			won = letterBoxes.get(i).isSuccess();
     		}
     		if(won) {
-    			isFinished=true;
-    			isWon = true;
+    			setFinished(true);
+    			setWon(true);
     		}
     	}
     	else {
-    		++numErrors;		
+    		setNumErrors(getNumErrors() + 1);		
     	}
     	return encertada;
     }
@@ -102,6 +118,12 @@ public class Match implements Serializable {
 
     public void setMatchId(int matchId) {
         this.matchId = matchId;
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public Player getPlayer() {
@@ -110,6 +132,12 @@ public class Match implements Serializable {
     
     public void setPlayer(Player player) {
 		this.player = player;
+		try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
     public int getNumErrors() {
@@ -118,6 +146,12 @@ public class Match implements Serializable {
 
     public void setNumErrors(int numErrors) {
         this.numErrors = numErrors;
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public boolean isFinished() {
@@ -126,6 +160,12 @@ public class Match implements Serializable {
 
     public void setFinished(boolean isFinished) {
         this.isFinished = isFinished;
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public boolean isWon() {
@@ -134,6 +174,12 @@ public class Match implements Serializable {
 
     public void setWon(boolean isWon) {
         this.isWon = isWon;
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public Word getWord() {
@@ -142,6 +188,12 @@ public class Match implements Serializable {
 
     public void setWord(Word word) {
         this.word = word;
+        try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	public List<LetterBox> getLetterBoxes() {
@@ -150,6 +202,12 @@ public class Match implements Serializable {
 	
 	public void setLetterBoxes(List<LetterBox> letterBoxes) {
 		this.letterBoxes = letterBoxes;
+		try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

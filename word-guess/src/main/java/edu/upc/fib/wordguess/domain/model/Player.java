@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import edu.upc.fib.wordguess.data.dao.PlayerDAO;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.postgres.PostgresPlayerDAO;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
@@ -33,10 +36,17 @@ public class Player extends RegisteredUser implements Serializable {
 		//
 	}
 	
+	private static PlayerDAO dao = PostgresDAOFactory.getInstance().getPlayerDAO();
+	
 	public Player(String name, String surname, String username, String password, String email) {
 		initialize(name, surname, username, password);
 		this.email = email;
-		HibernateUtil.store(this);
+		try {
+			dao.store(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getEmail() {
@@ -45,6 +55,12 @@ public class Player extends RegisteredUser implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+		try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
