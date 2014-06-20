@@ -44,6 +44,10 @@ public class Match implements Serializable {
     
     @OneToMany(mappedBy=LetterBox.MATCH_ID)
 	private List<LetterBox> letterBoxes;
+    
+    public Match () {
+    	
+    }
 	
     public Match(int matchId, Word word, Player player) {
         this.matchId = matchId;
@@ -59,6 +63,13 @@ public class Match implements Serializable {
         }
         
         HibernateUtil.store(this);
+    }
+    
+    public boolean play (int pos, char letter) {
+    	if(letter==letterBoxes.get(pos).getCorrectLetter()) {
+    		
+    	}
+    	return true;
     }
 
     public int getMatchId() {
