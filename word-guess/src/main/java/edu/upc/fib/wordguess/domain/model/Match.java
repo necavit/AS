@@ -49,13 +49,13 @@ public class Match implements Serializable {
     	
     }
 	
-    public Match(int matchId, Word word, Player player) {
+    public Match(int matchId, Word word,Player player) {
         this.matchId = matchId;
         this.word = word;
         this.numErrors = 0;
         this.isFinished = false;
         this.isWon = false;
-        this.player = player;
+        //this.player = player;
         
         letterBoxes = new ArrayList<LetterBox>();
         for (int i = 0; i < word.getName().length(); ++i) {
@@ -65,11 +65,24 @@ public class Match implements Serializable {
         HibernateUtil.store(this);
     }
     
+    public Match(int matchId, Word word) {
+        this.matchId = matchId;
+        this.word = word;
+        this.numErrors = 0;
+        this.isFinished = false;
+        this.isWon = false;
+        letterBoxes = new ArrayList<LetterBox>();
+        for (int i = 0; i < word.getName().length(); ++i) {
+        	System.out.print(word.getName().charAt(1));
+        	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
+        }
+    }
+    
     public boolean play (int pos, char letter) {
     	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
     	if( letterBoxes.get(pos).checkLetter(letter)) {
     		boolean won = true;
-    		for(int i=0; i<letterBoxes.size() && won ; ++i) {
+    		for(int i=0; i<letterBoxes.size()-1 && won ; ++i) {
     			won = letterBoxes.get(i).isSuccess();
     		}
     		if(won) {

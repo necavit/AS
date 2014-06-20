@@ -52,13 +52,14 @@ public class JugarPartidaView extends JFrame {
 			      }
 
 			      public void keyTyped(KeyEvent e) {
-			    	  JTextField casella = (JTextField) e.getSource();
+			    	  JTextField casella = (JTextField) e.getComponent();
 			    	  String pos = casella.getName();
 			  		  int posint = Integer.parseInt(pos);
-			    	  /*System.out.println(pos);
-			    	  System.out.println("comproba("+pos+")");*/
-			    	  ipc.PrComprovar(posint,casella.getText());
-			    	  if(casella.getText().length()==1) e.consume();				    	  
+			  		  System.out.print(casella.getText().length());
+			    	  //System.out.println(pos);
+			    	  //System.out.println("comproba("+pos+")");
+			    	  //ipc.PrComprovar(posint,casella.getText());
+			    	  if(casella.getText().length()==6) System.out.print(casella.getText());				    	  
 			      }
 
 			      public void keyPressed(KeyEvent e) {
@@ -335,6 +336,11 @@ public class JugarPartidaView extends JFrame {
 		String eactuals = Integer.toString(ea);
 		String numaxe = Integer.toString(nme);
 		lbNumErrors.setText(eactuals + " de " + numaxe);
+	}
+	
+	public void mostraErrors(int ea) {
+		String eactuals = Integer.toString(ea);
+		lbNumErrors.setText(eactuals);
 	}
 	
 	public void mostraLletra(char lletra,int pos) {
