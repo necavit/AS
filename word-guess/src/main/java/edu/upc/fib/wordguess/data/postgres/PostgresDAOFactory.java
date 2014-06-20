@@ -6,6 +6,11 @@ import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
+import edu.upc.fib.wordguess.data.mock.MockCategoryDAO;
+import edu.upc.fib.wordguess.data.mock.MockMatchDAO;
+import edu.upc.fib.wordguess.data.mock.MockPlayerDAO;
+import edu.upc.fib.wordguess.data.mock.MockRegisteredUserDAO;
+import edu.upc.fib.wordguess.data.mock.MockWordDAO;
 
 public class PostgresDAOFactory implements DAOFactory {
 
@@ -35,6 +40,40 @@ public class PostgresDAOFactory implements DAOFactory {
 	}
 	
 	/* **** **** PUBLIC METHODS ***** **** */
+	
+	@Override
+	public CategoryDAO getCategoryDAO() {
+		if (categoryDAO == null) categoryDAO = new MockCategoryDAO();
+		return categoryDAO;
+	}
+	
+	@Override
+	public MatchDAO getMatchDAO() {
+		if (matchDAO == null) matchDAO = new MockMatchDAO();
+		return matchDAO;
+	}
+	
+	@Override
+	public PlayerDAO getPlayerDAO() {
+		if (playerDAO == null) playerDAO = new MockPlayerDAO();
+		return playerDAO;
+	}
+	
+	@Override
+	public WordDAO getWordDAO() {
+		if (wordDAO == null) wordDAO = new MockWordDAO();
+		return wordDAO;
+	}
+	
+	@Override
+	public RegisteredUserDAO getRegisteredUserDAO() {
+		if (registeredUserDAO  == null) registeredUserDAO = new MockRegisteredUserDAO();
+		return registeredUserDAO;
+	}
+	
+	/* Postgres DAO implementations. Do no uncomment this until Hbernate properly map things!!!
+	 * MockDAOs are intended to be used until then.
+	 * 
 	@Override
 	public CategoryDAO getCategoryDAO() {
 		if (categoryDAO == null) categoryDAO = new PostgresCategoryDAO();
@@ -64,5 +103,5 @@ public class PostgresDAOFactory implements DAOFactory {
 		if (registeredUserDAO  == null) registeredUserDAO = new PostgresRegisteredUserDAO();
 		return registeredUserDAO;
 	}
-	
+	*/
 }
