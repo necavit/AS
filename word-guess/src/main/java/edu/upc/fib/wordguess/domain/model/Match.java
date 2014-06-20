@@ -66,10 +66,21 @@ public class Match implements Serializable {
     }
     
     public boolean play (int pos, char letter) {
-    	if(letter==letterBoxes.get(pos).getCorrectLetter()) {
-    		
+    	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
+    	if( letterBoxes.get(pos).checkLetter(letter)) {
+    		boolean won = true;
+    		for(int i=0; i<letterBoxes.size() && won ; ++i) {
+    			won = letterBoxes.get(i).isSuccess();
+    		}
+    		if(won) {
+    			isFinished=true;
+    			isWon = true;
+    		}
     	}
-    	return true;
+    	else {
+    		++numErrors;		
+    	}
+    	return encertada;
     }
 
     public int getMatchId() {

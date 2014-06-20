@@ -21,28 +21,15 @@ public class JugarPartidaUseCasController {
 	
 	public ArrayList<Object> ferJugada(int pos, char lletra, int idPartida) {
 		ArrayList<Object> infojugada = new ArrayList<Object>();
-		m.play(pos,lletra);
-		/*boolean encert,acabada,guanyada;
-		int puntuacio,errors;
-		String paraula = w.getName();
-		if(lletra==paraula.charAt(pos)) {
+		if(m.play(pos,lletra)) {
 			++numEncerts;
-			encert=true;
-			if(numEncerts==w.getNumLetters()) {
-				m.setFinished(true);
-				m.setWon(true);
+			if(m.isWon()) {
 				//Servei missatgeria
-			}
-			
-			else {
-				
 			}
 		}
 		else {
 			
 		}
-		i.encert=true;
-		infojugada.add(i);*/
 		return infojugada;
 	}
 	

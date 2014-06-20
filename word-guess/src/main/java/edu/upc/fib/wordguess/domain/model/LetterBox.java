@@ -86,6 +86,11 @@ public class LetterBox implements Serializable {
 		this.success =  success;
 	}
 
+	public boolean checkLetter( char letter ){
+		this.success = ( letter == this.correctLetter );
+		return this.success;
+	}
+	
 	/*
 	public List<Character> getWrongLetters() {
 		return wrongLetters;
