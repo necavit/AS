@@ -32,6 +32,7 @@ public class JugarPartidaUseCasController {
 		if(encert) {
 			++numEncerts;
 			if(m.isWon()) {
+				System.out.print("Partida Finalitzada");
 				//Servei missatgeria
 			}
 		}
