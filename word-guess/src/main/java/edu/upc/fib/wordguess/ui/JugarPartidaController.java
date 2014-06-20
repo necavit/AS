@@ -59,7 +59,14 @@ public class JugarPartidaController {
 	}
 	
 	public void PrComprovar(int pos, String lletra){
-		jpuc.ferJugada(pos, lletra.charAt(0) , idPartida);
+		ArrayList<Object> infop = jpuc.ferJugada(pos, lletra.charAt(0) , idPartida);
+		boolean encert = (boolean) infop.get(0);
+		boolean acabada = (boolean) infop.get(1);
+		boolean guanyada = (boolean) infop.get(2);
+		int puntuacio = (int) infop.get(4);
+		int errors = (int) infop.get(3);
+		jpv.mostraPuntuacioActual(puntuacio);
+		jpv.mostraErrors(errors);
 	}
 	
 	public void PrTancarPartida(){

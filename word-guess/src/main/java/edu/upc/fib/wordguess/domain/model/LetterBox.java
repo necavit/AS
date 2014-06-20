@@ -50,8 +50,8 @@ public class LetterBox implements Serializable {
 		this.matchId = matchId;
 		this.position = position;
 		this.correctLetter = correctLetter;
-		this.success = null;
-		HibernateUtil.store(this);
+		this.success = false;
+		//HibernateUtil.store(this);
 	}
 	
 	public int getPosition() {

@@ -3,6 +3,7 @@ package edu.upc.fib.wordguess.domain.controllers.transaction;
 import java.util.ArrayList;
 
 import edu.upc.fib.wordguess.domain.model.Match;
+import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
 
 
@@ -11,11 +12,12 @@ public class JugarPartidaUseCasController {
 	private int numEncerts;
 	private Word w;
 	private Match m;
+	private Player p;
 		
 	public JugarPartidaUseCasController() {
 		w = new Word();
-		m = new Match();
-		w.setName("Patata");
+		w.setName("patata");
+		m = new Match(1,w);
 		numEncerts=0;
 	}
 	
@@ -23,16 +25,28 @@ public class JugarPartidaUseCasController {
 		ArrayList<Object> infojugada = new ArrayList<Object>();
 		boolean encert,acabada,guanyada;
 		int puntuacio,errors;
+		encert=m.play(pos,lletra);
+		guanyada = m.isWon();
+		acabada = m.isFinished();
 		
-		if(m.play(pos,lletra)) {
+		if(encert) {
 			++numEncerts;
 			if(m.isWon()) {
 				//Servei missatgeria
 			}
 		}
 		else {
-			
+			//Fer la comprobacio si supera nmaximerrors
 		}
+		
+		errors = m.getNumErrors();
+		puntuacio = 3; // ESTRATEGIA
+		
+		infojugada.add(encert);
+		infojugada.add(acabada);
+		infojugada.add(guanyada);
+		infojugada.add(errors);
+		infojugada.add(puntuacio);
 		return infojugada;
 	}
 	
