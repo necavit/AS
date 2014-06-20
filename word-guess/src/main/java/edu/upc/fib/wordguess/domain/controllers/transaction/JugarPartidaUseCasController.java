@@ -21,6 +21,9 @@ public class JugarPartidaUseCasController {
 	
 	public ArrayList<Object> ferJugada(int pos, char lletra, int idPartida) {
 		ArrayList<Object> infojugada = new ArrayList<Object>();
+		boolean encert,acabada,guanyada;
+		int puntuacio,errors;
+		
 		if(m.play(pos,lletra)) {
 			++numEncerts;
 			if(m.isWon()) {
