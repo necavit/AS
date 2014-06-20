@@ -36,6 +36,7 @@ public class JugarPartidaView extends JFrame {
 	JLabel lbNumErrors;
 	JLabel lbPunts;
 	JButton btn_ok;
+	private int index;
 	
 	public void creaParaula(int numlletres) {
 		
@@ -44,7 +45,9 @@ public class JugarPartidaView extends JFrame {
 		for(int i=0;i<numlletres;i++) {
 			x=x+20;
 			lletres[i]= new JTextField();
-			lletres[i].setName(""+i);
+			String pos = Integer.toString(i);
+			lletres[i].setText("");
+			lletres[i].setName(pos);
 			lletres[i].setBounds(x,183,20,20);
 			lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
@@ -55,9 +58,8 @@ public class JugarPartidaView extends JFrame {
 			    	  JTextField casella = (JTextField) e.getSource();
 			    	  String pos = casella.getName();
 			  		  int posint = Integer.parseInt(pos);
-			    	  //System.out.println(pos);
-			    	  //System.out.println("comproba("+pos+")");
-			    	  //ipc.PrComprovar(posint,casella.getText());
+			  		  index=posint;
+			  		  String lletra = lletres[posint].getText();
 			    	  if(casella.getText().length()==1) e.consume();				    	  
 			      }
 
@@ -219,6 +221,7 @@ public class JugarPartidaView extends JFrame {
 			JButton btn_Comprovar = new JButton("Comprovar");
 			btn_Comprovar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+			    	  ipc.PrComprovar(index,lletres[index].getText());
 				}
 			});
 			btn_Comprovar.setBounds(318, 324, 109, 30);

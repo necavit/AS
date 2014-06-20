@@ -73,7 +73,6 @@ public class Match implements Serializable {
         this.isWon = false;
         letterBoxes = new ArrayList<LetterBox>();
         for (int i = 0; i < word.getName().length(); ++i) {
-        	System.out.print(word.getName().charAt(1));
         	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
         }
     }
@@ -82,7 +81,7 @@ public class Match implements Serializable {
     	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
     	if( letterBoxes.get(pos).checkLetter(letter)) {
     		boolean won = true;
-    		for(int i=0; i<letterBoxes.size()-1 && won ; ++i) {
+    		for(int i=0; i<letterBoxes.size() && won ; ++i) {
     			won = letterBoxes.get(i).isSuccess();
     		}
     		if(won) {
