@@ -42,9 +42,16 @@ public class JugarPartidaView extends JFrame {
 	JButton btn_TancarPartida;
 	private int index;
 	private boolean guanyada;
+	private int numlletres;
 	
+	
+	public void caparCaselles (int pos) {
+		for (int i=0; i<numlletres; ++i) {
+			if (i!=pos) lletres[i].setEnabled(false);
+		}
+	}
 	public void creaParaula(int numlletres) {
-		
+		this.numlletres = numlletres;
 		lletres = new JTextField[numlletres];
 		int x=200;
 		for(int i=0;i<numlletres;i++) {
@@ -64,8 +71,9 @@ public class JugarPartidaView extends JFrame {
 			    	  String pos = casella.getName();
 			  		  int posint = Integer.parseInt(pos);
 			  		  index=posint;
+			  		  caparCaselles(index);
 			  		  String lletra = lletres[posint].getText();
-			    	  if(casella.getText().length()==1) e.consume();				    	  
+			    	  if(casella.getText().length()==1) e.consume();	
 			      }
 
 			      public void keyPressed(KeyEvent e) {
@@ -411,5 +419,9 @@ public class JugarPartidaView extends JFrame {
 	public void marcaCasella(boolean encert) {
 		if(encert) lletres[index].setBackground(Color.green);
 		else lletres[index].setBackground(Color.red);
+		for (int i=0; i<numlletres; ++i) {
+			if (lletres[i].getBackground() == Color.green) lletres[i].setEnabled(false);
+			else lletres[i].setEnabled(true);
+		}
 	}
 }
