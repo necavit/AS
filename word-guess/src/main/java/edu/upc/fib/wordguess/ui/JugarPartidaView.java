@@ -97,26 +97,30 @@ public class JugarPartidaView extends JFrame {
 		public JLogin() {
 			setLayout(null);
 			
+			//label usuari
 			JLabel lb_user = new JLabel("Usuari");
 			lb_user.setFont(new java.awt.Font("Tahoma",0,20));
 			lb_user.setBounds(118, 86, 69, 26);
 			add(lb_user);
 			
-			JLabel lb_pass = new JLabel("Contrassenya");
+			//label contrasenya
+			JLabel lb_pass = new JLabel("Contrasenya");
 			lb_pass.setFont(new java.awt.Font("Tahoma",0,20));
 			lb_pass.setBounds(113, 137, 148, 22);
 			add(lb_pass);
 			
+			//textField usuername
 			tb_user = new JTextField();
 			tb_user.setBounds(275, 86, 139, 28);
 			add(tb_user);
 			tb_user.setColumns(10);
 			
-			
+			//textField contrasenya
 			tb_pass = new JPasswordField();
 			tb_pass.setBounds(271, 137, 143, 25);
 			add(tb_pass);
 			
+			//panell missatges
 			lb_missatges = new JLabel("",JLabel.CENTER);
 			lb_missatges.setBounds(97, 180, 385, 99);
 			add(lb_missatges);
