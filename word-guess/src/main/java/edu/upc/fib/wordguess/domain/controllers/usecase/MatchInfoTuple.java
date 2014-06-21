@@ -1,4 +1,4 @@
-package edu.upc.fib.wordguess.domain.model;
+package edu.upc.fib.wordguess.domain.controllers.usecase;
 
 /**
  * Tuple-like class, to store the information returned
@@ -7,7 +7,7 @@ package edu.upc.fib.wordguess.domain.model;
  * For the sake of simplicity, all members are public, but final,
  * so no modification is possible afterwards.
  */
-public class MatchInfoTuple {
+public final class MatchInfoTuple {
 
 	public final int matchId;
 	public final int currentScore;

@@ -25,6 +25,8 @@ public class Player extends RegisteredUser implements Serializable {
 	@Column(nullable=false)
 	private String email;
 	
+	private Match currentMatch;
+	
 	@OneToMany(mappedBy=Match.PLAYER)
 	private List<Match> playedMatches;
 	
@@ -79,6 +81,14 @@ public class Player extends RegisteredUser implements Serializable {
 		}
 	}
 
+	public List<Match> getPlayedMatches() {
+		return playedMatches;
+	}
+	
+	public void setPlayedMatches(List<Match> playedMatches) {
+		this.playedMatches = playedMatches;
+	}
+	
 	public int getWonMatches() {
 		int wonMatches = 0;
 		for (Match match : playedMatches) {
@@ -87,6 +97,14 @@ public class Player extends RegisteredUser implements Serializable {
 			}
 		}
 		return wonMatches;
+	}
+	
+	public Match getCurrentMatch() {
+		return currentMatch;
+	}
+	
+	public void setCurrentMatch(Match match) {
+		this.currentMatch = match;
 	}
 	
 }

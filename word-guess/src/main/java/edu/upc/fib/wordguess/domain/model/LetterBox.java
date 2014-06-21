@@ -1,6 +1,7 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +11,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
 @Table(name=LetterBox.TABLE)
@@ -40,7 +39,7 @@ public class LetterBox implements Serializable {
 	private Boolean success;
 	
 	
-	//TODO private List<Character> wrongLetters;
+	private List<Character> wrongLetters;
 
 	public LetterBox() {
 		//
@@ -51,7 +50,8 @@ public class LetterBox implements Serializable {
 		this.position = position;
 		this.correctLetter = correctLetter;
 		this.success = false;
-		//HibernateUtil.store(this);
+		this.wrongLetters = new ArrayList<Character>();
+		//TODO store this!!
 	}
 	
 	public int getPosition() {
@@ -60,6 +60,7 @@ public class LetterBox implements Serializable {
 
 	public void setPosition(int position) {
 		this.position = position;
+		//TODO update on dao
 	}
 	
 	public int getMatchId() {
@@ -68,6 +69,7 @@ public class LetterBox implements Serializable {
 	
 	public void setMatchId(int matchId) {
 		this.matchId = matchId;
+		//TODO update on dao
 	}
 
 	public char getCorrectLetter() {
@@ -76,6 +78,7 @@ public class LetterBox implements Serializable {
 
 	public void setCorrectLetter(char correctLetter) {
 		this.correctLetter = correctLetter;
+		//TODO update on dao
 	}
 
 	public Boolean isSuccess() {
@@ -84,21 +87,14 @@ public class LetterBox implements Serializable {
 
 	public void setSuccess(Boolean success) {
 		this.success =  success;
+		//TODO update on dao
 	}
 
-	public boolean checkLetter( char letter ){
-		this.success = ( letter == this.correctLetter );
+	public boolean checkLetter(char letter){
+		setSuccess(letter == this.correctLetter);
+		if (!success) {
+			wrongLetters.add(letter);
+		}
 		return this.success;
-	}
-	
-	/*
-	public List<Character> getWrongLetters() {
-		return wrongLetters;
-	}
-
-	public void setWrongLetters(List<Character> wrongLetters) {
-		this.wrongLetters = wrongLetters;
-	}
-	*/
-	
+	}	
 }

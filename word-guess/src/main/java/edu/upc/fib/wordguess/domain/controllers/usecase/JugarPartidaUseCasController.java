@@ -14,12 +14,8 @@ import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
-import edu.upc.fib.wordguess.domain.model.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.model.Player;
-import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
-import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
-import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
 import edu.upc.fib.wordguess.util.Log;
 
 //projecte extern
@@ -42,41 +38,45 @@ public class JugarPartidaUseCasController {
 		//
 	}
 	
+	public PlayLetterInfoTuple playLetter(int position, char letter) {
+		boolean success = match.play(position, letter);
+		if (match.isFinished() && match.isWon()) {
+			//TODO send mail
+			//servei missatgeria 
+			//m.getPlayer().getEmail();
+			//String paraula = m.getWord().getName();
+			// String numErr = Integer.toString(m.getNumErrors());
+			//String punts = 
+			//String contingut = "Partida Guanyada : Paraula="+paraula+" Punts="+punts+"  errors="+numErr;
+			// Mail m = new Mail();
+			//m.enviaMissatge2("miquelmasriera@gmail.com","CONTINGUT");
+		}
+		return new PlayLetterInfoTuple(success, match.isFinished(), match.isWon(),
+									   match.getScore(), match.getNumErrors());
+	}
+	
+	/**
+	 * DEPRECATED. Use playLetter(positio, letter) instead
+	 */
+	@Deprecated
 	public ArrayList<Object> ferJugada(int pos, char lletra, int idPartida) {
 		ArrayList<Object> infojugada = new ArrayList<Object>();
 		boolean encert,acabada,guanyada;
 		int puntuacio,errors;
 		encert = match.play(pos,lletra);
-		guanyada = match.isWon();
-		acabada = match.isFinished();
-		
+		guanyada = match.isWon(); acabada = match.isFinished();
 		if (encert) {
 			if(match.isWon()) {
 				System.out.print("Partida Finalitzada");
-				//servei missatgeria 
-				//m.getPlayer().getEmail();
-				//String paraula = m.getWord().getName();
-				// String numErr = Integer.toString(m.getNumErrors());
-				//String punts = 
-				//String contingut = "Partida Guanyada : Paraula="+paraula+" Punts="+punts+"  errors="+numErr;
-				
-				// Mail m = new Mail();
-				//m.enviaMissatge2("miquelmasriera@gmail.com","CONTINGUT");
 				
 			}
 		}
 		else {
 			//Fer la comprobacio si supera nmaximerrors
 		}
-		
 		errors = match.getNumErrors();
 		puntuacio = 3; // ESTRATEGIA
-		
-		infojugada.add(encert);
-		infojugada.add(acabada);
-		infojugada.add(guanyada);
-		infojugada.add(errors);
-		infojugada.add(puntuacio);
+		infojugada.add(encert); infojugada.add(acabada);infojugada.add(guanyada);infojugada.add(errors);infojugada.add(puntuacio);
 		return infojugada;
 	}
 	

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
 import edu.upc.fib.wordguess.util.Log;
@@ -72,7 +73,7 @@ public class Match implements Serializable {
 		
     	//assign player
     	this.player = player;
-    	player.addPlayedMatch(this);
+    	player.setCurrentMatch(this);
     	
     	//decide strategy
 		int wonMatchesCount = player.getWonMatches();
@@ -90,28 +91,9 @@ public class Match implements Serializable {
     	try {
 			dao.store(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	public boolean play (int pos, char letter) {
-    	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
-    	if( letterBoxes.get(pos).checkLetter(letter)) {
-    		boolean won = true;
-    		for(int i=0; i<letterBoxes.size() && won ; ++i) {
-    			won = letterBoxes.get(i).isSuccess();
-    		}
-    		if(won) {
-    			setFinished(true);
-    			setWon(true);
-    		}
-    	}
-    	else {
-    		setNumErrors(getNumErrors() + 1);		
-    	}
-    	return encertada;
-    }
 
     public int getMatchId() {
         return matchId;
@@ -122,7 +104,6 @@ public class Match implements Serializable {
         try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -136,7 +117,6 @@ public class Match implements Serializable {
 		try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -150,7 +130,6 @@ public class Match implements Serializable {
         try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -160,13 +139,17 @@ public class Match implements Serializable {
     }
 
     public void setFinished(boolean isFinished) {
-        this.isFinished = isFinished;
+    	Log.debug("match", "isFinished: " + isFinished);
+    	this.isFinished = isFinished;
         try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        if (isFinished) {
+        	player.setCurrentMatch(null);
+        	player.addPlayedMatch(this);
+        }
     }
 
     public boolean isWon() {
@@ -174,11 +157,11 @@ public class Match implements Serializable {
     }
 
     public void setWon(boolean isWon) {
+    	Log.debug("match", "isWon: " + isWon);
         this.isWon = isWon;
         try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -192,7 +175,6 @@ public class Match implements Serializable {
         try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -206,7 +188,6 @@ public class Match implements Serializable {
 		try {
 			dao.update(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -218,12 +199,43 @@ public class Match implements Serializable {
 	public MatchInfoTuple getMatchInfoTuple() {
 		int scoreOnSuccess = strategy.getScoreOnSuccess();
 		int scoreOnError = strategy.getScoreOnError();
-		return new MatchInfoTuple(matchId, getCurrentScore(), maximumErrorCount, scoreOnSuccess, scoreOnError);
+		return new MatchInfoTuple(matchId, getScore(), maximumErrorCount, scoreOnSuccess, scoreOnError);
 	}
 
-	private int getCurrentScore() {
+	public int getScore() {
 		return strategy.getScore(this);
 	}
 	
+	public boolean play(int position, char letter) {
+    	boolean success = letterBoxes.get(position).checkLetter(letter);
+    	if (success) {
+    		checkMatchWon();
+    	}
+    	else {
+    		setNumErrors(getNumErrors() + 1);
+    		checkMatchLost();
+    	}
+    	return success;
+    }
 	
+	private void checkMatchWon() {
+		boolean won = true;
+		for (LetterBox box : letterBoxes) {
+			if (!box.isSuccess()) {
+				won = false;
+				break;
+			}
+		}
+		if (won) {
+			setWon(true);
+			setFinished(true);
+		}
+	}
+	
+	private void checkMatchLost() {
+		if (numErrors > maximumErrorCount) {
+			setFinished(true);
+			setWon(false);
+		}
+	}
 }

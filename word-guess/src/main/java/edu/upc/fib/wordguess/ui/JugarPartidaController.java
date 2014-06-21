@@ -5,9 +5,9 @@ import java.util.List;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.usecase.JugarPartidaUseCasController;
+import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
-import edu.upc.fib.wordguess.domain.model.MatchInfoTuple;
 
 public class JugarPartidaController {
 	
