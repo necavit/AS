@@ -73,26 +73,7 @@ public class Match implements Serializable {
 			e.printStackTrace();
 		}
     }
-    
-    public Match(int matchId, Word word) {
-        this.matchId = matchId;
-        this.word = word;
-        this.numErrors = 0;
-        this.isFinished = false;
-        this.isWon = false;
-        letterBoxes = new ArrayList<LetterBox>();
-        for (int i = 0; i < word.getName().length(); ++i) {
-        	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
-        }
-        
-        try {
-			dao.store(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
+      
     public boolean play (int pos, char letter) {
     	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
     	if( letterBoxes.get(pos).checkLetter(letter)) {
