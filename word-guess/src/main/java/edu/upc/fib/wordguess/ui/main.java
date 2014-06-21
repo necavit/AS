@@ -21,22 +21,14 @@ public class main {
 	}
 	
 	static void appBootstrap() {
-		//afegiu aqui els "inserts" que volgueu. per fer un insert, només cal fer:
-		//
-		//   new Category("mobles")
-		//
-		//perquè tots els constructors del domini ja criden al seu controlador de dades
-		// correctament (als mocks, que es comporten com una BD, o haurien XDD)
-		//els updates es fan cada vegada que fas un set() d'un objecte
-		//els deletes no es fan, pq en java no hi ha operacio destructora... pero si et
-		// petes l'objecte... bé, en tot cas crec que tenim pocs deletes
-		
 		try {
 			//word-guess global params
 			// DO NOT DELETE THIS - it would break the whole program
 			new WordGuessParams(10, 6);
 			
 			//categories and words in each category
+			Category test = new Category("Test");
+				new Word("test", test);
 			Category mobles = new Category("Mobles");
 				new Word("cadira", mobles);
 				new Word("taula", mobles);
@@ -48,6 +40,10 @@ public class main {
 			
 			//players
 			new Player("John", "Doe", "test", "test", "john@doe.com");
+			new Player("David", "Martínez", "david", "test", "gollumdeagol@gmail.com");
+			new Player("Daniel", "Ariñez", "daniel", "test", "daniel.arinez92@gmail.com");
+			new Player("Miquel", "Masriera", "miquel", "test", "miquelmasriera@gmail.com");
+			new Player("Marcel", "Pujol", "marcel", "test", "pujy25@gmail.com");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

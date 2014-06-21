@@ -166,7 +166,7 @@ public class JugarPartidaView extends JFrame {
 			setLayout(null);
 			
 			// marcador puntucio actual
-			JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
+			JLabel lbPuntuacioActual = new JLabel("PUNTUACIï¿½ ACTUAL:",SwingConstants.CENTER);
 			lbPuntuacioActual.setBounds(31, 42, 250, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
@@ -177,7 +177,7 @@ public class JugarPartidaView extends JFrame {
 			lbPuntuacioActual.setOpaque(true);
 			add(lbPuntuacioActual);
 		
-			//puntuació actual
+			//puntuaciï¿½ actual
 			lbPunts = new JLabel("0",SwingConstants.CENTER);
 			lbPunts.setBounds(31, 72, 250, 30);
 			lbPunts.setFont(new java.awt.Font("Tahoma",0,20));
@@ -288,8 +288,8 @@ public class JugarPartidaView extends JFrame {
 					  try {
 						  lb_missatges1.setText("");
 						  ipc.PrComprovar(index,lletres[index].getText());
-						  
 					  } catch(Exception e) {
+						  e.printStackTrace();
 						  if (!guanyada) {
 							  System.out.println("Saltem al catch!");
 							  lb_missatges1.setText("La casella no pot estar buida");

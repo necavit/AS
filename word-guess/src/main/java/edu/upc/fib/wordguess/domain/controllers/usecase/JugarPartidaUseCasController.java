@@ -16,10 +16,11 @@ import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
+import edu.upc.fib.wordguess.service.ServiceLocator;
+import edu.upc.fib.wordguess.service.exception.NoSuchServiceException;
+import edu.upc.fib.wordguess.service.notification.NotificationService;
 import edu.upc.fib.wordguess.util.Log;
 
-//projecte extern
-//import ws1.Mail;
 
 public class JugarPartidaUseCasController {
 	
@@ -29,6 +30,11 @@ public class JugarPartidaUseCasController {
 	 * The username of the current Player
 	 */
 	private String username;
+	
+	/**
+	 * The current Player (needed to send the notification email)
+	 */
+	private Player player;
 	
 	/**
 	 * The current match being created and played
@@ -44,15 +50,21 @@ public class JugarPartidaUseCasController {
 		Log.debug(TAG, "play letter: " + letter);
 		boolean success = match.play(position, letter);
 		if (match.isFinished() && match.isWon()) {
-			//TODO send mail
-			//servei missatgeria 
-			//m.getPlayer().getEmail();
-			//String paraula = m.getWord().getName();
-			// String numErr = Integer.toString(m.getNumErrors());
-			//String punts = 
-			//String contingut = "Partida Guanyada : Paraula="+paraula+" Punts="+punts+"  errors="+numErr;
-			// Mail m = new Mail();
-			//m.enviaMissatge2("miquelmasriera@gmail.com","CONTINGUT");
+			NotificationService notificationService = null;
+			try {
+				notificationService = 
+						(NotificationService) ServiceLocator.getInstance().find(ServiceLocator.SERVICE_NOTIFICATION);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if (notificationService != null) {
+				notificationService.notifyWonMatch(player.getName() + " " + player.getSurname(),
+												   player.getEmail(), 
+												   match.getWordName(), 
+												   match.getScore(), 
+												   match.getNumErrors());
+			}
 		}
 		return new PlayLetterInfoTuple(success, match.isFinished(), match.isWon(),
 									   match.getScore(), match.getNumErrors());
@@ -71,7 +83,6 @@ public class JugarPartidaUseCasController {
 		
 		//retrieve the player that is to be assigned to the new match
 		PlayerDAO playerDAO = daoFactory.getPlayerDAO();
-		Player player = null;
 		try {
 			player = playerDAO.get(username);
 		} catch (PlayerNotExistsException e) {
