@@ -14,12 +14,12 @@ import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
+import edu.upc.fib.wordguess.domain.model.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
-import edu.upc.fib.wordguess.ui.MatchInfoTuple;
 
 //projecte extern
 //import ws1.Mail;

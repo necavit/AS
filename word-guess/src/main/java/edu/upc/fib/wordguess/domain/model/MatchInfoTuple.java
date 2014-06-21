@@ -1,4 +1,4 @@
-package edu.upc.fib.wordguess.ui;
+package edu.upc.fib.wordguess.domain.model;
 
 /**
  * Tuple-like class, to store the information returned

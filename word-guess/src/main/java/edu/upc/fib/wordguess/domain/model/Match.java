@@ -16,7 +16,6 @@ import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
-import edu.upc.fib.wordguess.ui.MatchInfoTuple;
 import edu.upc.fib.wordguess.util.Log;
 
 @Entity
