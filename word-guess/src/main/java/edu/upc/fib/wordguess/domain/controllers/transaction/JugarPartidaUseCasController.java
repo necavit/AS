@@ -2,6 +2,7 @@ package edu.upc.fib.wordguess.domain.controllers.transaction;
 
 import java.util.ArrayList;
 
+import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
@@ -13,10 +14,12 @@ public class JugarPartidaUseCasController {
 	private Word w;
 	private Match m;
 	private Player p;
+	private Category c;
 		
 	public JugarPartidaUseCasController() {
-		w = new Word();
-		w.setName("patata");
+		c = new Category("cat");
+		w = new Word("patata",c);
+		//w.setName("patata");
 		m = new Match(1,w);
 		numEncerts=0;
 	}
