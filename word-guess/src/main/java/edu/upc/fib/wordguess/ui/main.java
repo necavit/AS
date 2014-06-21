@@ -1,6 +1,8 @@
 package edu.upc.fib.wordguess.ui;
 
+import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.Word;
 
 
 public class main {
@@ -29,6 +31,17 @@ public class main {
 		// petes l'objecte... bé, en tot cas crec que tenim pocs deletes
 		
 		try {
+			//categories and words in each category
+			Category mobles = new Category("Mobles");
+				new Word("cadira", mobles);
+				new Word("taula", mobles);
+				new Word("armari", mobles);
+			Category transports = new Category("Transports");
+				new Word("cotxe", transports);
+				new Word("vaixell", transports);
+				new Word("moto", transports);
+			
+			//players
 			new Player("John", "Doe", "john.doe", "test", "john@doe.com");
 		} catch (Exception e) {
 			e.printStackTrace();
