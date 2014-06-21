@@ -81,7 +81,7 @@ public class JugarPartidaController {
 	}
 		
 	public void PrTancarPartida(){
-		
+		System.exit(-1);
 	}
 
 }

@@ -256,7 +256,7 @@ public class JugarPartidaView extends JFrame {
 					  }
 				}
 			});
-			btn_Comprovar.setBounds(318, 324, 109, 30);
+			btn_Comprovar.setBounds(318, 324, 122, 30);
 			btn_Comprovar.setVisible(true);
 			add(btn_Comprovar);
 			
@@ -264,10 +264,10 @@ public class JugarPartidaView extends JFrame {
 			btn_TancarPartida.setVisible(false);
 			btn_TancarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					//ipc.PrTancarPartida();
+					ipc.PrTancarPartida();
 				}
 			});
-			btn_TancarPartida.setBounds(229, 324, 109, 30);
+			btn_TancarPartida.setBounds(180, 324, 200, 30);
 			btn_TancarPartida.setVisible(false);
 			add(btn_TancarPartida);
 		}
