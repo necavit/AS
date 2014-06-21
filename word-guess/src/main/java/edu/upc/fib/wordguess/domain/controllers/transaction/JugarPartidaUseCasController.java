@@ -20,7 +20,6 @@ public class JugarPartidaUseCasController {
 		c = new Category("cat");
 		w = new Word("patata",c);
 		p = new Player("a","a","a","a","a");
-		//w.setName("patata");
 		m = new Match(1,w,p);
 		numEncerts=0;
 	}
