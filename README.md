@@ -2,12 +2,15 @@
 
 El codi de la pràctica es troba al directori `word-guess`.
 
+El codi del client de mail (servei extern) es troba al directori `mail-client`
+
+El codi del servidor de mail es troba al directori `mail-server`
+
 L'informe de la primera entrega es troba al directori `report1`.
 
 L'informe de la segona entrega es troba al directori `report2`.
 
 L'informe de la tercera entrega es troba al directori `report3`.
-
 
 ##Setup
 
@@ -70,5 +73,17 @@ sudo -u postgres createdb astest
 
 D'aquesta manera, disposarem de dos esquemes on podrem executar la nostra aplicació o els tests, de la manera que volguem.
 
-Un cop engegat i configurat el servidor PostgreSQL, podem continuar amb Hibernate.
+
+####Dependències i servei extern
+
+A la pràctica fem ús d'un servei extern que és un client de mail. Aquest client, que també hem implementat nosaltres, es comporta com una llibreria de la qual depèn el projecte principal. Al seu torn, aquest depèn del servidor, també. Totes aquestes dependències es gestionen amb Maven, de manera "automàtica".
+
+Per tal que el projecte principal (word-guess) funcioni correctament, ens caldrà executar la següent comanda, situant-nos a l'arrel de cadascun dels projectes:
+
+```bash
+mvn install
+```
+
+Alternativament, podem 
+
 
