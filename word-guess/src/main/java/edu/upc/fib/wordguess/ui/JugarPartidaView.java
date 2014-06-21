@@ -37,6 +37,7 @@ public class JugarPartidaView extends JFrame {
 	JLabel lbNumErrors1;
 	JLabel lbNumErrors2;
 	JLabel lbNumErrors3;
+	JLabel lbPuntuacioActual;
 	JLabel lbPunts;
 	JButton btn_ok;
 	JButton btn_Comprovar;
@@ -173,7 +174,7 @@ public class JugarPartidaView extends JFrame {
 			setLayout(null);
 			
 			// marcador puntucio actual
-			JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
+			lbPuntuacioActual = new JLabel("Puntuació actual \n0",SwingConstants.CENTER);
 			lbPuntuacioActual.setBounds(31, 42, 250, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
@@ -184,7 +185,7 @@ public class JugarPartidaView extends JFrame {
 			lbPuntuacioActual.setOpaque(true);
 			add(lbPuntuacioActual);
 		
-			//puntuació actual
+			/*puntuació actual
 			lbPunts = new JLabel("0",SwingConstants.CENTER);
 			lbPunts.setBounds(31, 72, 250, 30);
 			lbPunts.setFont(new java.awt.Font("Tahoma",0,20));
@@ -193,6 +194,7 @@ public class JugarPartidaView extends JFrame {
 			lbPunts.setForeground(Color.white);
 			lbPunts.setOpaque(true);
 			add(lbPunts);
+			*/
 			
 			//marcador errors
 			JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
@@ -453,7 +455,7 @@ public class JugarPartidaView extends JFrame {
 	
 	public void mostraPuntuacioActual(int p) {
 		String puntuacio = Integer.toString(p);
-		lbPunts.setText(puntuacio);
+		lbPuntuacioActual.setText("Puntuació actual: \n"+puntuacio);
 	}
 		
 	public void mostraErrorsActuals(int ea,int nme) {
