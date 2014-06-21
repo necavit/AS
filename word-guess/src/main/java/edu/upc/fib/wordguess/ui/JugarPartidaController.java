@@ -74,6 +74,7 @@ public class JugarPartidaController {
 		int puntuacio = (int) infop.get(4);
 		int errors = (int) infop.get(3);
 		if (acabada) jpv.finalitzarPartida(guanyada);
+		jpv.marcaCasella(encert);
 		jpv.mostraPuntuacioActual(puntuacio);
 		jpv.actualitzaErrors(errors);
 	}
