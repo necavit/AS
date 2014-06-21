@@ -56,14 +56,18 @@ public class JugarPartidaView extends JFrame {
 	public void creaParaula(int numlletres) {
 		this.numlletres = numlletres;
 		lletres = new JTextField[numlletres];
-		int x=200;
+		
+		int x = numlletres/2;
+		x = 300 - (x*40); // meitat del panell - la meitat del tamany de la paraula
+		if( (numlletres % 2) != 0 )
+			x = x-20;
+		
 		for(int i=0;i<numlletres;i++) {
-			x=x+20;
 			lletres[i]= new JTextField();
 			String pos = Integer.toString(i);
 			lletres[i].setText("");
 			lletres[i].setName(pos);
-			lletres[i].setBounds(x,183,20,20);
+			lletres[i].setBounds(x,200,40,40);
 			lletres[i].setHorizontalAlignment(JTextField.CENTER);
 			lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
@@ -85,6 +89,7 @@ public class JugarPartidaView extends JFrame {
 			      }
 		    });
 			partenjoc.add(lletres[i]);//adiciono al contentpane
+			x=x+40;
 		}
 	}
 	
