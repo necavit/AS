@@ -400,14 +400,16 @@ public class JugarPartidaView extends JFrame {
 		if (guanyada) lb_missatges1.setText("Enhorabona has guanyat la partida!");
 		else lb_missatges1.setText("Has superat el nombre maxim d'errors");
 		System.out.println("Estem aquiiii!!!");
-		btn_Comprovar.setEnabled(false);
-		//btn_Comprovar.setVisible(false);
+		//btn_Comprovar.setEnabled(false);
+		this.remove(btn_Comprovar);
+		btn_Comprovar.setVisible(false);
 		System.out.println("Estem aquiiii!!!1");
 		//btn_AturarPartida.setVisible(false);
 		btn_AturarPartida.setEnabled(false);
+		this.remove(btn_AturarPartida);
 		System.out.println("Estem aquiiii!!!2");
 		//btn_TancarPartida.setVisible(true);
-		btn_TancarPartida.setEnabled(true);
+		btn_TancarPartida.setVisible(true);
 		System.out.println("Estem aquiiii!!!3");
 	}
 }
