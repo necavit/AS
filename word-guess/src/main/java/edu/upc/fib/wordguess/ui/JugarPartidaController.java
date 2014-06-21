@@ -28,14 +28,14 @@ public class JugarPartidaController {
 	public boolean PrLogin(String username,String pass){
 		boolean logged = false;
 		try {
-			logged = jpuc.ferAutentificacio(username, pass);
+			logged = jpuc.authenticate(username, pass);
 		} catch (PlayerNotExistsException e) {
 			jpv.mostraMissatge("L'usuari no existeix", 0);
 		} catch (InvalidPasswordException e) {
 			jpv.mostraMissatge("La contrassenya és incorrecta", 0);
 		}
 		
-		List<Category> cats = jpuc.obtenirCategories();
+		List<Category> cats = jpuc.fetchCategories();
 		jpv.mostraCategories(cats);
 		//Capturar Excepcio no hi ha categories
 		if (cats.size() == 0) {
@@ -55,7 +55,7 @@ public class JugarPartidaController {
 	 * @param categoryName
 	 */
 	public void PrJugar(String categoryName) {
-		MatchInfoTuple matchInfo = jpuc.crearPartida(categoryName);		
+		MatchInfoTuple matchInfo = jpuc.createMatch(categoryName);		
 		idPartida = matchInfo.matchId;
 		jpv.mostraPuntuacions(matchInfo.scoreOnSuccess, matchInfo.scoreOnError);
 		jpv.mostraPuntuacioActual(matchInfo.currentScore);

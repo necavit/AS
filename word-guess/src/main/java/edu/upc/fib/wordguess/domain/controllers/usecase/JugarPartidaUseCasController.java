@@ -22,6 +22,8 @@ import edu.upc.fib.wordguess.util.Log;
 
 public class JugarPartidaUseCasController {
 	
+	private static final String TAG = JugarPartidaUseCasController.class.getSimpleName();
+	
 	/**
 	 * The username of the current Player
 	 */
@@ -54,13 +56,13 @@ public class JugarPartidaUseCasController {
 									   match.getScore(), match.getNumErrors());
 	}
 	
-	public boolean ferAutentificacio(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {
+	public boolean authenticate(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {
 		this.username = username;
 		LoginTransaction login = new LoginTransaction(username, pass);
 		return login.execute();
 	}
 	
-	public MatchInfoTuple crearPartida(String categoryName) {
+	public MatchInfoTuple createMatch(String categoryName) {
 		DAOFactory daoFactory = PostgresDAOFactory.getInstance();
 		
 		//retrieve the player that is to be assigned to the new match
@@ -85,22 +87,21 @@ public class JugarPartidaUseCasController {
 			e.printStackTrace();
 		}
 		
-		//retrieve the global game parameters
+		//retrieve the global game parameters //TODO this should be accessed from database
 		WordGuessParams params = new WordGuessParams();
 		
 		match = new Match(params, player, category);
 		return match.getMatchInfoTuple();
 	}
 	
-	
-	public List<Category> obtenirCategories() {
+	public List<Category> fetchCategories() {
 		FetchCategoriesTransaction fetchCategories = new FetchCategoriesTransaction();
 		return fetchCategories.execute();
 	}
 	
 	public String getMatchWord() {
 		String matchWord = match.getWordName();
-		Log.debug("getMatchWord", matchWord);
+		Log.debug(TAG, matchWord);
 		return matchWord;
 	}
 }
