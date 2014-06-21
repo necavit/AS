@@ -37,15 +37,17 @@ public class JugarPartidaView extends JFrame {
 	JLabel lbNumErrors1;
 	JLabel lbNumErrors2;
 	JLabel lbNumErrors3;
+	JLabel lbPuntuacioActual;
 	JLabel lbPunts;
 	JButton btn_ok;
 	JButton btn_Comprovar;
 	JButton btn_AturarPartida;
 	JButton btn_TancarPartida;
+	JLabel lbErrors;
 	private int index;
 	private boolean guanyada;
 	private int numlletres;
-	
+	private int nmaxe;
 	
 	public void caparCaselles (int pos) {
 		for (int i=0; i<numlletres; ++i) {
@@ -56,15 +58,21 @@ public class JugarPartidaView extends JFrame {
 	public void creaParaula(int numlletres) {
 		this.numlletres = numlletres;
 		lletres = new JTextField[numlletres];
-		int x=200;
+		
+		int x = numlletres/2;
+		x = 300 - (x*40); // meitat del panell - la meitat del tamany de la paraula
+		if( (numlletres % 2) != 0 )
+			x = x-20; //si es imparell desplaco mitja
+		
 		for(int i=0;i<numlletres;i++) {
-			x=x+20;
 			lletres[i]= new JTextField();
 			String pos = Integer.toString(i);
 			lletres[i].setText("");
 			lletres[i].setName(pos);
-			lletres[i].setBounds(x,183,20,20);
+			lletres[i].setBounds(x,170,40,40);
 			lletres[i].setHorizontalAlignment(JTextField.CENTER);
+			lletres[i].setBorder( BorderFactory.createLineBorder( new Color(0,0,0), 1 ));
+			lletres[i].setFont(new java.awt.Font("Tahoma",1,18));
 			lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
 
@@ -85,6 +93,7 @@ public class JugarPartidaView extends JFrame {
 			      }
 		    });
 			partenjoc.add(lletres[i]);//adiciono al contentpane
+			x=x+40;
 		}
 	}
 	
@@ -133,7 +142,7 @@ public class JugarPartidaView extends JFrame {
 			//panell missatges
 			lb_missatges = new JLabel("",JLabel.CENTER);
 			lb_missatges.setBounds(150, 180, 300, 60);
-			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_missatges.setHorizontalAlignment(SwingConstants.CENTER);
 			lb_missatges.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_missatges);
 			
@@ -152,7 +161,7 @@ public class JugarPartidaView extends JFrame {
 				}
 			});
 			btn_login.setBackground( new Color( 117, 255, 71) );
-			btn_login.setBounds(250, 280, 100, 35);
+			btn_login.setBounds(250, 300, 100, 35);
 			btn_login.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
 			btn_login.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
 			add(btn_login);
@@ -166,7 +175,7 @@ public class JugarPartidaView extends JFrame {
 			setLayout(null);
 			
 			// marcador puntucio actual
-			JLabel lbPuntuacioActual = new JLabel("PUNTUACI� ACTUAL:",SwingConstants.CENTER);
+			 lbPuntuacioActual = new JLabel("PUNTUACI� ACTUAL:",SwingConstants.CENTER);
 			lbPuntuacioActual.setBounds(31, 42, 250, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
@@ -177,7 +186,7 @@ public class JugarPartidaView extends JFrame {
 			lbPuntuacioActual.setOpaque(true);
 			add(lbPuntuacioActual);
 		
-			//puntuaci� actual
+			/*puntuaci� actual
 			lbPunts = new JLabel("0",SwingConstants.CENTER);
 			lbPunts.setBounds(31, 72, 250, 30);
 			lbPunts.setFont(new java.awt.Font("Tahoma",0,20));
@@ -186,9 +195,10 @@ public class JugarPartidaView extends JFrame {
 			lbPunts.setForeground(Color.white);
 			lbPunts.setOpaque(true);
 			add(lbPunts);
+			*/
 			
 			//marcador errors
-			JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
+			lbErrors = new JLabel("ERRORS 0 de X:",SwingConstants.CENTER);
 			lbErrors.setBounds(326, 42, 250, 30);
 			lbErrors.setFont(new java.awt.Font("Tahoma",0,20));
 			lbErrors.setFont(boldfont);
@@ -229,9 +239,14 @@ public class JugarPartidaView extends JFrame {
 			
 			/* ***************************************** */
 			
+			//area missatges
 			lb_missatges1 = new JLabel("",SwingConstants.CENTER);
-			lb_missatges1.setBounds(57, 246, 422, 76);
+			lb_missatges1.setBounds(100, 230, 400, 60);
+			lb_missatges1.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_missatges1.setVerticalAlignment(SwingConstants.CENTER);
+			lb_missatges1.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_missatges1);
+			
 			
 			lb_PuntEncert = new JLabel("+10",SwingConstants.CENTER);
 			lb_PuntEncert.setBounds(31, 113, 62, 30);
@@ -269,7 +284,9 @@ public class JugarPartidaView extends JFrame {
 			lb_Errors.setOpaque(true);
 			add(lb_Errors);
 			
-			btn_AturarPartida = new JButton("Aturar Partida");
+			
+			//boto aturar partida
+			btn_AturarPartida = new JButton("Aturar");
 			btn_AturarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ipc.PrAturarPartida();
@@ -278,10 +295,17 @@ public class JugarPartidaView extends JFrame {
 					for (int i=0; i<numlletres; ++i) partenjoc.remove(lletres[i]);
 				}
 			});
-			btn_AturarPartida.setBounds(140, 324, 122, 30);
+			
+			btn_AturarPartida.setBackground( new Color( 255, 172, 92) );
+			btn_AturarPartida.setBounds( 150 , 300, 100, 35);
+			btn_AturarPartida.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
+			btn_AturarPartida.setBorder( BorderFactory.createLineBorder( new Color(255,123,11), 2 ));
+			
 			btn_AturarPartida.setVisible(true);
 			add(btn_AturarPartida);
 			
+			
+			//boto comprovar
 			btn_Comprovar = new JButton("Comprovar");
 			btn_Comprovar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -297,19 +321,27 @@ public class JugarPartidaView extends JFrame {
 					  }
 				}
 			});
-			btn_Comprovar.setBounds(318, 324, 122, 30);
+			
+			btn_Comprovar.setBackground( new Color( 117, 255, 71) );
+			btn_Comprovar.setBounds(350, 300, 100, 35);
+			btn_Comprovar.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
+			btn_Comprovar.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
+			
 			btn_Comprovar.setVisible(true);
 			add(btn_Comprovar);
 			
-			btn_TancarPartida = new JButton("Tancar Partida");
+			btn_TancarPartida = new JButton("Tancar");
+			btn_TancarPartida.setBackground( new Color( 255, 112, 112) );
+			btn_TancarPartida.setBounds( 250 , 300, 100, 35);
+			btn_TancarPartida.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
+			btn_TancarPartida.setBorder( BorderFactory.createLineBorder( new Color(133,0,0), 2 ));
+			
 			btn_TancarPartida.setVisible(false);
 			btn_TancarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ipc.PrTancarPartida();
 				}
 			});
-			btn_TancarPartida.setBounds(180, 324, 200, 30);
-			btn_TancarPartida.setVisible(false);
 			add(btn_TancarPartida);
 		}
 	}
@@ -324,19 +356,19 @@ public class JugarPartidaView extends JFrame {
 			JLabel lb_Selcat = new JLabel("Tria una categoria:");
 			lb_Selcat.setFont(new java.awt.Font("Tahoma",0,20));
 			lb_Selcat.setHorizontalAlignment(SwingConstants.CENTER);
-			lb_Selcat.setBounds(200, 40, 200, 30);
+			lb_Selcat.setBounds(200, 60, 200, 30);
 			add(lb_Selcat);
 			
 			//combobox
 			cb_cat = new JComboBox<String>();
 			cb_cat.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
 			cb_cat.setFont(new java.awt.Font("Tahoma",1, 14));
-			cb_cat.setBounds(220, 100, 160, 30);
+			cb_cat.setBounds(220, 120, 160, 30);
 			add(cb_cat);
 			
 			//label missatge
 			lb_missatges2 = new JLabel("",JLabel.CENTER);
-			lb_missatges2.setBounds(100, 160, 400, 80 );
+			lb_missatges2.setBounds(100, 170, 400, 80 );
 			lb_missatges2.setHorizontalAlignment(SwingConstants.CENTER);
 			lb_missatges2.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_missatges2);
@@ -352,7 +384,7 @@ public class JugarPartidaView extends JFrame {
 				}
 			});
 			btn_logout.setBackground( new Color( 255, 92, 92) );
-			btn_logout.setBounds( 150 , 280, 100, 35);
+			btn_logout.setBounds( 150 , 300, 100, 35);
 			btn_logout.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
 			btn_logout.setBorder( BorderFactory.createLineBorder( new Color(133,0,0), 2 ));
 			add(btn_logout);
@@ -369,7 +401,7 @@ public class JugarPartidaView extends JFrame {
 			});
 
 			btn_ok.setBackground( new Color( 92, 92, 255) );
-			btn_ok.setBounds( 350 , 280, 100, 35);
+			btn_ok.setBounds( 350 , 300, 100, 35);
 			btn_ok.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
 			btn_ok.setBorder( BorderFactory.createLineBorder( new Color(0,0,133), 2 ));
 			add(btn_ok);
@@ -423,18 +455,22 @@ public class JugarPartidaView extends JFrame {
 	
 	public void mostraPuntuacioActual(int p) {
 		String puntuacio = Integer.toString(p);
-		lbPunts.setText(puntuacio);
+		lbPuntuacioActual.setText("Puntuaci� actual: \n"+puntuacio);
 	}
 		
 	public void mostraErrorsActuals(int ea,int nme) {
+		
+		this.nmaxe = nme;
 		String errActuals = Integer.toString(ea);
 		String numMaxErr = Integer.toString(nme);
-		lbNumErrors1.setText(errActuals);
-		lbNumErrors3.setText(numMaxErr);
+		this.lbErrors.setText("ERRORS : "+ea+" de "+nmaxe);
+		//lbNumErrors1.setText(errActuals);
+		//lbNumErrors3.setText(numMaxErr);
 	}
 	public void actualitzaErrors(int ea) {
 		String errActuals = Integer.toString(ea);
-		lbNumErrors1.setText(errActuals);
+		//lbNumErrors1.setText(errActuals);
+		lbErrors.setText("ERRORS : "+ea+" de "+nmaxe );
 	}
 	
 	public void mostraLletra(char lletra,int pos) {
