@@ -35,7 +35,6 @@ public class MockPlayerDAO extends MockGenericDAO<Player> implements PlayerDAO {
 	
 	@Override
 	public Player update(Player object) throws Exception {
-		map.remove(object).getUsername();
 		map.put(object.getUsername(), object);
 		return object;
 	}

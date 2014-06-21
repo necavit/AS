@@ -35,7 +35,6 @@ public class MockWordDAO extends MockGenericDAO<Word> implements WordDAO {
 	
 	@Override
 	public Word update(Word object) throws Exception {
-		map.remove(object).getName();
 		map.put(object.getName(), object);
 		return object;
 	}

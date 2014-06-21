@@ -35,7 +35,6 @@ public class MockRegisteredUserDAO extends MockGenericDAO<RegisteredUser> implem
 	
 	@Override
 	public RegisteredUser update(RegisteredUser object) throws Exception {
-		map.remove(object).getUsername();
 		map.put(object.getUsername(), object);
 		return object;
 	}

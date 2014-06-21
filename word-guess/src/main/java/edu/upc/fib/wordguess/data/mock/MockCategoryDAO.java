@@ -35,7 +35,6 @@ public class MockCategoryDAO extends MockGenericDAO<Category> implements Categor
 	
 	@Override
 	public Category update(Category object) throws Exception {
-		map.remove(object).getName();
 		map.put(object.getName(), object);
 		return object;
 	}
