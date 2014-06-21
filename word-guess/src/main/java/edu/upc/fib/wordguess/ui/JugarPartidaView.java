@@ -116,6 +116,7 @@ public class JugarPartidaView extends JFrame {
 			tb_user.setBounds(320, 80, 130, 30);
 			tb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_user.setBackground( Color.LIGHT_GRAY );
+			tb_user.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
 			tb_user.setFont(new java.awt.Font("Tahoma",0,17));
 			add(tb_user);
 			tb_user.setColumns(10);
@@ -125,6 +126,7 @@ public class JugarPartidaView extends JFrame {
 			tb_pass.setBounds(320, 130, 130, 30);
 			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_pass.setBackground( Color.lightGray );
+			tb_pass.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
 			tb_pass.setFont(new java.awt.Font("Tahoma",0,17));
 			add(tb_pass);
 			
@@ -151,7 +153,8 @@ public class JugarPartidaView extends JFrame {
 			});
 			btn_login.setBackground(Color.green);
 			btn_login.setBounds(250, 280, 100, 35);
-			btn_login.setFont(new java.awt.Font("Tahoma",0,15));
+			btn_login.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
+			btn_login.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
 			add(btn_login);
 		}
 	}
