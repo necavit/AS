@@ -250,6 +250,7 @@ public class JugarPartidaView extends JFrame {
 					ipc.PrAturarPartida();
 					setContentPane(selcat);
 					selcat.updateUI();
+					for (int i=0; i<numlletres; ++i) partenjoc.remove(lletres[i]);
 				}
 			});
 			btn_AturarPartida.setBounds(140, 324, 122, 30);
