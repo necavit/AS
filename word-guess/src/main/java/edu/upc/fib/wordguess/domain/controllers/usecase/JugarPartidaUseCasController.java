@@ -63,6 +63,7 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public MatchInfoTuple createMatch(String categoryName) {
+		Log.debug(TAG, "create match for category: " + categoryName);
 		DAOFactory daoFactory = PostgresDAOFactory.getInstance();
 		
 		//retrieve the player that is to be assigned to the new match
@@ -95,17 +96,19 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public List<Category> fetchCategories() {
+		Log.debug(TAG, "fetch categories");
 		FetchCategoriesTransaction fetchCategories = new FetchCategoriesTransaction();
 		return fetchCategories.execute();
 	}
 	
 	public String getMatchWord() {
 		String matchWord = match.getWordName();
-		Log.debug(TAG, matchWord);
+		Log.debug(TAG, "match word: " + matchWord);
 		return matchWord;
 	}
 	
 	public void stopMatch() {
+		Log.debug(TAG, "stop match");
 		this.match.stop();
 	}
 }
