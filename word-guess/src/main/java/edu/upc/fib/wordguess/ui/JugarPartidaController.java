@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
-import edu.upc.fib.wordguess.domain.controllers.transaction.JugarPartidaUseCasController;
+import edu.upc.fib.wordguess.domain.controllers.usecase.JugarPartidaUseCasController;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 
 public class JugarPartidaController {

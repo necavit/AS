@@ -1,9 +1,10 @@
-package edu.upc.fib.wordguess.domain.controllers.transaction;
+package edu.upc.fib.wordguess.domain.controllers.usecase;
 
 import java.util.ArrayList;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
+import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
