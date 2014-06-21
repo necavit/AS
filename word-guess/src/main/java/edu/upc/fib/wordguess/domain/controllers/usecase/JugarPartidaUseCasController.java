@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
+import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.CategoryNotExistsException;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
@@ -90,8 +91,9 @@ public class JugarPartidaUseCasController {
 			e.printStackTrace();
 		}
 		
-		//retrieve the global game parameters //TODO this should be accessed from database
-		WordGuessParams params = new WordGuessParams();
+		//retrieve the global game parameters
+		ParamsDAO paramsDAO = daoFactory.getParamsDAO();
+		WordGuessParams params = paramsDAO.getParams();
 		
 		match = new Match(params, player, category);
 		return match.getMatchInfoTuple();

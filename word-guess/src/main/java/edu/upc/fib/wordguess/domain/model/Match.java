@@ -62,9 +62,9 @@ public class Match implements Serializable {
       
     public Match(WordGuessParams params, Player player, Category category) {
     	//match params
-    	matchId = params.nextMatchId;
+    	matchId = params.getNextMatchId();
 		Log.debug("new Match", "matchId: " + matchId);
-		maximumErrorCount = params.maxErrorsCount;
+		maximumErrorCount = params.getMaxErrorsCount();
 		Log.debug("new Match", "maxErrors: " + maximumErrorCount);
 		
 		this.isFinished = false;

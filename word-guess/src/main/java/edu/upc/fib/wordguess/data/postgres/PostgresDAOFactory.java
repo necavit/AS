@@ -3,11 +3,13 @@ package edu.upc.fib.wordguess.data.postgres;
 import edu.upc.fib.wordguess.data.DAOFactory;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
+import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 import edu.upc.fib.wordguess.data.mock.MockCategoryDAO;
 import edu.upc.fib.wordguess.data.mock.MockMatchDAO;
+import edu.upc.fib.wordguess.data.mock.MockParamsDAO;
 import edu.upc.fib.wordguess.data.mock.MockPlayerDAO;
 import edu.upc.fib.wordguess.data.mock.MockRegisteredUserDAO;
 import edu.upc.fib.wordguess.data.mock.MockWordDAO;
@@ -25,6 +27,8 @@ public class PostgresDAOFactory implements DAOFactory {
 	private PlayerDAO playerDAO = null;
 
 	private RegisteredUserDAO registeredUserDAO = null;
+
+	private ParamsDAO paramsDAO = null;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
@@ -69,6 +73,12 @@ public class PostgresDAOFactory implements DAOFactory {
 	public RegisteredUserDAO getRegisteredUserDAO() {
 		if (registeredUserDAO  == null) registeredUserDAO = new MockRegisteredUserDAO();
 		return registeredUserDAO;
+	}
+	
+	@Override
+	public ParamsDAO getParamsDAO() {
+		if (paramsDAO  == null) paramsDAO = new MockParamsDAO();
+		return paramsDAO;
 	}
 	
 	/* Postgres DAO implementations. Do no uncomment this until Hbernate properly map things!!!

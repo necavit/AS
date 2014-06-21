@@ -3,6 +3,7 @@ package edu.upc.fib.wordguess.ui;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
+import edu.upc.fib.wordguess.domain.model.WordGuessParams;
 
 
 public class main {
@@ -31,6 +32,10 @@ public class main {
 		// petes l'objecte... bé, en tot cas crec que tenim pocs deletes
 		
 		try {
+			//word-guess global params
+			// DO NOT DELETE THIS - it would break the whole program
+			new WordGuessParams(10, 6);
+			
 			//categories and words in each category
 			Category mobles = new Category("Mobles");
 				new Word("cadira", mobles);
