@@ -64,7 +64,8 @@ public class JugarPartidaController {
 	}
 	
 	public void PrAturarPartida(){
-		jpv.aturaPartida();
+		System.out.println("JugarPartidaController.PrAturarPartida()");
+		jpuc.stopMatch();
 	}
 	
 	public void PrComprovar(int pos, String lletra) {

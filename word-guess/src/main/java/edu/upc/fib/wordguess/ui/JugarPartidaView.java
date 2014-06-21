@@ -244,6 +244,9 @@ public class JugarPartidaView extends JFrame {
 			btn_AturarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ipc.PrAturarPartida();
+					System.out.println("Estem aquiiiii!!!! aturarPartida()");
+					setContentPane(selcat);
+					selcat.updateUI();
 				}
 			});
 			btn_AturarPartida.setBounds(140, 324, 122, 30);
