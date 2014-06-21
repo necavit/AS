@@ -61,6 +61,7 @@ public class JugarPartidaView extends JFrame {
 			lletres[i].setText("");
 			lletres[i].setName(pos);
 			lletres[i].setBounds(x,183,20,20);
+			lletres[i].setHorizontalAlignment(JTextField.CENTER);
 			lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
 
