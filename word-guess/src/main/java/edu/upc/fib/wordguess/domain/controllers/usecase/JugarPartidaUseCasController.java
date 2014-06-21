@@ -104,4 +104,8 @@ public class JugarPartidaUseCasController {
 		Log.debug(TAG, matchWord);
 		return matchWord;
 	}
+	
+	public void stopMatch() {
+		//TODO
+	}
 }
