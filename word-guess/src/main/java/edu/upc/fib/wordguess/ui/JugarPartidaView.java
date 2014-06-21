@@ -420,7 +420,10 @@ public class JugarPartidaView extends JFrame {
 		if(encert) lletres[index].setBackground(Color.green);
 		else lletres[index].setBackground(Color.red);
 		for (int i=0; i<numlletres; ++i) {
-			if (lletres[i].getBackground() == Color.green) lletres[i].setEnabled(false);
+			if (lletres[i].getBackground() == Color.green) {
+				lletres[i].setEnabled(false);
+				lletres[i].setDisabledTextColor(Color.BLACK);
+			}
 			else lletres[i].setEnabled(true);
 		}
 	}
