@@ -74,10 +74,11 @@ public class JugarPartidaController {
 		boolean guanyada = (boolean) infop.get(2);
 		int puntuacio = (int) infop.get(4);
 		int errors = (int) infop.get(3);
+		if (acabada) jpv.finalitzarPartida(guanyada);
 		jpv.mostraPuntuacioActual(puntuacio);
 		jpv.actualitzaErrors(errors);
 	}
-	
+		
 	public void PrTancarPartida(){
 		
 	}

@@ -37,7 +37,11 @@ public class JugarPartidaView extends JFrame {
 	JLabel lbNumErrors3;
 	JLabel lbPunts;
 	JButton btn_ok;
+	JButton btn_Comprovar;
+	JButton btn_AturarPartida;
+	JButton btn_TancarPartida;
 	private int index;
+	private boolean guanyada;
 	
 	public void creaParaula(int numlletres) {
 		
@@ -244,7 +248,10 @@ public class JugarPartidaView extends JFrame {
 						  lb_missatges1.setText("");
 						  ipc.PrComprovar(index,lletres[index].getText());
 					  } catch(Exception e) {
-						  lb_missatges1.setText("La casella no pot estar buida");
+						  if (!guanyada) {
+							  System.out.println("Saltem al catch!");
+							  lb_missatges1.setText("La casella no pot estar buida");
+						  }
 					  }
 				}
 			});
@@ -252,6 +259,7 @@ public class JugarPartidaView extends JFrame {
 			add(btn_Comprovar);
 			
 			JButton btn_TancarPartida = new JButton("Tancar Partida");
+			btn_TancarPartida.setVisible(false);
 			btn_TancarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					//ipc.PrTancarPartida();
@@ -259,9 +267,6 @@ public class JugarPartidaView extends JFrame {
 			});
 			btn_TancarPartida.setBounds(229, 324, 109, 30);
 			add(btn_TancarPartida);
-			
-			btn_TancarPartida.setVisible(true);
-
 		}
 	}
 	
@@ -389,5 +394,20 @@ public class JugarPartidaView extends JFrame {
 	public void tancar() {
 		System.exit(-1);
 	}
-
+	
+	public void finalitzarPartida(boolean guanyada) {
+		this.guanyada = guanyada;
+		if (guanyada) lb_missatges1.setText("Enhorabona has guanyat la partida!");
+		else lb_missatges1.setText("Has superat el nombre maxim d'errors");
+		System.out.println("Estem aquiiii!!!");
+		btn_Comprovar.setEnabled(false);
+		//btn_Comprovar.setVisible(false);
+		System.out.println("Estem aquiiii!!!1");
+		//btn_AturarPartida.setVisible(false);
+		btn_AturarPartida.setEnabled(false);
+		System.out.println("Estem aquiiii!!!2");
+		//btn_TancarPartida.setVisible(true);
+		btn_TancarPartida.setEnabled(true);
+		System.out.println("Estem aquiiii!!!3");
+	}
 }
