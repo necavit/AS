@@ -240,7 +240,12 @@ public class JugarPartidaView extends JFrame {
 			JButton btn_Comprovar = new JButton("Comprovar");
 			btn_Comprovar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-			    	  ipc.PrComprovar(index,lletres[index].getText());
+					  try {
+						  lb_missatges1.setText("");
+						  ipc.PrComprovar(index,lletres[index].getText());
+					  } catch(Exception e) {
+						  lb_missatges1.setText("La casella no pot estar buida");
+					  }
 				}
 			});
 			btn_Comprovar.setBounds(318, 324, 109, 30);
