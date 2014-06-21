@@ -40,6 +40,7 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public PlayLetterInfoTuple playLetter(int position, char letter) {
+		Log.debug(TAG, "play letter: " + letter);
 		boolean success = match.play(position, letter);
 		if (match.isFinished() && match.isWon()) {
 			//TODO send mail
@@ -56,7 +57,8 @@ public class JugarPartidaUseCasController {
 									   match.getScore(), match.getNumErrors());
 	}
 	
-	public boolean authenticate(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {
+	public boolean authenticate(String username, String pass) throws PlayerNotExistsException, InvalidPasswordException {
+		Log.debug(TAG, "authenticate username: " + username);
 		this.username = username;
 		LoginTransaction login = new LoginTransaction(username, pass);
 		return login.execute();
