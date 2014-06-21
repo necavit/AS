@@ -429,6 +429,7 @@ public class JugarPartidaView extends JFrame {
 		}
 		else {
 			lletres[index].setBackground(Color.red);
+			mostraMissatge("La lletra es incorrecta",2);
 		}
 		for (int i=0; i<numlletres; ++i) {
 			if (lletres[i].getBackground() == Color.green) {
