@@ -402,7 +402,6 @@ public class JugarPartidaView extends JFrame {
 		this.guanyada = guanyada;
 		if (guanyada) lb_missatges1.setText("Enhorabona has guanyat la partida!");
 		else lb_missatges1.setText("Has superat el nombre maxim d'errors");
-		System.out.println("Estem aquiiii!!!");
 		btn_Comprovar.setVisible(false);
 		btn_AturarPartida.setVisible(false);
 		btn_TancarPartida.setVisible(true);		
