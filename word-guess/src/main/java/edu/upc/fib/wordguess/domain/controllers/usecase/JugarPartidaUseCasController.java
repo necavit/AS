@@ -40,6 +40,7 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public PlayLetterInfoTuple playLetter(int position, char letter) {
+		Log.debug(TAG, "play letter: " + letter);
 		boolean success = match.play(position, letter);
 		if (match.isFinished() && match.isWon()) {
 			//TODO send mail
@@ -56,13 +57,15 @@ public class JugarPartidaUseCasController {
 									   match.getScore(), match.getNumErrors());
 	}
 	
-	public boolean authenticate(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {
+	public boolean authenticate(String username, String pass) throws PlayerNotExistsException, InvalidPasswordException {
+		Log.debug(TAG, "authenticate username: " + username);
 		this.username = username;
 		LoginTransaction login = new LoginTransaction(username, pass);
 		return login.execute();
 	}
 	
 	public MatchInfoTuple createMatch(String categoryName) {
+		Log.debug(TAG, "create match for category: " + categoryName);
 		DAOFactory daoFactory = PostgresDAOFactory.getInstance();
 		
 		//retrieve the player that is to be assigned to the new match
@@ -95,17 +98,19 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public List<Category> fetchCategories() {
+		Log.debug(TAG, "fetch categories");
 		FetchCategoriesTransaction fetchCategories = new FetchCategoriesTransaction();
 		return fetchCategories.execute();
 	}
 	
 	public String getMatchWord() {
 		String matchWord = match.getWordName();
-		Log.debug(TAG, matchWord);
+		Log.debug(TAG, "match word: " + matchWord);
 		return matchWord;
 	}
 	
 	public void stopMatch() {
+		Log.debug(TAG, "stop match");
 		this.match.stop();
 	}
 }
