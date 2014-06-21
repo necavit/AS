@@ -232,16 +232,17 @@ public class JugarPartidaView extends JFrame {
 			lb_Errors.setOpaque(true);
 			add(lb_Errors);
 			
-			JButton btn_AturarPartida = new JButton("Aturar Partida");
+			btn_AturarPartida = new JButton("Aturar Partida");
 			btn_AturarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ipc.PrAturarPartida();
 				}
 			});
 			btn_AturarPartida.setBounds(140, 324, 122, 30);
+			btn_AturarPartida.setVisible(true);
 			add(btn_AturarPartida);
 			
-			JButton btn_Comprovar = new JButton("Comprovar");
+			btn_Comprovar = new JButton("Comprovar");
 			btn_Comprovar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					  try {
@@ -256,9 +257,10 @@ public class JugarPartidaView extends JFrame {
 				}
 			});
 			btn_Comprovar.setBounds(318, 324, 109, 30);
+			btn_Comprovar.setVisible(true);
 			add(btn_Comprovar);
 			
-			JButton btn_TancarPartida = new JButton("Tancar Partida");
+			btn_TancarPartida = new JButton("Tancar Partida");
 			btn_TancarPartida.setVisible(false);
 			btn_TancarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -266,6 +268,7 @@ public class JugarPartidaView extends JFrame {
 				}
 			});
 			btn_TancarPartida.setBounds(229, 324, 109, 30);
+			btn_TancarPartida.setVisible(false);
 			add(btn_TancarPartida);
 		}
 	}
@@ -400,14 +403,8 @@ public class JugarPartidaView extends JFrame {
 		if (guanyada) lb_missatges1.setText("Enhorabona has guanyat la partida!");
 		else lb_missatges1.setText("Has superat el nombre maxim d'errors");
 		System.out.println("Estem aquiiii!!!");
-		btn_Comprovar.setEnabled(false);
-		//btn_Comprovar.setVisible(false);
-		System.out.println("Estem aquiiii!!!1");
-		//btn_AturarPartida.setVisible(false);
-		btn_AturarPartida.setEnabled(false);
-		System.out.println("Estem aquiiii!!!2");
-		//btn_TancarPartida.setVisible(true);
-		btn_TancarPartida.setEnabled(true);
-		System.out.println("Estem aquiiii!!!3");
+		btn_Comprovar.setVisible(false);
+		btn_AturarPartida.setVisible(false);
+		btn_TancarPartida.setVisible(true);		
 	}
 }
