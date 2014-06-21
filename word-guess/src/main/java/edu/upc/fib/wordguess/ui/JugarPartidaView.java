@@ -1,14 +1,12 @@
 package edu.upc.fib.wordguess.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+
+import edu.upc.fib.wordguess.domain.model.Category;
 
 public class JugarPartidaView extends JFrame {
 	
@@ -27,7 +26,7 @@ public class JugarPartidaView extends JFrame {
 	JSelcat selcat;
 	JPartidaEnJoc partenjoc;
 	JTextField [] lletres;
-	JComboBox cb_cat;
+	JComboBox<String> cb_cat;
 	JLabel lb_missatges;
 	JLabel lb_missatges1;
 	JLabel lb_missatges2;
@@ -249,7 +248,7 @@ public class JugarPartidaView extends JFrame {
 			lb_Selcat.setBounds(204, 42, 218, 24);
 			add(lb_Selcat);
 			
-			cb_cat = new JComboBox();
+			cb_cat = new JComboBox<String>();
 			cb_cat.setBounds(220, 97, 156, 20);
 			add(cb_cat);
 			
@@ -295,9 +294,9 @@ public class JugarPartidaView extends JFrame {
 		setContentPane(login);
 	}
 	
-	public void mostraCategories(ArrayList<String> cats) {
-		for(int i=0; i<cats.size(); ++i) {
-			cb_cat.addItem(cats.get(i));
+	public void mostraCategories(List<Category> categories) {
+		for (Category category : categories) {
+			cb_cat.addItem(category.getName());
 		}
 	}
 	

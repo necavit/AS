@@ -1,9 +1,10 @@
 package edu.upc.fib.wordguess.domain.controllers.usecase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
+import edu.upc.fib.wordguess.domain.controllers.transaction.FetchCategoriesTransaction;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
@@ -82,12 +83,9 @@ public class JugarPartidaUseCasController {
 		
 	}
 	
-	public ArrayList<String> obtenirCategories() {
-		ArrayList<String> categories = new ArrayList<String>();
-		//Llamada a la base de datos
-		categories.add("Porno");
-		categories.add("Gayer");
-		return categories;
+	public List<Category> obtenirCategories() {
+		FetchCategoriesTransaction fetchCategories = new FetchCategoriesTransaction();
+		return fetchCategories.execute();
 	}
 	
 	public String obteParaula(String cat) {

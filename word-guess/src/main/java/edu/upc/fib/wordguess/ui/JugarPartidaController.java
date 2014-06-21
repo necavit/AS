@@ -1,11 +1,12 @@
 package edu.upc.fib.wordguess.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.usecase.JugarPartidaUseCasController;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
+import edu.upc.fib.wordguess.domain.model.Category;
 
 public class JugarPartidaController {
 	
@@ -34,7 +35,7 @@ public class JugarPartidaController {
 			jpv.mostraMissatge("La contrassenya és incorrecta", 0);
 		}
 		
-		ArrayList<String> cats = jpuc.obtenirCategories();
+		List<Category> cats = jpuc.obtenirCategories();
 		jpv.mostraCategories(cats);
 		//Capturar Excepcio no hi ha categories
 		if (cats.size() == 0) {
