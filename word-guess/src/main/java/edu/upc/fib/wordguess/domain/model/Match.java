@@ -238,4 +238,8 @@ public class Match implements Serializable {
 			setWon(false);
 		}
 	}
+
+	public void stop() {
+		setFinished(true);
+	}
 }

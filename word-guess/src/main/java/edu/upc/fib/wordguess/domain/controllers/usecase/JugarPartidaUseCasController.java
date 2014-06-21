@@ -106,6 +106,6 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public void stopMatch() {
-		//TODO
+		this.match.stop();
 	}
 }
