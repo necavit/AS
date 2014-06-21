@@ -120,7 +120,7 @@ public class JugarPartidaView extends JFrame {
 			btn_login.setBackground(Color.green);
 			btn_login.setBounds(223, 304, 89, 23);
 			add(btn_login);
-		}		
+		}
 	}
 	
 	
