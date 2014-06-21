@@ -59,7 +59,7 @@ public class Match implements Serializable {
         this.numErrors = 0;
         this.isFinished = false;
         this.isWon = false;
-        //this.player = player;
+        this.player = player;
         
         letterBoxes = new ArrayList<LetterBox>();
         for (int i = 0; i < word.getName().length(); ++i) {

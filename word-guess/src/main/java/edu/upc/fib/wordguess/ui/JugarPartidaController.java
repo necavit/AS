@@ -11,12 +11,6 @@ public class JugarPartidaController {
 	private String username;
 	private int idPartida;
 	
-	private class info {
-		boolean encert,acabada,guanyada;
-		int puntuacio,errors;
-	}
-	
-	
 	public JugarPartidaController () {
 		jpuc = new JugarPartidaUseCasController();
 		jpv = new JugarPartidaView(this);		
