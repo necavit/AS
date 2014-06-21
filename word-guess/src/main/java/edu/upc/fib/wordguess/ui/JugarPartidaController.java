@@ -49,18 +49,18 @@ public class JugarPartidaController {
 		//No fa res
 	}
 	
-	public void PrJugar(String cat){
-			ArrayList<Integer> infopartida = jpuc.crearPartida(cat, this.username);
-			int pi = infopartida.get(0);
-			int nme = infopartida.get(1);
-			int pe = infopartida.get(2);
-			int perr = infopartida.get(3);
-			idPartida = infopartida.get(4);
-			jpv.mostraPuntuacions(pe,perr);
-			jpv.mostraPuntuacioActual(pi);
-			jpv.mostraErrorsActuals(0, nme);
-			String paraula = jpuc.obteParaula(cat);
-			jpv.creaParaula(paraula.length());
+	/**
+	 * Creates a new match taking a word from the given category.
+	 * 
+	 * @param categoryName
+	 */
+	public void PrJugar(String categoryName) {
+		MatchInfoTuple matchInfo = jpuc.crearPartida(categoryName);		
+		idPartida = matchInfo.matchId;
+		jpv.mostraPuntuacions(matchInfo.scoreOnSuccess, matchInfo.scoreOnError);
+		jpv.mostraPuntuacioActual(matchInfo.currentScore);
+		jpv.mostraErrorsActuals(0, matchInfo.maximumErrorCount);
+		jpv.creaParaula(jpuc.getMatchWord().length());
 	}
 	
 	public void PrAturarPartida(){

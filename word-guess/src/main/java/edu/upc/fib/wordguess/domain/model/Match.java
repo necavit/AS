@@ -14,7 +14,10 @@ import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
-import edu.upc.fib.wordguess.util.HibernateUtil;
+import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
+import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
+import edu.upc.fib.wordguess.ui.MatchInfoTuple;
+import edu.upc.fib.wordguess.util.Log;
 
 @Entity
 @Table(name=Match.TABLE)
@@ -44,6 +47,10 @@ public class Match implements Serializable {
     @JoinColumn
     private Player player;
     
+    private int maximumErrorCount;
+    
+    private ScoringStrategy strategy;
+    
     @OneToMany(mappedBy=LetterBox.MATCH_ID)
 	private List<LetterBox> letterBoxes;
     
@@ -52,29 +59,44 @@ public class Match implements Serializable {
     }
 	
     private static MatchDAO dao = PostgresDAOFactory.getInstance().getMatchDAO();
-    
-    public Match(int matchId, Word word,Player player) {
-        this.matchId = matchId;
-        this.word = word;
-        this.numErrors = 0;
-        this.isFinished = false;
+      
+    public Match(WordGuessParams params, Player player, Category category) {
+    	//match params
+    	matchId = params.nextMatchId;
+		Log.debug("new Match", "matchId: " + matchId);
+		maximumErrorCount = params.maxErrorsCount;
+		Log.debug("new Match", "maxErrors: " + maximumErrorCount);
+		
+		this.isFinished = false;
         this.isWon = false;
-        this.player = player;
-        
-        letterBoxes = new ArrayList<LetterBox>();
+        this.numErrors = 0;
+		
+    	//assign player
+    	this.player = player;
+    	player.addPlayedMatch(this);
+    	
+    	//decide strategy
+		int wonMatchesCount = player.getWonMatches();
+		strategy = ScoringStrategyFactory.buildStrategy(wonMatchesCount);
+		
+		//get word
+		this.word = category.getRandomWord();
+		
+		//build letter boxes
+		letterBoxes = new ArrayList<LetterBox>();
         for (int i = 0; i < word.getName().length(); ++i) {
         	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
         }
-        
-        try {
+		
+    	try {
 			dao.store(this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-      
-    public boolean play (int pos, char letter) {
+	}
+
+	public boolean play (int pos, char letter) {
     	boolean encertada=letterBoxes.get(pos).checkLetter(letter);
     	if( letterBoxes.get(pos).checkLetter(letter)) {
     		boolean won = true;
@@ -189,5 +211,20 @@ public class Match implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
+	public String getWordName() {
+		return word.getName();
+	}
+
+	public MatchInfoTuple getMatchInfoTuple() {
+		int scoreOnSuccess = strategy.getScoreOnSuccess();
+		int scoreOnError = strategy.getScoreOnError();
+		return new MatchInfoTuple(matchId, getCurrentScore(), maximumErrorCount, scoreOnSuccess, scoreOnError);
+	}
+
+	private int getCurrentScore() {
+		return strategy.getScore(this);
+	}
+	
 	
 }

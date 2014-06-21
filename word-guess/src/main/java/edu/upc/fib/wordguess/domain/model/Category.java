@@ -1,6 +1,9 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +14,6 @@ import org.hibernate.HibernateException;
 
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
-import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
 @Table(name=Category.TABLE)
@@ -24,6 +26,8 @@ public class Category implements Serializable {
 	@Id
 	@Column
 	private String name;
+	
+	private List<Word> words;
 	
 	/**
      * WARNING! Never use this constructor!
@@ -38,6 +42,7 @@ public class Category implements Serializable {
 	
 	public Category(String name) throws HibernateException {
 		this.name = name;
+		this.words = new ArrayList<Word>();
 		try {
 			dao.store(this);
 		} catch (Exception e) {
@@ -58,6 +63,34 @@ public class Category implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Word> getWords() {
+		return words;
+	}
+	
+	public void setWords(List<Word> words) {
+		this.words = words;
+	}
+
+	public void addWord(Word word) {
+		this.words.add(word);
+		try {
+			dao.update(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteWord(Word word) {
+		this.words.remove(word);
+	}
+	
+	public Word getRandomWord() {
+		Random rand = new Random();
+		int wordIndex = rand.nextInt(words.size());
+		return words.get(wordIndex);
 	}
 	
 }

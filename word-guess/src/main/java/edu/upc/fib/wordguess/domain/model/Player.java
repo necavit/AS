@@ -1,6 +1,7 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -41,6 +42,8 @@ public class Player extends RegisteredUser implements Serializable {
 	public Player(String name, String surname, String username, String password, String email) {
 		initialize(name, surname, username, password);
 		this.email = email;
+		this.playedMatches = new ArrayList<Match>();
+		
 		try {
 			dao.store(this);
 		} catch (Exception e) {
@@ -61,6 +64,29 @@ public class Player extends RegisteredUser implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void addPlayedMatch(Match match) {
+		if (playedMatches != null) {
+			playedMatches.add(match);
+			try {
+				dao.update(this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.err.println("playedMatches is null. username is: " + getUsername());
+		}
+	}
+
+	public int getWonMatches() {
+		int wonMatches = 0;
+		for (Match match : playedMatches) {
+			if (match.isWon()) {
+				++wonMatches;
+			}
+		}
+		return wonMatches;
 	}
 	
 }

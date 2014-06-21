@@ -46,6 +46,7 @@ public class Word implements Serializable {
         this.name = name;
         this.numLetters = name.length();
         this.category = category;
+        category.addWord(this);
         try {
 			dao.store(this);
 		} catch (Exception e) {
