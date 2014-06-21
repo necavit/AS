@@ -13,7 +13,6 @@ public class JugarPartidaController {
 	
 	private JugarPartidaView jpv;
 	private JugarPartidaUseCasController jpuc;
-	private String username;
 	private int idPartida;
 	
 	public JugarPartidaController () {
@@ -26,7 +25,6 @@ public class JugarPartidaController {
 	}
 				
 	public boolean PrLogin(String username,String pass){
-		this.username = username;
 		boolean logged = false;
 		try {
 			logged = jpuc.ferAutentificacio(username, pass);
