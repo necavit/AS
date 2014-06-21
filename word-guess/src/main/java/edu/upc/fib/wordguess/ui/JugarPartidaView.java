@@ -347,6 +347,7 @@ public class JugarPartidaView extends JFrame {
 	}
 	
 	public void mostraCategories(List<Category> categories) {
+		cb_cat.removeAllItems();
 		for (Category category : categories) {
 			cb_cat.addItem(category.getName());
 		}
