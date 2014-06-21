@@ -43,10 +43,11 @@ public class JugarPartidaView extends JFrame {
 	JButton btn_Comprovar;
 	JButton btn_AturarPartida;
 	JButton btn_TancarPartida;
+	JLabel lbErrors;
 	private int index;
 	private boolean guanyada;
 	private int numlletres;
-	
+	private int nmaxe;
 	
 	public void caparCaselles (int pos) {
 		for (int i=0; i<numlletres; ++i) {
@@ -197,7 +198,7 @@ public class JugarPartidaView extends JFrame {
 			*/
 			
 			//marcador errors
-			JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
+			lbErrors = new JLabel("ERRORS 0 de X:",SwingConstants.CENTER);
 			lbErrors.setBounds(326, 42, 250, 30);
 			lbErrors.setFont(new java.awt.Font("Tahoma",0,20));
 			lbErrors.setFont(boldfont);
@@ -330,7 +331,6 @@ public class JugarPartidaView extends JFrame {
 			add(btn_Comprovar);
 			
 			btn_TancarPartida = new JButton("Tancar");
-			
 			btn_TancarPartida.setBackground( new Color( 255, 112, 112) );
 			btn_TancarPartida.setBounds( 250 , 300, 100, 35);
 			btn_TancarPartida.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
@@ -459,14 +459,18 @@ public class JugarPartidaView extends JFrame {
 	}
 		
 	public void mostraErrorsActuals(int ea,int nme) {
+		
+		this.nmaxe = nme;
 		String errActuals = Integer.toString(ea);
 		String numMaxErr = Integer.toString(nme);
-		lbNumErrors1.setText(errActuals);
-		lbNumErrors3.setText(numMaxErr);
+		this.lbErrors.setText("ERRORS : "+ea+" de "+nmaxe);
+		//lbNumErrors1.setText(errActuals);
+		//lbNumErrors3.setText(numMaxErr);
 	}
 	public void actualitzaErrors(int ea) {
 		String errActuals = Integer.toString(ea);
-		lbNumErrors1.setText(errActuals);
+		//lbNumErrors1.setText(errActuals);
+		lbErrors.setText("ERRORS : "+ea+" de "+nmaxe );
 	}
 	
 	public void mostraLletra(char lletra,int pos) {
