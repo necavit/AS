@@ -35,7 +35,7 @@ public class MockMatchDAO extends MockGenericDAO<Match> implements MatchDAO {
 	
 	@Override
 	public Match update(Match object) throws Exception {
-		map.remove(object).getMatchId();
+		//map.remove(object).getMatchId();
 		map.put(object.getMatchId(), object);
 		return object;
 	}
