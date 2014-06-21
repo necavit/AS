@@ -33,7 +33,9 @@ public class JugarPartidaView extends JFrame {
 	JLabel lb_missatges2;
 	JLabel lb_PuntEncert;
 	JLabel lb_PuntsError;
-	JLabel lbNumErrors;
+	JLabel lbNumErrors1;
+	JLabel lbNumErrors2;
+	JLabel lbNumErrors3;
 	JLabel lbPunts;
 	JButton btn_ok;
 	private int index;
@@ -128,7 +130,7 @@ public class JugarPartidaView extends JFrame {
 					
 		public JPartidaEnJoc() {
 			setLayout(null);
-			JLabel lbPuntuacioActual = new JLabel("PUNTUACIï¿½ ACTUAL:",SwingConstants.CENTER);
+			JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
 			lbPuntuacioActual.setBounds(31, 42, 253, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
@@ -157,14 +159,35 @@ public class JugarPartidaView extends JFrame {
 			lbPunts.setOpaque(true);
 			add(lbPunts);
 			
-			lbNumErrors = new JLabel("",SwingConstants.CENTER);
-			lbNumErrors.setBounds(326, 72, 253, 30);
-			lbNumErrors.setFont(new java.awt.Font("Tahoma",0,20));
-			lbNumErrors.setFont(boldfont);
-			lbNumErrors.setBackground(Color.gray);
-			lbNumErrors.setForeground(Color.white);
-			lbNumErrors.setOpaque(true);
-			add(lbNumErrors);
+			/* LABELS COORESPONENT AL NUMERO D'ERRORS */
+			lbNumErrors1 = new JLabel("0",SwingConstants.CENTER);
+			lbNumErrors1.setBounds(326, 72, 63, 30);
+			lbNumErrors1.setFont(new java.awt.Font("Tahoma",0,20));
+			lbNumErrors1.setFont(boldfont);
+			lbNumErrors1.setBackground(Color.gray);
+			lbNumErrors1.setForeground(Color.white);
+			lbNumErrors1.setOpaque(true);
+			add(lbNumErrors1);
+			
+			lbNumErrors2 = new JLabel(" de ",SwingConstants.CENTER);
+			lbNumErrors2.setBounds(389, 72, 127, 30);
+			lbNumErrors2.setFont(new java.awt.Font("Tahoma",0,20));
+			lbNumErrors2.setFont(boldfont);
+			lbNumErrors2.setBackground(Color.gray);
+			lbNumErrors2.setForeground(Color.white);
+			lbNumErrors2.setOpaque(true);
+			add(lbNumErrors2);
+			
+			lbNumErrors3 = new JLabel("3",SwingConstants.CENTER);
+			lbNumErrors3.setBounds(516, 72, 63, 30);
+			lbNumErrors3.setFont(new java.awt.Font("Tahoma",0,20));
+			lbNumErrors3.setFont(boldfont);
+			lbNumErrors3.setBackground(Color.gray);
+			lbNumErrors3.setForeground(Color.white);
+			lbNumErrors3.setOpaque(true);
+			add(lbNumErrors3);
+			
+			/* ***************************************** */
 			
 			lb_missatges1 = new JLabel("",SwingConstants.CENTER);
 			lb_missatges1.setBounds(57, 246, 422, 76);
@@ -333,14 +356,14 @@ public class JugarPartidaView extends JFrame {
 	}
 		
 	public void mostraErrorsActuals(int ea,int nme) {
-		String eactuals = Integer.toString(ea);
-		String numaxe = Integer.toString(nme);
-		lbNumErrors.setText(eactuals + " de " + numaxe);
+		String errActuals = Integer.toString(ea);
+		String numMaxErr = Integer.toString(nme);
+		lbNumErrors1.setText(errActuals);
+		lbNumErrors3.setText(numMaxErr);
 	}
-	
-	public void mostraErrors(int ea) {
-		String eactuals = Integer.toString(ea);
-		lbNumErrors.setText(eactuals);
+	public void actualitzaErrors(int ea) {
+		String errActuals = Integer.toString(ea);
+		lbNumErrors1.setText(errActuals);
 	}
 	
 	public void mostraLletra(char lletra,int pos) {

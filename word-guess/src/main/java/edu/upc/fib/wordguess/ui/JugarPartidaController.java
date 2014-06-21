@@ -74,7 +74,7 @@ public class JugarPartidaController {
 		int puntuacio = (int) infop.get(4);
 		int errors = (int) infop.get(3);
 		jpv.mostraPuntuacioActual(puntuacio);
-		jpv.mostraErrors(errors);
+		jpv.actualitzaErrors(errors);
 	}
 	
 	public void PrTancarPartida(){
