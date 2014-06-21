@@ -7,6 +7,8 @@ import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
 
+//projecte extern
+//import ws1.Mail;
 
 public class JugarPartidaUseCasController {
 	
@@ -36,7 +38,10 @@ public class JugarPartidaUseCasController {
 			++numEncerts;
 			if(m.isWon()) {
 				System.out.print("Partida Finalitzada");
-				//Servei missatgeria
+				//servei missatgeria 
+				// Mail m = new Mail();
+				//m.enviaMissatge2("miquelmasriera@gmail.com","CONTINGUT");
+				
 			}
 		}
 		else {
