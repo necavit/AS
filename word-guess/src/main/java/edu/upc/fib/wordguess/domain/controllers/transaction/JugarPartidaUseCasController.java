@@ -2,6 +2,7 @@ package edu.upc.fib.wordguess.domain.controllers.transaction;
 
 import java.util.ArrayList;
 
+import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
@@ -61,7 +62,7 @@ public class JugarPartidaUseCasController {
 		return infojugada;
 	}
 	
-	public boolean ferAutentificacio(String username,String pass) throws UserNotExistsException, InvalidPasswordException {
+	public boolean ferAutentificacio(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {
 		LoginTransaction login = new LoginTransaction(username, pass);
 		return login.execute();
 	}

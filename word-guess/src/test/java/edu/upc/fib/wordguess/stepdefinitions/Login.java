@@ -5,6 +5,7 @@ import org.junit.Assert;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
@@ -32,7 +33,7 @@ public class Login {
 	    LoginTransaction loginController = new LoginTransaction(username, password);
 	    try {
 	    	loggedIn = loginController.execute();
-	    } catch (UserNotExistsException ue) {
+	    } catch (PlayerNotExistsException ue) {
 	    	usernameExists = false;
 	    } catch (InvalidPasswordException ipe) {
 			loggedIn = false;

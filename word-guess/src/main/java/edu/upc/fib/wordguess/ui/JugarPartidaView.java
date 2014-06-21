@@ -113,9 +113,6 @@ public class JugarPartidaView extends JFrame {
 						setContentPane(selcat);
 						selcat.updateUI();
 					}
-					else {
-						mostraMissatge("Usuari i/o contrassenya incorrectes",0);
-					}
 					tb_user.setText("");
 					tb_pass.setText("");
 				}
@@ -131,7 +128,7 @@ public class JugarPartidaView extends JFrame {
 					
 		public JPartidaEnJoc() {
 			setLayout(null);
-			JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
+			JLabel lbPuntuacioActual = new JLabel("PUNTUACIï¿½ ACTUAL:",SwingConstants.CENTER);
 			lbPuntuacioActual.setBounds(31, 42, 253, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
