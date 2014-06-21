@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import edu.upc.fib.wordguess.domain.model.Category;
 
@@ -50,6 +52,7 @@ public class JugarPartidaView extends JFrame {
 			if (i!=pos) lletres[i].setEnabled(false);
 		}
 	}
+	
 	public void creaParaula(int numlletres) {
 		this.numlletres = numlletres;
 		lletres = new JTextField[numlletres];
@@ -244,7 +247,6 @@ public class JugarPartidaView extends JFrame {
 			btn_AturarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ipc.PrAturarPartida();
-					System.out.println("Estem aquiiiii!!!! aturarPartida()");
 					setContentPane(selcat);
 					selcat.updateUI();
 				}
@@ -420,14 +422,22 @@ public class JugarPartidaView extends JFrame {
 	}
 	
 	public void marcaCasella(boolean encert) {
-		if(encert) lletres[index].setBackground(Color.green);
-		else lletres[index].setBackground(Color.red);
+		if(encert) {
+			lletres[index].setBackground(Color.green);
+		}
+		else {
+			lletres[index].setBackground(Color.red);
+		}
 		for (int i=0; i<numlletres; ++i) {
 			if (lletres[i].getBackground() == Color.green) {
 				lletres[i].setEnabled(false);
 				lletres[i].setDisabledTextColor(Color.BLACK);
 			}
-			else lletres[i].setEnabled(true);
+			else {
+				lletres[i].setEnabled(true);
+			}
+			lletres[i].setBorder(UIManager.getBorder("TextField.border"));
 		}
+		if(!encert) lletres[index].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 	}
 }
