@@ -2,7 +2,9 @@ package edu.upc.fib.wordguess.ui;
 
 import java.util.ArrayList;
 
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.transaction.JugarPartidaUseCasController;
+import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 
 public class JugarPartidaController {
 	
@@ -22,7 +24,19 @@ public class JugarPartidaController {
 				
 	public boolean PrLogin(String username,String pass){
 		this.username = username;
-		jpuc.ferAutentificacio(username, pass);
+		boolean logged = false;
+		try {
+			logged = jpuc.ferAutentificacio(username, pass);
+		} catch (UserNotExistsException e) {
+			// TODO mostrar un missatge dient que el user no existeix
+		} catch (InvalidPasswordException e) {
+			// TODO mostrar un missatge dient que la password es incorrecta
+		}
+		
+		if (logged) {
+			//TODO no sé si cal això...
+		}
+		
 		ArrayList<String> cats = jpuc.obtenirCategories();
 		jpv.mostraCategories(cats);
 		//Capturar Excepcio no hi ha categories

@@ -1,5 +1,7 @@
 package edu.upc.fib.wordguess.ui;
 
+import edu.upc.fib.wordguess.domain.model.Player;
+
 
 public class main {
 
@@ -26,7 +28,11 @@ public class main {
 		//els deletes no es fan, pq en java no hi ha operacio destructora... pero si et
 		// petes l'objecte... bé, en tot cas crec que tenim pocs deletes
 		
-		
+		try {
+			new Player("John", "Doe", "john.doe", "test", "john@doe.com");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 
