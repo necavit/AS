@@ -20,6 +20,7 @@ import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
+import edu.upc.fib.wordguess.util.Log;
 
 //projecte extern
 //import ws1.Mail;
@@ -36,22 +37,20 @@ public class JugarPartidaUseCasController {
 	 */
 	private Match match;
 	
-	private int numEncerts;
 	
 	public JugarPartidaUseCasController() {
-		numEncerts = 0;
+		//
 	}
 	
 	public ArrayList<Object> ferJugada(int pos, char lletra, int idPartida) {
 		ArrayList<Object> infojugada = new ArrayList<Object>();
 		boolean encert,acabada,guanyada;
 		int puntuacio,errors;
-		encert=match.play(pos,lletra);
+		encert = match.play(pos,lletra);
 		guanyada = match.isWon();
 		acabada = match.isFinished();
 		
-		if(encert) {
-			++numEncerts;
+		if (encert) {
 			if(match.isWon()) {
 				System.out.print("Partida Finalitzada");
 				//servei missatgeria 
@@ -126,15 +125,8 @@ public class JugarPartidaUseCasController {
 	}
 	
 	public String getMatchWord() {
-		return match.getWordName();
+		String matchWord = match.getWordName();
+		Log.debug("getMatchWord", matchWord);
+		return matchWord;
 	}
-	
-	/**
-	 * Use getMatchWord() instead, which retrieves the current match word.
-	 */
-	@Deprecated
-	public String obteParaula(String cat) {
-		return getMatchWord();
-	}
-	
 }
