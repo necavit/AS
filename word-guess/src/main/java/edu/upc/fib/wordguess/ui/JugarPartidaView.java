@@ -151,7 +151,7 @@ public class JugarPartidaView extends JFrame {
 					tb_pass.setText("");
 				}
 			});
-			btn_login.setBackground(Color.green);
+			btn_login.setBackground( new Color( 117, 255, 71) );
 			btn_login.setBounds(250, 280, 100, 35);
 			btn_login.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
 			btn_login.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
@@ -164,8 +164,10 @@ public class JugarPartidaView extends JFrame {
 					
 		public JPartidaEnJoc() {
 			setLayout(null);
+			
+			// marcador puntucio actual
 			JLabel lbPuntuacioActual = new JLabel("PUNTUACIÓ ACTUAL:",SwingConstants.CENTER);
-			lbPuntuacioActual.setBounds(31, 42, 253, 30);
+			lbPuntuacioActual.setBounds(31, 42, 250, 30);
 			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
 			Font f = lbPuntuacioActual.getFont();
 			Font boldfont = new Font(f.getFontName(),f.BOLD,f.getSize());
@@ -174,24 +176,27 @@ public class JugarPartidaView extends JFrame {
 			lbPuntuacioActual.setForeground(Color.white);
 			lbPuntuacioActual.setOpaque(true);
 			add(lbPuntuacioActual);
-			
-			JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
-			lbErrors.setBounds(326, 42, 253, 30);
-			lbErrors.setFont(new java.awt.Font("Tahoma",0,20));
-			lbErrors.setFont(boldfont);
-			lbErrors.setBackground(Color.gray);
-			lbErrors.setForeground(Color.white);
-			lbErrors.setOpaque(true);
-			add(lbErrors);
-			
+		
+			//puntuació actual
 			lbPunts = new JLabel("0",SwingConstants.CENTER);
-			lbPunts.setBounds(31, 72, 253, 30);
+			lbPunts.setBounds(31, 72, 250, 30);
 			lbPunts.setFont(new java.awt.Font("Tahoma",0,20));
 			lbPunts.setFont(boldfont);
 			lbPunts.setBackground(Color.blue);
 			lbPunts.setForeground(Color.white);
 			lbPunts.setOpaque(true);
 			add(lbPunts);
+			
+			//marcador errors
+			JLabel lbErrors = new JLabel("ERRORS:",SwingConstants.CENTER);
+			lbErrors.setBounds(326, 42, 250, 30);
+			lbErrors.setFont(new java.awt.Font("Tahoma",0,20));
+			lbErrors.setFont(boldfont);
+			lbErrors.setBackground(Color.gray);
+			lbErrors.setForeground(Color.white);
+			lbErrors.setOpaque(true);
+			add(lbErrors);
+		
 			
 			/* LABELS COORESPONENT AL NUMERO D'ERRORS */
 			lbNumErrors1 = new JLabel("0",SwingConstants.CENTER);
@@ -203,6 +208,7 @@ public class JugarPartidaView extends JFrame {
 			lbNumErrors1.setOpaque(true);
 			add(lbNumErrors1);
 			
+			//del total
 			lbNumErrors2 = new JLabel(" de ",SwingConstants.CENTER);
 			lbNumErrors2.setBounds(389, 72, 127, 30);
 			lbNumErrors2.setFont(new java.awt.Font("Tahoma",0,20));
@@ -314,19 +320,28 @@ public class JugarPartidaView extends JFrame {
 		public JSelcat() {
 			setLayout(null);
 			
+			//label seleccionar categoria
 			JLabel lb_Selcat = new JLabel("Tria una categoria:");
 			lb_Selcat.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_Selcat.setBounds(204, 42, 218, 24);
+			lb_Selcat.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_Selcat.setBounds(200, 40, 200, 30);
 			add(lb_Selcat);
 			
+			//combobox
 			cb_cat = new JComboBox<String>();
-			cb_cat.setBounds(220, 97, 156, 20);
+			cb_cat.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
+			cb_cat.setFont(new java.awt.Font("Tahoma",1, 14));
+			cb_cat.setBounds(220, 100, 160, 30);
 			add(cb_cat);
 			
+			//label missatge
 			lb_missatges2 = new JLabel("",JLabel.CENTER);
-			lb_missatges2.setBounds(93, 156, 412, 87);
+			lb_missatges2.setBounds(100, 160, 400, 80 );
+			lb_missatges2.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_missatges2.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_missatges2);
 			
+			//boto logout
 			JButton btn_logout = new JButton("Logout");
 			btn_logout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -336,9 +351,13 @@ public class JugarPartidaView extends JFrame {
 					btn_ok.setEnabled(true);
 				}
 			});
-			btn_logout.setBounds(169, 268, 89, 23);
+			btn_logout.setBackground( new Color( 255, 92, 92) );
+			btn_logout.setBounds( 150 , 280, 100, 35);
+			btn_logout.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
+			btn_logout.setBorder( BorderFactory.createLineBorder( new Color(133,0,0), 2 ));
 			add(btn_logout);
 			
+			//boto ok
 			btn_ok = new JButton("Jugar");
 			btn_ok.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -348,9 +367,13 @@ public class JugarPartidaView extends JFrame {
 					partenjoc.updateUI();
 				}
 			});
-			btn_ok.setBounds(333, 268, 89, 23);
-			add(btn_ok);
 
+			btn_ok.setBackground( new Color( 92, 92, 255) );
+			btn_ok.setBounds( 350 , 280, 100, 35);
+			btn_ok.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
+			btn_ok.setBorder( BorderFactory.createLineBorder( new Color(0,0,133), 2 ));
+			add(btn_ok);
+			
 		}
 	}
 
