@@ -100,31 +100,42 @@ public class JugarPartidaView extends JFrame {
 			//label usuari
 			JLabel lb_user = new JLabel("Usuari");
 			lb_user.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_user.setBounds(118, 86, 69, 26);
+			lb_user.setBounds(150, 80, 150, 30);
+			lb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_user);
 			
 			//label contrasenya
 			JLabel lb_pass = new JLabel("Contrasenya");
 			lb_pass.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_pass.setBounds(113, 137, 148, 22);
+			lb_pass.setBounds(150, 130, 130, 30);
+			lb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_pass);
 			
 			//textField usuername
 			tb_user = new JTextField();
-			tb_user.setBounds(275, 86, 139, 28);
+			tb_user.setBounds(320, 80, 130, 30);
+			tb_user.setHorizontalAlignment(SwingConstants.CENTER);
+			tb_user.setBackground( Color.LIGHT_GRAY );
+			tb_user.setFont(new java.awt.Font("Tahoma",0,17));
 			add(tb_user);
 			tb_user.setColumns(10);
 			
 			//textField contrasenya
 			tb_pass = new JPasswordField();
-			tb_pass.setBounds(271, 137, 143, 25);
+			tb_pass.setBounds(320, 130, 130, 30);
+			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
+			tb_pass.setBackground( Color.lightGray );
+			tb_pass.setFont(new java.awt.Font("Tahoma",0,17));
 			add(tb_pass);
 			
 			//panell missatges
 			lb_missatges = new JLabel("",JLabel.CENTER);
-			lb_missatges.setBounds(97, 180, 385, 99);
+			lb_missatges.setBounds(150, 180, 300, 60);
+			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_missatges.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_missatges);
 			
+			//boto de login
 			JButton btn_login = new JButton("Login");
 			btn_login.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -139,7 +150,8 @@ public class JugarPartidaView extends JFrame {
 				}
 			});
 			btn_login.setBackground(Color.green);
-			btn_login.setBounds(223, 304, 89, 23);
+			btn_login.setBounds(250, 280, 100, 35);
+			btn_login.setFont(new java.awt.Font("Tahoma",0,15));
 			add(btn_login);
 		}
 	}
