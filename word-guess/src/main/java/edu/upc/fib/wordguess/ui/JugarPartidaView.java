@@ -248,6 +248,7 @@ public class JugarPartidaView extends JFrame {
 					  try {
 						  lb_missatges1.setText("");
 						  ipc.PrComprovar(index,lletres[index].getText());
+						  
 					  } catch(Exception e) {
 						  if (!guanyada) {
 							  System.out.println("Saltem al catch!");
@@ -405,5 +406,10 @@ public class JugarPartidaView extends JFrame {
 		btn_Comprovar.setVisible(false);
 		btn_AturarPartida.setVisible(false);
 		btn_TancarPartida.setVisible(true);		
+	}
+	
+	public void marcaCasella(boolean encert) {
+		if(encert) lletres[index].setBackground(Color.green);
+		else lletres[index].setBackground(Color.red);
 	}
 }
