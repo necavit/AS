@@ -1,6 +1,5 @@
 package edu.upc.fib.wordguess.domain.controllers.usecase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
@@ -53,31 +52,6 @@ public class JugarPartidaUseCasController {
 		}
 		return new PlayLetterInfoTuple(success, match.isFinished(), match.isWon(),
 									   match.getScore(), match.getNumErrors());
-	}
-	
-	/**
-	 * DEPRECATED. Use playLetter(positio, letter) instead
-	 */
-	@Deprecated
-	public ArrayList<Object> ferJugada(int pos, char lletra, int idPartida) {
-		ArrayList<Object> infojugada = new ArrayList<Object>();
-		boolean encert,acabada,guanyada;
-		int puntuacio,errors;
-		encert = match.play(pos,lletra);
-		guanyada = match.isWon(); acabada = match.isFinished();
-		if (encert) {
-			if(match.isWon()) {
-				System.out.print("Partida Finalitzada");
-				
-			}
-		}
-		else {
-			//Fer la comprobacio si supera nmaximerrors
-		}
-		errors = match.getNumErrors();
-		puntuacio = 3; // ESTRATEGIA
-		infojugada.add(encert); infojugada.add(acabada);infojugada.add(guanyada);infojugada.add(errors);infojugada.add(puntuacio);
-		return infojugada;
 	}
 	
 	public boolean ferAutentificacio(String username,String pass) throws PlayerNotExistsException, InvalidPasswordException {

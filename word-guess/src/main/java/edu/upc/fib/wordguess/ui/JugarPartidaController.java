@@ -6,6 +6,7 @@ import java.util.List;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.usecase.JugarPartidaUseCasController;
 import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
+import edu.upc.fib.wordguess.domain.controllers.usecase.PlayLetterInfoTuple;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 
@@ -66,17 +67,14 @@ public class JugarPartidaController {
 		jpv.aturaPartida();
 	}
 	
-	public void PrComprovar(int pos, String lletra){
-		ArrayList<Object> infop = jpuc.ferJugada(pos, lletra.charAt(0) , idPartida);
-		boolean encert = (boolean) infop.get(0);
-		boolean acabada = (boolean) infop.get(1);
-		boolean guanyada = (boolean) infop.get(2);
-		int puntuacio = (int) infop.get(4);
-		int errors = (int) infop.get(3);
-		if (acabada) jpv.finalitzarPartida(guanyada);
-		jpv.marcaCasella(encert);
-		jpv.mostraPuntuacioActual(puntuacio);
-		jpv.actualitzaErrors(errors);
+	public void PrComprovar(int pos, String lletra) {
+		PlayLetterInfoTuple playInfo = jpuc.playLetter(pos, lletra.charAt(0));
+		if (playInfo.isFinished) {
+			jpv.finalitzarPartida(playInfo.isWon);
+		}
+		jpv.marcaCasella(playInfo.success);
+		jpv.mostraPuntuacioActual(playInfo.currentScore);
+		jpv.actualitzaErrors(playInfo.numErrors);
 	}
 		
 	public void PrTancarPartida(){
