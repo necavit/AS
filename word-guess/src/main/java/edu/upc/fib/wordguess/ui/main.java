@@ -42,7 +42,7 @@ public class main {
 				new Word("moto", transports);
 			
 			//players
-			new Player("John", "Doe", "john.doe", "test", "john@doe.com");
+			new Player("John", "Doe", "test", "test", "john@doe.com");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
