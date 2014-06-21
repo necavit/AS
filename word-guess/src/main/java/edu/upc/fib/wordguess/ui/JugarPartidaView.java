@@ -260,6 +260,7 @@ public class JugarPartidaView extends JFrame {
 			JButton btn_logout = new JButton("Logout");
 			btn_logout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					lb_missatges.setText("");
 					setContentPane(login);
 					login.updateUI();
 					btn_ok.setEnabled(true);
