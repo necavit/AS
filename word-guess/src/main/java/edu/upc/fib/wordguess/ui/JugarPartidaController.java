@@ -70,10 +70,10 @@ public class JugarPartidaController {
 	
 	public void PrComprovar(int pos, String lletra) {
 		PlayLetterInfoTuple playInfo = jpuc.playLetter(pos, lletra.charAt(0));
+		jpv.marcaCasella(playInfo.success);
 		if (playInfo.isFinished) {
 			jpv.finalitzarPartida(playInfo.isWon);
 		}
-		jpv.marcaCasella(playInfo.success);
 		jpv.mostraPuntuacioActual(playInfo.currentScore);
 		jpv.actualitzaErrors(playInfo.numErrors);
 	}
