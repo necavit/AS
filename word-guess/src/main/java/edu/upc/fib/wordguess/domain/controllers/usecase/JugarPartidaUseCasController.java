@@ -44,6 +44,12 @@ public class JugarPartidaUseCasController {
 			if(m.isWon()) {
 				System.out.print("Partida Finalitzada");
 				//servei missatgeria 
+				//m.getPlayer().getEmail();
+				//String paraula = m.getWord().getName();
+				// String numErr = Integer.toString(m.getNumErrors());
+				//String punts = 
+				//String contingut = "Partida Guanyada : Paraula="+paraula+" Punts="+punts+"  errors="+numErr;
+				
 				// Mail m = new Mail();
 				//m.enviaMissatge2("miquelmasriera@gmail.com","CONTINGUT");
 				
