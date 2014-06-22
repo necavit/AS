@@ -7,6 +7,12 @@ import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 
+/**
+ * DAOFactory provides centralized access to domain object
+ *  DAOs (Data Access Object).
+ *  
+ * Please note that this is just an interface. 
+ */
 public interface DAOFactory {
 	
 	public WordDAO getWordDAO();

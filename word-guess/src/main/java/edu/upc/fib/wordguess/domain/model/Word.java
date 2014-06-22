@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.HibernateException;
 
 import edu.upc.fib.wordguess.data.dao.WordDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
 @Entity
@@ -40,7 +40,7 @@ public class Word implements Serializable {
     	//empty constructor for Hibernate to work
     }
     
-    private static WordDAO dao = PostgresDAOFactory.getInstance().getWordDAO();
+    private static WordDAO dao = MockDAOFactory.getInstance().getWordDAO();
     
     public Word(String name, Category category) throws HibernateException {
         this.name = name;

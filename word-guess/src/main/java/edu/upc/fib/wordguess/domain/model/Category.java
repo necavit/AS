@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.HibernateException;
 
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 
 @Entity
 @Table(name=Category.TABLE)
@@ -38,7 +38,7 @@ public class Category implements Serializable {
 		//
 	}
 	
-	private static CategoryDAO dao = PostgresDAOFactory.getInstance().getCategoryDAO();
+	private static CategoryDAO dao = MockDAOFactory.getInstance().getCategoryDAO();
 	
 	public Category(String name) throws HibernateException {
 		this.name = name;

@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.upc.fib.wordguess.data.DAOFactory;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Word;
 
@@ -33,7 +33,7 @@ public class HibernateMapping {
 
 	@When("^the database is queried for its existence$")
 	public void the_database_is_queried_for_its_existence() throws Throwable {
-	    DAOFactory daoFactory = PostgresDAOFactory.getInstance();
+	    DAOFactory daoFactory = MockDAOFactory.getInstance();
 	    WordDAO wordDAO = daoFactory.getWordDAO();
 	    exists = wordDAO.exists(name);
 	}

@@ -2,7 +2,7 @@ package edu.upc.fib.wordguess.domain.controllers.transaction;
 
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Player;
 
@@ -19,7 +19,7 @@ public class LoginTransaction implements Transaction<Boolean> {
 	@Override
 	public Boolean execute() throws PlayerNotExistsException, InvalidPasswordException {
 		//data controllers acquisition
-		PostgresDAOFactory dataFactory = PostgresDAOFactory.getInstance();
+		MockDAOFactory dataFactory = MockDAOFactory.getInstance();
 		PlayerDAO userController = dataFactory.getPlayerDAO();
 		
 		//fetch user

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
@@ -58,7 +58,7 @@ public class Match implements Serializable {
     	
     }
 	
-    private static MatchDAO dao = PostgresDAOFactory.getInstance().getMatchDAO();
+    private static MatchDAO dao = MockDAOFactory.getInstance().getMatchDAO();
       
     public Match(WordGuessParams params, Player player, Category category) {
     	//match params

@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.data.postgres.PostgresPlayerDAO;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
@@ -39,7 +39,7 @@ public class Player extends RegisteredUser implements Serializable {
 		//
 	}
 	
-	private static PlayerDAO dao = PostgresDAOFactory.getInstance().getPlayerDAO();
+	private static PlayerDAO dao = MockDAOFactory.getInstance().getPlayerDAO();
 	
 	public Player(String name, String surname, String username, String password, String email) {
 		initialize(name, surname, username, password);
