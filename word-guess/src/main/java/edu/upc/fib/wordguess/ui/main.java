@@ -14,8 +14,8 @@ public class main {
 
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				JugarPartidaController jpc = new JugarPartidaController();
-				jpc.inicialitza();
+				PlayMatchController jpc = new PlayMatchController();
+				jpc.initialize();
 			}
 		});
 	}
