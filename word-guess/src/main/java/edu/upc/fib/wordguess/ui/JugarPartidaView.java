@@ -1,5 +1,6 @@
 package edu.upc.fib.wordguess.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,6 +18,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import edu.upc.fib.wordguess.domain.model.Category;
 
@@ -62,19 +64,19 @@ public class JugarPartidaView extends JFrame {
 		lletres = new JTextField[numlletres];
 		
 		int x = numlletres/2;
-		x = 300 - (x*40); // meitat del panell - la meitat del tamany de la paraula
+		x = 300 - (x*50); // meitat del panell - la meitat del tamany de la paraula
 		if( (numlletres % 2) != 0 )
-			x = x-20; //si es imparell desplaco mitja
+			x = x-25; //si es imparell desplaco mitja
 		
 		for(int i=0;i<numlletres;i++) {
 			lletres[i]= new JTextField();
 			String pos = Integer.toString(i);
 			lletres[i].setText("");
 			lletres[i].setName(pos);
-			lletres[i].setBounds(x,175,40,40);
+			lletres[i].setBounds(x,180,45,45);
 			lletres[i].setHorizontalAlignment(JTextField.CENTER);
 			lletres[i].setBorder( BorderFactory.createLineBorder( new Color(0,0,0), 1 ));
-			lletres[i].setFont(new java.awt.Font("Tahoma",1,18));
+			lletres[i].setFont(new java.awt.Font("Tahoma",1,20));
 			lletres[i].addKeyListener(new KeyAdapter() {
 			      public void keyReleased(KeyEvent e) {
 
@@ -95,7 +97,7 @@ public class JugarPartidaView extends JFrame {
 			      }
 		    });
 			partenjoc.add(lletres[i]);//adiciono al contentpane
-			x=x+40;
+			x=x+50;
 		}
 	}
 	
@@ -104,7 +106,6 @@ public class JugarPartidaView extends JFrame {
 		private static final long serialVersionUID = 1L;
 		private JTextField tb_user;
 		private JPasswordField tb_pass;
-
 		public JLogin() {
 			setLayout(null);
 			
@@ -177,13 +178,13 @@ public class JugarPartidaView extends JFrame {
 			setLayout(null);
 			
 			// marcador puntucio actual
-			 lbPuntuacioActual = new JLabel("Punts:",SwingConstants.CENTER);
-			lbPuntuacioActual.setBounds(75, 30, 200, 30);
-			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",0,20));
-			Font f = lbPuntuacioActual.getFont();
-			Font boldfont = new Font(f.getFontName(),f.BOLD,f.getSize());
-			lbPuntuacioActual.setFont(boldfont);
-			lbPuntuacioActual.setBackground(Color.blue);
+			lbPuntuacioActual = new JLabel("Punts:",SwingConstants.CENTER);
+			lbPuntuacioActual.setBounds(75, 35, 200, 40);
+			lbPuntuacioActual.setFont(new java.awt.Font("Tahoma",1,20));
+			//Font f = lbPuntuacioActual.getFont();
+			//Font boldfont = new Font(f.getFontName(),f.BOLD,f.getSize());
+			//lbPuntuacioActual.setFont(boldfont);
+			lbPuntuacioActual.setBackground( new Color( 51, 102, 255 ) );
 			lbPuntuacioActual.setForeground(Color.white);
 			lbPuntuacioActual.setOpaque(true);
 			add(lbPuntuacioActual);
@@ -201,9 +202,9 @@ public class JugarPartidaView extends JFrame {
 			
 			//marcador errors
 			lbErrors = new JLabel("Errors 0 de X:",SwingConstants.CENTER);
-			lbErrors.setBounds(325, 30, 200, 30);
-			lbErrors.setFont(new java.awt.Font("Tahoma",0,20));
-			lbErrors.setFont(boldfont);
+			lbErrors.setBounds(325, 35, 200, 40);
+			lbErrors.setFont(new java.awt.Font("Tahoma",1,20));
+			//lbErrors.setFont(boldfont);
 			lbErrors.setBackground(Color.gray);
 			lbErrors.setForeground(Color.white);
 			lbErrors.setOpaque(true);
@@ -245,19 +246,19 @@ public class JugarPartidaView extends JFrame {
 			
 			//area missatges
 			lb_missatges1 = new JLabel("",SwingConstants.CENTER);
-			lb_missatges1.setBounds(100, 220, 400, 60);
+			lb_missatges1.setBounds(100, 240, 400, 30);
 			lb_missatges1.setHorizontalAlignment(SwingConstants.CENTER);
 			lb_missatges1.setVerticalAlignment(SwingConstants.CENTER);
-			lb_missatges1.setFont(new java.awt.Font("Tahoma",0,17));
+			lb_missatges1.setFont(new java.awt.Font("Tahoma",1,15));
 			add(lb_missatges1);
 			
 			//lbPuntsEncert
 			lb_PuntEncert = new JLabel("+10",SwingConstants.CENTER);
-			lb_PuntEncert.setBounds(175, 95, 250, 25);
+			lb_PuntEncert.setBounds(175, 105, 250, 25);
 			lb_PuntEncert.setFont(new java.awt.Font("Tahoma",1,16));
 			//lb_PuntEncert.setFont(boldfont);
 			//lb_PuntEncert.setBackground(Color.green);
-			lb_PuntEncert.setForeground(Color.green);
+			lb_PuntEncert.setForeground( new Color(0,133,0) );
 			lb_PuntEncert.setOpaque(true);
 			add(lb_PuntEncert);
 			
@@ -276,7 +277,7 @@ public class JugarPartidaView extends JFrame {
 			
 			//label puntsError
 			lb_PuntsError = new JLabel("-5",SwingConstants.CENTER);
-			lb_PuntsError.setBounds(175, 120, 250, 25);
+			lb_PuntsError.setBounds(175, 130, 250, 25);
 			lb_PuntsError.setFont(new java.awt.Font("Tahoma",1,16));
 			//lb_PuntsError.setFont(boldfont);
 			//lb_PuntsError.setBackground(Color.red);
@@ -308,9 +309,9 @@ public class JugarPartidaView extends JFrame {
 			});
 			
 			btn_AturarPartida.setBackground( new Color( 255, 172, 92) );
-			btn_AturarPartida.setBounds( 150 , 300, 100, 35);
+			btn_AturarPartida.setBounds( 150 , 290, 100, 35);
 			btn_AturarPartida.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
-			btn_AturarPartida.setBorder( BorderFactory.createLineBorder( new Color(255,123,11), 2 ));
+			btn_AturarPartida.setBorder( BorderFactory.createLineBorder( new Color(255,103,1), 2 ));
 			
 			btn_AturarPartida.setVisible(true);
 			add(btn_AturarPartida);
@@ -334,7 +335,7 @@ public class JugarPartidaView extends JFrame {
 			});
 			
 			btn_Comprovar.setBackground( new Color( 117, 255, 71) );
-			btn_Comprovar.setBounds(350, 300, 100, 35);
+			btn_Comprovar.setBounds(350, 290, 100, 35);
 			btn_Comprovar.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
 			btn_Comprovar.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
 			
@@ -343,7 +344,7 @@ public class JugarPartidaView extends JFrame {
 			
 			btn_TancarPartida = new JButton("Tancar");
 			btn_TancarPartida.setBackground( new Color( 255, 112, 112) );
-			btn_TancarPartida.setBounds( 250 , 300, 100, 35);
+			btn_TancarPartida.setBounds( 250 , 290, 100, 35);
 			btn_TancarPartida.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
 			btn_TancarPartida.setBorder( BorderFactory.createLineBorder( new Color(133,0,0), 2 ));
 			
