@@ -360,6 +360,7 @@ public class PlayMatchView extends JFrame {
 		matchPanel = new JPartidaEnJoc();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600 , 400);
+		this.setTitle("Word-guess 2014");
 		setContentPane(login);
 	}
 	
