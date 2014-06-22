@@ -111,27 +111,27 @@ public class PlayMatchView extends JFrame {
 			//label usuari
 			JLabel lb_user = new JLabel("Usuari");
 			lb_user.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_user.setBounds(210, 80, 150, 30);
+			lb_user.setBounds(160, 100, 150, 30);
 			lb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_user);
 			
 			//label contrasenya
 			JLabel lb_pass = new JLabel("Contrasenya");
 			lb_pass.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_pass.setBounds(210, 130, 130, 30);
+			lb_pass.setBounds(160, 150, 130, 30);
 			lb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_pass);
 			
 			//label imatge logo
 			JLabel lb_logo = new JLabel("");
-			lb_logo.setBounds(50, 50, 130, 130);
+			lb_logo.setBounds(-4, -2, 87, 87);
 			ImageIcon ImgIcon = new ImageIcon(getClass().getClassLoader().getResource("logoWG.png"));
 			lb_logo.setIcon(ImgIcon);
 			add(lb_logo);
 			
 			//textField username
 			tb_user = new JTextField();
-			tb_user.setBounds(380, 80, 130, 30);
+			tb_user.setBounds(320, 100, 130, 30);
 			tb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_user.setBackground( Color.LIGHT_GRAY );
 			tb_user.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
@@ -141,7 +141,7 @@ public class PlayMatchView extends JFrame {
 			
 			//textField contrasenya
 			tb_pass = new JPasswordField();
-			tb_pass.setBounds(380, 130, 130, 30);
+			tb_pass.setBounds(320, 150, 130, 30);
 			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_pass.setBackground( Color.lightGray );
 			tb_pass.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
@@ -150,7 +150,7 @@ public class PlayMatchView extends JFrame {
 			
 			//panell missatges
 			lb_messagesLoginPanel = new JLabel("",JLabel.CENTER);
-			lb_messagesLoginPanel.setBounds(150, 180, 300, 60);
+			lb_messagesLoginPanel.setBounds(150, 200, 300, 60);
 			lb_messagesLoginPanel.setHorizontalAlignment(SwingConstants.CENTER);
 			lb_messagesLoginPanel.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_messagesLoginPanel);
@@ -170,7 +170,7 @@ public class PlayMatchView extends JFrame {
 				}
 			});
 			btn_login.setBackground( new Color( 117, 255, 71) );
-			btn_login.setBounds(250, 250, 100, 35);
+			btn_login.setBounds(250, 270, 100, 35);
 			btn_login.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
 			btn_login.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
 			add(btn_login);
@@ -185,10 +185,17 @@ public class PlayMatchView extends JFrame {
 		public JPartidaEnJoc() {
 			setLayout(null);
 			
+			//label imatge logo
+			JLabel lb_logo = new JLabel("");
+			lb_logo.setBounds(-4, -2, 87, 87);
+			ImageIcon ImgIcon = new ImageIcon(getClass().getClassLoader().getResource("logoWG.png"));
+			lb_logo.setIcon(ImgIcon);
+			add(lb_logo);
+			
 			// marcador puntucio actual
 			lb_currentPoints = new JLabel("Punts:",SwingConstants.CENTER);
-			lb_currentPoints.setBounds(75, 35, 200, 40);
-			lb_currentPoints.setFont(new java.awt.Font("Tahoma",1,20));
+			lb_currentPoints.setBounds(102, 62, 172, 35);
+			lb_currentPoints.setFont(new java.awt.Font("Tahoma",1,18));
 			lb_currentPoints.setBackground( new Color( 51, 102, 255 ) );
 			lb_currentPoints.setForeground(Color.white);
 			lb_currentPoints.setOpaque(true);
@@ -196,8 +203,8 @@ public class PlayMatchView extends JFrame {
 			
 			//marcador errors
 			lb_ErrorCounter = new JLabel("Errors 0 de X:",SwingConstants.CENTER);
-			lb_ErrorCounter.setBounds(325, 35, 200, 40);
-			lb_ErrorCounter.setFont(new java.awt.Font("Tahoma",1,20));
+			lb_ErrorCounter.setBounds(323, 62, 172, 35);
+			lb_ErrorCounter.setFont(new java.awt.Font("Tahoma",1,18));
 			//lbErrors.setFont(boldfont);
 			lb_ErrorCounter.setBackground(Color.gray);
 			lb_ErrorCounter.setForeground(Color.white);
@@ -214,15 +221,15 @@ public class PlayMatchView extends JFrame {
 			
 			//lbPuntsEncert
 			lb_pointsPerCorrectLetter = new JLabel("+10",SwingConstants.CENTER);
-			lb_pointsPerCorrectLetter.setBounds(175, 105, 250, 25);
-			lb_pointsPerCorrectLetter.setFont(new java.awt.Font("Tahoma",1,16));
+			lb_pointsPerCorrectLetter.setBounds(175, 115, 250, 25);
+			lb_pointsPerCorrectLetter.setFont(new java.awt.Font("Tahoma",1,14));
 			lb_pointsPerCorrectLetter.setForeground( new Color(0,133,0) );
 			lb_pointsPerCorrectLetter.setOpaque(true);
 			add(lb_pointsPerCorrectLetter);
 			
 			lb_PointsPerError = new JLabel("-5",SwingConstants.CENTER);
-			lb_PointsPerError.setBounds(175, 130, 250, 25);
-			lb_PointsPerError.setFont(new java.awt.Font("Tahoma",1,16));
+			lb_PointsPerError.setBounds(175, 140, 250, 25);
+			lb_PointsPerError.setFont(new java.awt.Font("Tahoma",1,14));
 			//lb_PuntsError.setFont(boldfont);
 			//lb_PuntsError.setBackground(Color.red);
 			lb_PointsPerError.setForeground(Color.red);
@@ -294,7 +301,15 @@ public class PlayMatchView extends JFrame {
 		/**Pantalla corresponent a seleccionar una categoria de paraules per tal de que la partida
 		 *sigui creada amb una paraula random de les corresponents a la categoria escollida*/
 		public JSelcat() {
-			setLayout(null);	
+			setLayout(null);
+			
+			//label imatge logo
+			JLabel lb_logo = new JLabel("");
+			lb_logo.setBounds(-4, -2, 87, 87);
+			ImageIcon ImgIcon = new ImageIcon(getClass().getClassLoader().getResource("logoWG.png"));
+			lb_logo.setIcon(ImgIcon);
+			add(lb_logo);
+			
 			//label seleccionar categoria
 			JLabel lb_Selcat = new JLabel("Tria una categoria:");
 			lb_Selcat.setFont(new java.awt.Font("Tahoma",0,20));
@@ -311,7 +326,7 @@ public class PlayMatchView extends JFrame {
 			
 			//label missatge
 			lb_messagesCategoriesPanel = new JLabel("",JLabel.CENTER);
-			lb_messagesCategoriesPanel.setBounds(100, 170, 400, 80 );
+			lb_messagesCategoriesPanel.setBounds(100, 170, 400, 40 );
 			lb_messagesCategoriesPanel.setHorizontalAlignment(SwingConstants.CENTER);
 			lb_messagesCategoriesPanel.setFont(new java.awt.Font("Tahoma",0,17));
 			add(lb_messagesCategoriesPanel);
@@ -327,7 +342,7 @@ public class PlayMatchView extends JFrame {
 				}
 			});
 			btn_logout.setBackground( new Color( 255, 92, 92) );
-			btn_logout.setBounds( 150 , 300, 100, 35);
+			btn_logout.setBounds( 150 , 280, 100, 35);
 			btn_logout.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
 			btn_logout.setBorder( BorderFactory.createLineBorder( new Color(133,0,0), 2 ));
 			add(btn_logout);
@@ -344,7 +359,7 @@ public class PlayMatchView extends JFrame {
 			});
 
 			btn_startMatch.setBackground( new Color( 92, 92, 255) );
-			btn_startMatch.setBounds( 350 , 300, 100, 35);
+			btn_startMatch.setBounds( 350 , 280, 100, 35);
 			btn_startMatch.setFont(new java.awt.Font("Tahoma", Font.BOLD, 16));
 			btn_startMatch.setBorder( BorderFactory.createLineBorder( new Color(0,0,133), 2 ));
 			add(btn_startMatch);
