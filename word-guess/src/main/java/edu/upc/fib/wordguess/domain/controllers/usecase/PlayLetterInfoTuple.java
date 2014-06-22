@@ -1,5 +1,12 @@
 package edu.upc.fib.wordguess.domain.controllers.usecase;
 
+/**
+ * Tuple-like class, to store the information returned
+ * when a new match is created, to be sent to UI components.
+ * 
+ * For the sake of simplicity, all members are public, but final,
+ * so no modification is possible afterwards.
+ */
 public final class PlayLetterInfoTuple {
 
 	public final boolean success;

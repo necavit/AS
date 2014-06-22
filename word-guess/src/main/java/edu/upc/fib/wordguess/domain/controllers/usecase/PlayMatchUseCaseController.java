@@ -21,6 +21,9 @@ import edu.upc.fib.wordguess.service.exception.NoSuchServiceException;
 import edu.upc.fib.wordguess.service.notification.NotificationService;
 import edu.upc.fib.wordguess.util.Log;
 
+/**
+ *
+ */
 
 public class PlayMatchUseCaseController {
 	
@@ -46,6 +49,14 @@ public class PlayMatchUseCaseController {
 		//
 	}
 	
+	/**
+	 * play a letter and check the match values, so if the user wins, the user receives an
+	 * email with the information of the match played 
+	 * 
+	 * @param position
+	 * @param letter
+	 * @return
+	 */
 	public PlayLetterInfoTuple playLetter(int position, char letter) {
 		Log.debug(TAG, "play letter: " + letter);
 		boolean success = match.play(position, letter);
@@ -70,6 +81,16 @@ public class PlayMatchUseCaseController {
 									   match.getScore(), match.getNumErrors());
 	}
 	
+	/**
+	 * uses the login transaction controller to autenticate a user, it throws the
+	 * possible exceptions the loginTransaction may throw
+	 * 
+	 * @param username
+	 * @param pass
+	 * @return
+	 * @throws PlayerNotExistsException
+	 * @throws InvalidPasswordException
+	 */
 	public boolean authenticate(String username, String pass) throws PlayerNotExistsException, InvalidPasswordException {
 		Log.debug(TAG, "authenticate username: " + username);
 		this.username = username;
@@ -77,6 +98,13 @@ public class PlayMatchUseCaseController {
 		return login.execute();
 	}
 	
+	
+	/**
+	 * given the name of a category, it creates a match with its player, word and letterboxes 
+	 * 
+	 * @param categoryName
+	 * @return
+	 */
 	public MatchInfoTuple createMatch(String categoryName) {
 		Log.debug(TAG, "create match for category: " + categoryName);
 		DAOFactory daoFactory = MockDAOFactory.getInstance();
@@ -110,18 +138,30 @@ public class PlayMatchUseCaseController {
 		return match.getMatchInfoTuple();
 	}
 	
+	
+	/**
+	 * 
+	 * @return all the catgories of the system
+	 */
 	public List<Category> fetchCategories() {
 		Log.debug(TAG, "fetch categories");
 		FetchCategoriesTransaction fetchCategories = new FetchCategoriesTransaction();
 		return fetchCategories.execute();
 	}
 	
+	/**
+	 * 
+	 * @return the word of the match
+	 */
 	public String getMatchWord() {
 		String matchWord = match.getWordName();
 		Log.debug(TAG, "match word: " + matchWord);
 		return matchWord;
 	}
 	
+	/**
+	 * set the match as finished
+	 */
 	public void stopMatch() {
 		Log.debug(TAG, "stop match");
 		this.match.stop();

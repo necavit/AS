@@ -8,7 +8,7 @@ import edu.upc.fib.wordguess.domain.model.Category;
 
 /*
  *aquesta classe hereda de transaccio i l'implementa mab les funcionalitats del
- *controlador de llistar les categories del sitema
+ *controlador de llistar les categories del sistema
  */
 
 public class FetchCategoriesTransaction implements Transaction< List<Category> > {
