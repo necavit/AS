@@ -36,12 +36,8 @@ public class PlayMatchView extends JFrame {
 	JLabel lb_messagesCategoriesPanel;
 	JLabel lb_pointsPerCorrectLetter;
 	JLabel lb_PointsPerError;
-	//JLabel lbNumErrors1;
-	//JLabel lbNumErrors2;
-	//JLabel lbNumErrors3;
 	JLabel lb_currentPoints;
 	JLabel lb_ErrorCounter;
-	//JLabel lbPunts;
 	JButton btn_startMatch;
 	JButton btn_CheckLetter;
 	JButton btn_stopMatch;
@@ -181,24 +177,10 @@ public class PlayMatchView extends JFrame {
 			lb_currentPoints = new JLabel("Punts:",SwingConstants.CENTER);
 			lb_currentPoints.setBounds(75, 35, 200, 40);
 			lb_currentPoints.setFont(new java.awt.Font("Tahoma",1,20));
-			//Font f = lbPuntuacioActual.getFont();
-			//Font boldfont = new Font(f.getFontName(),f.BOLD,f.getSize());
-			//lbPuntuacioActual.setFont(boldfont);
 			lb_currentPoints.setBackground( new Color( 51, 102, 255 ) );
 			lb_currentPoints.setForeground(Color.white);
 			lb_currentPoints.setOpaque(true);
-			add(lb_currentPoints);
-		
-			/*puntuaci� actual
-			lbPunts = new JLabel("0",SwingConstants.CENTER);
-			lbPunts.setBounds(31, 72, 250, 30);
-			lbPunts.setFont(new java.awt.Font("Tahoma",0,20));
-			lbPunts.setFont(boldfont);
-			lbPunts.setBackground(Color.blue);
-			lbPunts.setForeground(Color.white);
-			lbPunts.setOpaque(true);
-			add(lbPunts);
-			*/
+			add(lb_currentPoints);		
 			
 			//marcador errors
 			lb_ErrorCounter = new JLabel("Errors 0 de X:",SwingConstants.CENTER);
@@ -209,40 +191,6 @@ public class PlayMatchView extends JFrame {
 			lb_ErrorCounter.setForeground(Color.white);
 			lb_ErrorCounter.setOpaque(true);
 			add(lb_ErrorCounter);
-		
-			
-			/* LABELS COORESPONENT AL NUMERO D'ERRORS */
-			
-			/*
-			lbNumErrors1 = new JLabel("0",SwingConstants.CENTER);
-			lbNumErrors1.setBounds(326, 72, 63, 30);
-			lbNumErrors1.setFont(new java.awt.Font("Tahoma",0,20));
-			lbNumErrors1.setFont(boldfont);
-			lbNumErrors1.setBackground(Color.gray);
-			lbNumErrors1.setForeground(Color.white);
-			lbNumErrors1.setOpaque(true);
-			add(lbNumErrors1);
-			
-			//del total
-			lbNumErrors2 = new JLabel(" de ",SwingConstants.CENTER);
-			lbNumErrors2.setBounds(389, 72, 127, 30);
-			lbNumErrors2.setFont(new java.awt.Font("Tahoma",0,20));
-			lbNumErrors2.setFont(boldfont);
-			lbNumErrors2.setBackground(Color.gray);
-			lbNumErrors2.setForeground(Color.white);
-			lbNumErrors2.setOpaque(true);
-			add(lbNumErrors2);
-			
-			lbNumErrors3 = new JLabel("3",SwingConstants.CENTER);
-			lbNumErrors3.setBounds(516, 72, 63, 30);
-			lbNumErrors3.setFont(new java.awt.Font("Tahoma",0,20));
-			lbNumErrors3.setFont(boldfont);
-			lbNumErrors3.setBackground(Color.gray);
-			lbNumErrors3.setForeground(Color.white);
-			lbNumErrors3.setOpaque(true);
-			add(lbNumErrors3);
-			*/
-			/* ***************************************** */
 			
 			//area missatges
 			lb_messagesMatchPanel = new JLabel("",SwingConstants.CENTER);
@@ -256,26 +204,10 @@ public class PlayMatchView extends JFrame {
 			lb_pointsPerCorrectLetter = new JLabel("+10",SwingConstants.CENTER);
 			lb_pointsPerCorrectLetter.setBounds(175, 105, 250, 25);
 			lb_pointsPerCorrectLetter.setFont(new java.awt.Font("Tahoma",1,16));
-			//lb_PuntEncert.setFont(boldfont);
-			//lb_PuntEncert.setBackground(Color.green);
 			lb_pointsPerCorrectLetter.setForeground( new Color(0,133,0) );
 			lb_pointsPerCorrectLetter.setOpaque(true);
 			add(lb_pointsPerCorrectLetter);
 			
-			
-			//label encert
-			/*
-			JLabel lb_Encerts = new JLabel("Encert",SwingConstants.CENTER);
-			lb_Encerts.setBounds(103, 113, 181, 30);
-			lb_Encerts.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_Encerts.setFont(boldfont);
-			lb_Encerts.setBackground(Color.green);
-			lb_Encerts.setForeground(Color.white);
-			lb_Encerts.setOpaque(true);
-			add(lb_Encerts);
-			*/
-			
-			//label puntsError
 			lb_PointsPerError = new JLabel("-5",SwingConstants.CENTER);
 			lb_PointsPerError.setBounds(175, 130, 250, 25);
 			lb_PointsPerError.setFont(new java.awt.Font("Tahoma",1,16));
@@ -284,19 +216,7 @@ public class PlayMatchView extends JFrame {
 			lb_PointsPerError.setForeground(Color.red);
 			lb_PointsPerError.setOpaque(true);
 			add(lb_PointsPerError);
-			
-			//label fallada
-			/*
-			JLabel lb_Errors = new JLabel("Fallada",SwingConstants.CENTER);
-			lb_Errors.setBounds(398, 113, 181, 30);
-			lb_Errors.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_Errors.setFont(boldfont);
-			lb_Errors.setBackground(Color.red);
-			lb_Errors.setForeground(Color.white);
-			lb_Errors.setOpaque(true);
-			add(lb_Errors);
-			*/
-			
+				
 			//boto aturar partida
 			btn_stopMatch = new JButton("Aturar");
 			btn_stopMatch.addActionListener(new ActionListener() {
@@ -359,11 +279,8 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public class JSelcat extends JPanel {
-
-		
 		public JSelcat() {
-			setLayout(null);
-			
+			setLayout(null);	
 			//label seleccionar categoria
 			JLabel lb_Selcat = new JLabel("Tria una categoria:");
 			lb_Selcat.setFont(new java.awt.Font("Tahoma",0,20));
