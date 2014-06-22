@@ -98,7 +98,8 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public class JLogin extends JPanel {
-
+		/**Pantalla corresponent al login del sistema, és la primera pantalla que es mostra al iniciar 
+		 *el programa*/
 		private static final long serialVersionUID = 1L;
 		private JTextField tb_user;
 		private JPasswordField tb_pass;
@@ -169,7 +170,9 @@ public class PlayMatchView extends JFrame {
 	
 	
 	public class JPartidaEnJoc extends JPanel {
-					
+	   /**Pantalla corresponent a la partida que s'està jugant
+		* Mostra puntuació actual, num errors i les caselles per tal d'endevinar la paraula, 
+		* a més apareixaràn els botons: comprovar, aturar partida i tancar partida*/
 		public JPartidaEnJoc() {
 			setLayout(null);
 			
@@ -279,6 +282,8 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public class JSelcat extends JPanel {
+		/**Pantalla corresponent a seleccionar una categoria de paraules per tal de que la partida
+		 *sigui creada amb una paraula random de les corresponents a la categoria escollida*/
 		public JSelcat() {
 			setLayout(null);	
 			//label seleccionar categoria
@@ -350,6 +355,7 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public void loadCategories(List<Category> categories) {
+		/**Carrega les categories dins del combobox corresponent*/
 		cBox_Categories.removeAllItems();
 		for (Category category : categories) {
 			cBox_Categories.addItem(category.getName());
@@ -357,6 +363,7 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public void showMessage(String text,int panelNumber) {
+		/**Mostra un missatge al label corresponent en funció de la pantalla indicada*/
 		if(panelNumber==0) {
 			//Pantalla de Login
 			lb_messagesLoginPanel.setText(text);
@@ -376,6 +383,8 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public void loadPointsPer(int en, int err) {
+		/**Mostra la quantitat de punts per error i punt per encert definit prèviament a 
+		  l'estratègia que se l'hi ha aplicat a la partida*/
 		String encert = Integer.toString(en);
 		String error = Integer.toString(err);
 		lb_pointsPerCorrectLetter.setText("Punts per encert: +"+encert);
@@ -383,46 +392,47 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public void updateCurrentScoring(int points) {
+		/**Actualitza la puntuació actual*/
 		String Spoints = Integer.toString(points);
 		lb_currentPoints.setText("Punts: \n"+ Spoints);
 	}
 		
 	public void updateErrorCount(int ea,int nme) {
-		
+		/**Actualitza la quantitat d'errors actuals respecte el nombre màxim d'errors permesos*/
 		this.maxErrors = nme;
 		String errActuals = Integer.toString(ea);
 		String numMaxErr = Integer.toString(nme);
 		this.lb_ErrorCounter.setText("Errors : "+ea+" de "+maxErrors);
-		//lbNumErrors1.setText(errActuals);
-		//lbNumErrors3.setText(numMaxErr);
 	}
 	public void updateErrors(int ea) {
+		/**Actualitza la quantitat d'errors actuals respecte el nombre màxim d'errors permesos*/
 		String errActuals = Integer.toString(ea);
-		//lbNumErrors1.setText(errActuals);
 		lb_ErrorCounter.setText("Errors : "+ea+" de "+maxErrors );
 	}
 	
-	public void mostraLletra(char lletra,int pos) {
-		
-	}
-	
 	public void emptyLetterBoxes() {
+		/**Buidar el text corresponent a les caselles de la partida*/
 		for(int i=0; i < letters.length; ++i ) {
 			letters[i].setText("");
 		}
 	}
 	
 	public void stopMatch() {
+		/**Funció corresponent al event de click sobre el botó "Aturar Partida"*/
 		emptyLetterBoxes();
 		setContentPane(login);
 		login.updateUI();
 	}
 	
 	public void close() {
+		/**Funció corresponent al event de click sobre el botó "Tancar Partida"*/
 		System.exit(-1);
 	}
 	
 	public void finishMatch(boolean guanyada) {
+		/**Quan una partida és finalitzada, pot ser que o bé hagui guanyat o bé hagui superat
+		  la quantitat maxima d'errors permesos, en funció d'aquestes possibilitats actualitzem
+		  els labels de missatges i l'aparició o no, del botons corresponents a l'interface*/
 		this.matchWon = guanyada;
 		if (guanyada) {
 			lb_messagesMatchPanel.setForeground( new Color( 0, 113, 0 ) );
@@ -435,6 +445,8 @@ public class PlayMatchView extends JFrame {
 	}
 	
 	public void markLetterBox(boolean encert) {
+		/**Pinta la casella corresponent de color verd o vermell en funció de si en aquesta casella
+		  s'ha produït un encert o una fallada*/
 		if(encert) {
 			letters[index].setBackground(Color.green);
 		}
