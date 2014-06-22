@@ -15,9 +15,9 @@ import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
 import edu.upc.fib.wordguess.service.ServiceLocator;
-import edu.upc.fib.wordguess.service.exception.NoSuchServiceException;
 import edu.upc.fib.wordguess.service.notification.NotificationService;
 import edu.upc.fib.wordguess.util.Log;
 
@@ -134,8 +134,19 @@ public class PlayMatchUseCaseController {
 		ParamsDAO paramsDAO = daoFactory.getParamsDAO();
 		WordGuessParams params = paramsDAO.getParams();
 		
-		match = new Match(params, player, category);
-		return match.getMatchInfoTuple();
+		Word word = category.getRandomWord();
+		
+		try {
+			match = new Match(params, player, word);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (match != null) {
+			return match.getMatchInfoTuple();
+		}
+		else {
+			return null;
+		}
 	}
 	
 	

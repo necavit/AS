@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategy;
 import edu.upc.fib.wordguess.domain.model.strategy.ScoringStrategyFactory;
@@ -41,8 +42,10 @@ public class Match implements Serializable {
     @Column
     private boolean isWon;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="word_id")
     private Word word;
+    public static final String MAPPED_BY_WORD = "word";
     
     public static final String PLAYER = "player";
     @ManyToOne
@@ -60,9 +63,9 @@ public class Match implements Serializable {
     	
     }
 	
-    private static MatchDAO dao = MockDAOFactory.getInstance().getMatchDAO();
+    private static MatchDAO dao = PostgresDAOFactory.getInstance().getMatchDAO();
       
-    public Match(WordGuessParams params, Player player, Category category) {
+    public Match(WordGuessParams params, Player player, Word word) throws Exception {
     	//match params
     	matchId = params.getNextMatchId();
 		Log.debug("new Match", "matchId: " + matchId);
@@ -82,7 +85,12 @@ public class Match implements Serializable {
 		strategy = ScoringStrategyFactory.buildStrategy(wonMatchesCount);
 		
 		//get word
-		this.word = category.getRandomWord();
+		this.word = word;
+		try {
+			word.addMatch(this);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		//build letter boxes
 		letterBoxes = new ArrayList<LetterBox>();
@@ -90,64 +98,44 @@ public class Match implements Serializable {
         	letterBoxes.add(new LetterBox(matchId, i, word.getName().charAt(i)));
         }
 		
-    	try {
-			dao.store(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    	dao.store(this);
 	}
 
     public int getMatchId() {
         return matchId;
     }
 
-    public void setMatchId(int matchId) {
+    public void setMatchId(int matchId) throws Exception {
         this.matchId = matchId;
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
     
     public Player getPlayer() {
 		return player;
 	}
     
-    public void setPlayer(Player player) {
+    public void setPlayer(Player player) throws Exception {
 		this.player = player;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		dao.update(this);
 	}
 
     public int getNumErrors() {
         return numErrors;
     }
 
-    public void setNumErrors(int numErrors) {
+    public void setNumErrors(int numErrors) throws Exception {
         this.numErrors = numErrors;
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
 
     public boolean isFinished() {
         return isFinished;
     }
 
-    public void setFinished(boolean isFinished) {
+    public void setFinished(boolean isFinished) throws Exception {
     	Log.debug("match", "isFinished: " + isFinished);
     	this.isFinished = isFinished;
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        dao.update(this);
         if (isFinished) {
         	player.setCurrentMatch(null);
         	player.addPlayedMatch(this);
@@ -158,40 +146,28 @@ public class Match implements Serializable {
         return isWon;
     }
 
-    public void setWon(boolean isWon) {
+    public void setWon(boolean isWon) throws Exception {
     	Log.debug("match", "isWon: " + isWon);
         this.isWon = isWon;
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
 
     public Word getWord() {
         return word;
     }
 
-    public void setWord(Word word) {
+    public void setWord(Word word) throws Exception {
         this.word = word;
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
 
 	public List<LetterBox> getLetterBoxes() {
 		return letterBoxes;
 	}
 	
-	public void setLetterBoxes(List<LetterBox> letterBoxes) {
+	public void setLetterBoxes(List<LetterBox> letterBoxes) throws Exception {
 		this.letterBoxes = letterBoxes;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		dao.update(this);
 	}
 
 	public String getWordName() {
@@ -214,7 +190,11 @@ public class Match implements Serializable {
     		checkMatchWon();
     	}
     	else {
-    		setNumErrors(getNumErrors() + 1);
+    		try {
+				setNumErrors(getNumErrors() + 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
     		checkMatchLost();
     	}
     	return success;
@@ -229,19 +209,31 @@ public class Match implements Serializable {
 			}
 		}
 		if (won) {
-			setWon(true);
-			setFinished(true);
+			try {
+				setWon(true);
+				setFinished(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	private void checkMatchLost() {
 		if (numErrors > maximumErrorCount) {
-			setFinished(true);
-			setWon(false);
+			try {
+				setFinished(true);
+				setWon(false);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void stop() {
-		setFinished(true);
+		try {
+			setFinished(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
