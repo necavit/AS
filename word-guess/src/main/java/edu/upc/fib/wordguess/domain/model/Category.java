@@ -8,19 +8,19 @@ import java.util.Random;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.HibernateException;
-
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 
+/**
+ * Classe java corresponent a la classe "Category" del model de classes de domini
+ * */
 @Entity
 @Table(name=Category.TABLE)
 public class Category implements Serializable {
-	/**
-	 * Classe java corresponent a la classe "Category" del model de classes de domini
-	 * */
+	
 	private static final long serialVersionUID = 7847291535698838393L;
 
 	public static final String TABLE = "category";
@@ -29,6 +29,7 @@ public class Category implements Serializable {
 	@Column
 	private String name;
 	
+	@OneToMany(mappedBy=Word.MAPPED_BY_CATEGORY)
 	private List<Word> words;
 	
 	/**
@@ -40,31 +41,21 @@ public class Category implements Serializable {
 		//
 	}
 	
-	private static CategoryDAO dao = MockDAOFactory.getInstance().getCategoryDAO();
+	private static CategoryDAO dao = PostgresDAOFactory.getInstance().getCategoryDAO();
 	
-	public Category(String name) throws HibernateException {
+	public Category(String name) throws Exception {
 		this.name = name;
 		this.words = new ArrayList<Word>();
-		try {
-			dao.store(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.store(this);
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
 		this.name = name;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.update(this);
 	}
 	
 	public List<Word> getWords() {
@@ -75,14 +66,9 @@ public class Category implements Serializable {
 		this.words = words;
 	}
 
-	public void addWord(Word word) {
+	public void addWord(Word word) throws Exception {
 		this.words.add(word);
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.update(this);
 	}
 	
 	public void deleteWord(Word word) {

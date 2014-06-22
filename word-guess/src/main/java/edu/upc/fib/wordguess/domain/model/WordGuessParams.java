@@ -12,7 +12,7 @@ import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 @Table(name=WordGuessParams.TABLE)
 public class WordGuessParams {
 	/**
-	 * Classe java corresponent a la classe "Paràmetres" del model de classes de domini
+	 * Classe java corresponent a la classe "Parï¿½metres" del model de classes de domini
 	 * */
 	public static final String TABLE = "word_guess_params";
 	
@@ -32,14 +32,10 @@ public class WordGuessParams {
 	
 	private static ParamsDAO dao = MockDAOFactory.getInstance().getParamsDAO();
 	
-	public WordGuessParams(int maxErrorsCount, int nextMatchId) {
+	public WordGuessParams(int maxErrorsCount, int nextMatchId) throws Exception {
 		this.maxErrorsCount = maxErrorsCount;
 		this.nextMatchId = nextMatchId;
-		try {
-			dao.store(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		dao.store(this);
 	}
 	
 	public int getMaxErrorsCount() {
@@ -61,7 +57,7 @@ public class WordGuessParams {
 		return next;
 	}
 	
-	public void setNextMatchId(int nextMatchId) {
+	private void setNextMatchId(int nextMatchId) {
 		this.nextMatchId = nextMatchId;
 		try {
 			dao.update(this);

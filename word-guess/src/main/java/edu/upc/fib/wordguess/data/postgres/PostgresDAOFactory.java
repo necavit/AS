@@ -85,8 +85,8 @@ public class PostgresDAOFactory implements DAOFactory {
 	
 	@Override
 	public ParamsDAO getParamsDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		if (paramsDAO == null) paramsDAO = new PostgresParamsDAO();
+		return paramsDAO;
 	}
 
 }

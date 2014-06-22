@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.HibernateException;
-
 import edu.upc.fib.wordguess.data.dao.WordDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
-import edu.upc.fib.wordguess.util.HibernateUtil;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 
+/**
+ * Classe java corresponent a la classe "Paraula" del model de classes de domini
+ * */
 @Entity
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
-	/**
-	 * Classe java corresponent a la classe "Paraula" del model de classes de domini
-	 * */
+	
     private static final long serialVersionUID = -7024212638179206833L;
     public static final String TABLE = "word";
 
@@ -30,8 +30,10 @@ public class Word implements Serializable {
     @Column
     private int numLetters;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="category_id")
     private Category category;
+    public static final String MAPPED_BY_CATEGORY = "category";
     
     /**
      * WARNING! Never use this constructor!
@@ -42,34 +44,24 @@ public class Word implements Serializable {
     	//empty constructor for Hibernate to work
     }
     
-    private static WordDAO dao = MockDAOFactory.getInstance().getWordDAO();
+    private static WordDAO dao = PostgresDAOFactory.getInstance().getWordDAO();
     
-    public Word(String name, Category category) throws HibernateException {
+    public Word(String name, Category category) throws Exception {
         this.name = name;
         this.numLetters = name.length();
         this.category = category;
         category.addWord(this);
-        try {
-			dao.store(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        dao.store(this);
     }
 
     public String getName() {
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
         this.name = name;
         this.numLetters = name.length();
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
 
     public int getNumLetters() {
@@ -80,13 +72,10 @@ public class Word implements Serializable {
 		return category;
 	}
     
-    public void setCategory(Category category) {
-		this.category = category;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public void setCategory(Category category) throws Exception {
+		this.category.deleteWord(this);
+    	this.category = category;
+    	category.addWord(this);
+		dao.update(this);
 	}
 }
