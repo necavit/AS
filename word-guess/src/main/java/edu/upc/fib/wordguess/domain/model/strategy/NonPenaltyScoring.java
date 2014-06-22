@@ -4,7 +4,12 @@ import edu.upc.fib.wordguess.domain.model.LetterBox;
 import edu.upc.fib.wordguess.domain.model.Match;
 
 public class NonPenaltyScoring implements ScoringStrategy {
-
+	
+	@Override
+	public StrategyValue getValue() {
+		return StrategyValue.nonpenalty;
+	}
+	
 	@Override
 	public int getScoreOnSuccess() {
 		return 1;

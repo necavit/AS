@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,7 +30,8 @@ public class Category implements Serializable {
 	@Column
 	private String name;
 	
-	@OneToMany(mappedBy=Word.MAPPED_BY_CATEGORY)
+	@OneToMany(mappedBy=Word.MAPPED_BY_CATEGORY,
+			fetch=FetchType.EAGER)
 	private List<Word> words;
 	
 	/**

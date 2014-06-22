@@ -6,14 +6,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.ParamsDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 
+
+/**
+ * Classe java corresponent a la classe "Parametres" del model de classes de domini
+ * */
 @Entity
 @Table(name=WordGuessParams.TABLE)
 public class WordGuessParams {
-	/**
-	 * Classe java corresponent a la classe "Par�metres" del model de classes de domini
-	 * */
+	
 	public static final String TABLE = "word_guess_params";
 	
 	@Id
@@ -30,7 +32,7 @@ public class WordGuessParams {
 		//
 	}
 	
-	private static ParamsDAO dao = MockDAOFactory.getInstance().getParamsDAO();
+	private static ParamsDAO dao = PostgresDAOFactory.getInstance().getParamsDAO();
 	
 	public WordGuessParams(int maxErrorsCount, int nextMatchId) throws Exception {
 		this.maxErrorsCount = maxErrorsCount;
@@ -68,6 +70,10 @@ public class WordGuessParams {
 
 	public String getId() {
 		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

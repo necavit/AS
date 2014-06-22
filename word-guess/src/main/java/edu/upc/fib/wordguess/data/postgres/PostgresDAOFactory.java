@@ -2,6 +2,7 @@ package edu.upc.fib.wordguess.data.postgres;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
+import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
@@ -32,6 +33,8 @@ public class PostgresDAOFactory implements DAOFactory {
 	private RegisteredUserDAO registeredUserDAO = null;
 
 	private ParamsDAO paramsDAO = null;
+
+	private PostgresLetterBoxDAO letterBoxDAO = null;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
@@ -87,6 +90,12 @@ public class PostgresDAOFactory implements DAOFactory {
 	public ParamsDAO getParamsDAO() {
 		if (paramsDAO == null) paramsDAO = new PostgresParamsDAO();
 		return paramsDAO;
+	}
+	
+	@Override
+	public LetterBoxDAO getLetterBoxDAO() {
+		if (letterBoxDAO == null) letterBoxDAO  = new PostgresLetterBoxDAO();
+		return letterBoxDAO;
 	}
 
 }

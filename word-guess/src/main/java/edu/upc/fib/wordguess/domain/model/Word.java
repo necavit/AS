@@ -33,7 +33,7 @@ public class Word implements Serializable {
     @Column
     private int numLetters;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="category_id")
     private Category category;
     public static final String MAPPED_BY_CATEGORY = "category";
@@ -57,8 +57,8 @@ public class Word implements Serializable {
         this.numLetters = name.length();
         this.category = category;
         this.matches = new ArrayList<Match>();
-        category.addWord(this);
         dao.store(this);
+        category.addWord(this);
     }
 
     public String getName() {

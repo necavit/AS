@@ -15,8 +15,13 @@ public class PostgresParamsDAO extends PostgresGenericDAO<WordGuessParams> imple
 	public List<WordGuessParams> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<WordGuessParams> params = (List<WordGuessParams>) session.createQuery("from " + WordGuessParams.TABLE).list();
-				
+		List<WordGuessParams> params = null;
+		try {
+			params = (List<WordGuessParams>) session.createQuery("from " + WordGuessParams.class.getSimpleName()).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		session.close();
 		
 		return params;

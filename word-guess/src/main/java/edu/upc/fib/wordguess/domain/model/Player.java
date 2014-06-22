@@ -6,20 +6,21 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
-import edu.upc.fib.wordguess.data.postgres.PostgresPlayerDAO;
-import edu.upc.fib.wordguess.util.HibernateUtil;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 
+/**
+ * Classe java corresponent a la classe "Jugador" del model de classes de domini
+ * */
 @Entity
 @Table(name=Player.TABLE_PLAYER)
 public class Player extends RegisteredUser implements Serializable {
-	/**
-	 * Classe java corresponent a la classe "Jugador" del model de classes de domini
-	 * */
+	
 	private static final long serialVersionUID = 2249987917128104143L;
 
 	public static final String TABLE_PLAYER = "player";
@@ -27,9 +28,10 @@ public class Player extends RegisteredUser implements Serializable {
 	@Column(nullable=false)
 	private String email;
 	
+	@OneToOne
 	private Match currentMatch;
 	
-	@OneToMany(mappedBy=Match.PLAYER)
+	@OneToMany(mappedBy=Match.MAPPED_BY_PLAYER, fetch=FetchType.EAGER)
 	private List<Match> playedMatches;
 	
 	/**
@@ -41,43 +43,29 @@ public class Player extends RegisteredUser implements Serializable {
 		//
 	}
 	
-	private static PlayerDAO dao = MockDAOFactory.getInstance().getPlayerDAO();
+	private static PlayerDAO dao = PostgresDAOFactory.getInstance().getPlayerDAO();
 	
-	public Player(String name, String surname, String username, String password, String email) {
+	public Player(String name, String surname, String username, String password, String email) throws Exception {
 		initialize(name, surname, username, password);
 		this.email = email;
 		this.playedMatches = new ArrayList<Match>();
-		
-		try {
-			dao.store(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.currentMatch = null;
+		dao.store(this);
 	}
 	
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) throws Exception {
 		this.email = email;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.update(this);
 	}
 	
-	public void addPlayedMatch(Match match) {
+	public void addPlayedMatch(Match match) throws Exception {
 		if (playedMatches != null) {
 			playedMatches.add(match);
-			try {
-				dao.update(this);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			dao.update(this);
 		} else {
 			System.err.println("playedMatches is null. username is: " + getUsername());
 		}
@@ -93,7 +81,7 @@ public class Player extends RegisteredUser implements Serializable {
 	
 	public int getWonMatches() {
 		int wonMatches = 0;
-		for (Match match : playedMatches) {
+		for (Match match : getPlayedMatches()) {
 			if (match.isWon()) {
 				++wonMatches;
 			}
@@ -105,8 +93,9 @@ public class Player extends RegisteredUser implements Serializable {
 		return currentMatch;
 	}
 	
-	public void setCurrentMatch(Match match) {
+	public void setCurrentMatch(Match match) throws Exception {
 		this.currentMatch = match;
+		dao.update(this);
 	}
 	
 }

@@ -6,6 +6,11 @@ import edu.upc.fib.wordguess.domain.model.Match;
 public class PenaltyScoringStrategy implements ScoringStrategy {
 
 	@Override
+	public StrategyValue getValue() {
+		return StrategyValue.penalty;
+	}
+	
+	@Override
 	public int getScoreOnSuccess() {
 		return 2; //just because it seemed right
 	}

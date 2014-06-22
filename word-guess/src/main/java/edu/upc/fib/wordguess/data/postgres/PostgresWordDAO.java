@@ -41,7 +41,7 @@ public class PostgresWordDAO extends PostgresGenericDAO<Word> implements WordDAO
 	public List<Word> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<Word> words = (List<Word>) session.createQuery("from " + Word.TABLE).list();
+		List<Word> words = (List<Word>) session.createQuery("from " + Word.class.getSimpleName()).list();
 				
 		session.close();
 		
