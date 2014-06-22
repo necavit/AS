@@ -6,6 +6,11 @@ import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Player;
 
+/*
+ *aquesta classe hereda de transaccio i l'implementa amb les funcionalitats del
+ *controlador de fer autentificacio d'un usuari
+ */
+
 public class LoginTransaction implements Transaction<Boolean> {
 
 	private String username;
@@ -17,6 +22,13 @@ public class LoginTransaction implements Transaction<Boolean> {
 	}
 	
 	@Override
+	/**
+	 * agafa una instancia del jugador amb el username que s'ha rebut a la constructora
+	 * i comprova si te la mateixa contrasenya que l'atribut de la classe
+	 * llença la excepcio de contrasenya no valida
+	 * 
+	 * retrna un boolea que indica si el login es correcre
+	 */
 	public Boolean execute() throws PlayerNotExistsException, InvalidPasswordException {
 		//data controllers acquisition
 		MockDAOFactory dataFactory = MockDAOFactory.getInstance();
