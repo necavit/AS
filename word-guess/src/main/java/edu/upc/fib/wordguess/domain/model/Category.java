@@ -18,7 +18,9 @@ import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 @Entity
 @Table(name=Category.TABLE)
 public class Category implements Serializable {
-
+	/**
+	 * Classe java corresponent a la classe "Category" del model de classes de domini
+	 * */
 	private static final long serialVersionUID = 7847291535698838393L;
 
 	public static final String TABLE = "category";

@@ -13,6 +13,9 @@ import edu.upc.fib.wordguess.util.HibernateUtil;
 @Entity
 @Table(name=Admin.TABLE_ADMIN)
 public class Admin extends RegisteredUser implements Serializable {
+	/**
+	 * Classe java corresponent a la classe "Admin" del model de classes de domini
+	 * */
 	
 	public static final String TABLE_ADMIN = "admin";
 	

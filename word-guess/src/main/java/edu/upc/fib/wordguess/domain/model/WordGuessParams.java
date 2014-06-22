@@ -11,7 +11,9 @@ import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 @Entity
 @Table(name=WordGuessParams.TABLE)
 public class WordGuessParams {
-
+	/**
+	 * Classe java corresponent a la classe "Paràmetres" del model de classes de domini
+	 * */
 	public static final String TABLE = "word_guess_params";
 	
 	@Id

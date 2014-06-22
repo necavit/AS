@@ -13,7 +13,9 @@ import javax.persistence.Table;
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name=RegisteredUser.TABLE_USER)
 public abstract class RegisteredUser implements Serializable {
-	
+	/**
+	 * Classe java corresponent a la classe "UsuariRegistrat" del model de classes de domini
+	 * */
 	private static final long serialVersionUID = -283532121656300725L;
 	
 	public static final String TABLE_USER = "registered_user";

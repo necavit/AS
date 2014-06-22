@@ -22,7 +22,9 @@ import edu.upc.fib.wordguess.util.Log;
 @Entity
 @Table(name=Match.TABLE)
 public class Match implements Serializable {
-
+	/**
+	 * Classe java corresponent a la classe "Partida" del model de classes de domini
+	 * */
     private static final long serialVersionUID = -5210486939375055839L;
     public static final String TABLE = "match";
 

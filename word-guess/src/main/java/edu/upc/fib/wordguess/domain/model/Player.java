@@ -17,7 +17,9 @@ import edu.upc.fib.wordguess.util.HibernateUtil;
 @Entity
 @Table(name=Player.TABLE_PLAYER)
 public class Player extends RegisteredUser implements Serializable {
-
+	/**
+	 * Classe java corresponent a la classe "Jugador" del model de classes de domini
+	 * */
 	private static final long serialVersionUID = 2249987917128104143L;
 
 	public static final String TABLE_PLAYER = "player";

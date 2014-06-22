@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -109,20 +111,27 @@ public class PlayMatchView extends JFrame {
 			//label usuari
 			JLabel lb_user = new JLabel("Usuari");
 			lb_user.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_user.setBounds(150, 80, 150, 30);
+			lb_user.setBounds(210, 80, 150, 30);
 			lb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_user);
 			
 			//label contrasenya
 			JLabel lb_pass = new JLabel("Contrasenya");
 			lb_pass.setFont(new java.awt.Font("Tahoma",0,20));
-			lb_pass.setBounds(150, 130, 130, 30);
+			lb_pass.setBounds(210, 130, 130, 30);
 			lb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			add(lb_pass);
 			
-			//textField usuername
+			//label imatge logo
+			JLabel lb_logo = new JLabel("");
+			lb_logo.setBounds(50, 50, 130, 130);
+			ImageIcon ImgIcon = new ImageIcon(getClass().getClassLoader().getResource("logoWG.png"));
+			lb_logo.setIcon(ImgIcon);
+			add(lb_logo);
+			
+			//textField username
 			tb_user = new JTextField();
-			tb_user.setBounds(320, 80, 130, 30);
+			tb_user.setBounds(380, 80, 130, 30);
 			tb_user.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_user.setBackground( Color.LIGHT_GRAY );
 			tb_user.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
@@ -132,7 +141,7 @@ public class PlayMatchView extends JFrame {
 			
 			//textField contrasenya
 			tb_pass = new JPasswordField();
-			tb_pass.setBounds(320, 130, 130, 30);
+			tb_pass.setBounds(380, 130, 130, 30);
 			tb_pass.setHorizontalAlignment(SwingConstants.CENTER);
 			tb_pass.setBackground( Color.lightGray );
 			tb_pass.setBorder( BorderFactory.createLineBorder( new Color(160, 160, 160), 2 ));
@@ -161,7 +170,7 @@ public class PlayMatchView extends JFrame {
 				}
 			});
 			btn_login.setBackground( new Color( 117, 255, 71) );
-			btn_login.setBounds(250, 300, 100, 35);
+			btn_login.setBounds(250, 250, 100, 35);
 			btn_login.setFont(new java.awt.Font("Tahoma", Font.BOLD, 15));
 			btn_login.setBorder( BorderFactory.createLineBorder( new Color(0,133,0), 2 ));
 			add(btn_login);

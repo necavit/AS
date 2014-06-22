@@ -17,7 +17,9 @@ import edu.upc.fib.wordguess.util.HibernateUtil;
 @Entity
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
-
+	/**
+	 * Classe java corresponent a la classe "Paraula" del model de classes de domini
+	 * */
     private static final long serialVersionUID = -7024212638179206833L;
     public static final String TABLE = "word";
 

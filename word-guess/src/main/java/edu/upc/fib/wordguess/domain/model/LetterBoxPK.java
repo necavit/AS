@@ -3,7 +3,9 @@ package edu.upc.fib.wordguess.domain.model;
 import java.io.Serializable;
 
 public class LetterBoxPK implements Serializable {
-
+	/**
+	 * Classe necessària per poder fer em mapping de Hibernate ja que LetterBox té una clau composta
+	 * */
 	private static final long serialVersionUID = -2730791475497868230L;
 
 	private int position;

@@ -16,7 +16,9 @@ import javax.persistence.Table;
 @Table(name=LetterBox.TABLE)
 @IdClass(value=LetterBoxPK.class)
 public class LetterBox implements Serializable {
-
+	/**
+	 * Classe java corresponent a la classe "Casella" del model de classes de domini
+	 * */
 	public static final String TABLE = "letter_box";
 	
 	private static final long serialVersionUID = -6982945784764306460L;
