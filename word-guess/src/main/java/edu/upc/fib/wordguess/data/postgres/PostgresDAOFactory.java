@@ -8,6 +8,15 @@ import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 
+/**
+ * PostgresDAOFactory provides centralized access to domain object
+ *  DAOs (Data Access Object).
+ *  
+ * It is a DAOFactory interface implementation and returns DAOs
+ * 	which are usign an Object-Relational-Mapping strategy to achieve
+ *  persistency. The ORM used is Hibernate and the underlying database
+ *  used is PostgreSQL.
+ */
 public class PostgresDAOFactory implements DAOFactory {
 	
 	/* **** **** MEMBERS ***** **** */
