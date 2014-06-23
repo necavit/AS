@@ -125,7 +125,7 @@ public class PlayMatchView extends JFrame {
 			
 			//label imatge logo
 			JLabel lb_logo = new JLabel("");
-			lb_logo.setBounds(-4, -2, 87, 87);
+			lb_logo.setBounds(20, 90, 87, 87);
 			ImageIcon ImgIcon = new ImageIcon(getClass().getClassLoader().getResource("logoWG.png"));
 			lb_logo.setIcon(ImgIcon);
 			add(lb_logo);
