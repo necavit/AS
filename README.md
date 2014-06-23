@@ -8,6 +8,8 @@ L'informe de la segona entrega es troba al directori `report2`.
 
 L'informe de la tercera entrega es troba al directori `report3`.
 
+L'informe de la quarta entrega es troba al directori `report4`.
+
 ##Execució
 
 Per executar el projecte, un cop configurat l'entorn (vegeu la secció Setup), podem seleccionar el fitxer `WordGuess` del directori `src/main/java` i executar-lo a través de l'IDE com una aplicació Java.
