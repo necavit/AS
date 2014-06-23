@@ -226,7 +226,14 @@ public class Match implements Serializable {
 	private void checkMatchWon() {
 		boolean won = true;
 		for (LetterBox box : letterBoxes) {
-			if (!box.isSuccess()) {
+			Boolean success = box.isSuccess();
+			if (success != null) { //box has been answered
+				if (!box.isSuccess()) {
+					won = false;
+					break;
+				}
+			}
+			else { //one box unanswered - it can't be a winning move
 				won = false;
 				break;
 			}
