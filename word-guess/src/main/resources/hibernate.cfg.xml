@@ -10,7 +10,7 @@
   <property name="hibernate.default_schema">public</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
   
   <!-- Schema mappings -->
 	  <mapping class="edu.upc.fib.wordguess.domain.model.Admin"/>
@@ -20,6 +20,7 @@
 	  <mapping class="edu.upc.fib.wordguess.domain.model.Player"/>
 	  <mapping class="edu.upc.fib.wordguess.domain.model.RegisteredUser"/>
 	  <mapping class="edu.upc.fib.wordguess.domain.model.Word"/>
+	  <mapping class="edu.upc.fib.wordguess.domain.model.WordGuessParams"/>
   <!-- End Schema mappings -->
   
  </session-factory>

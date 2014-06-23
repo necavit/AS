@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name=RegisteredUser.TABLE_USER)
-public abstract class RegisteredUser implements Serializable {
+public class RegisteredUser implements Serializable {
 	/**
 	 * Classe java corresponent a la classe "UsuariRegistrat" del model de classes de domini
 	 * */

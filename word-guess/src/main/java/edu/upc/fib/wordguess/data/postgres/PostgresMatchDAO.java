@@ -16,7 +16,7 @@ public class PostgresMatchDAO extends PostgresGenericDAO<Match> implements Match
 	public List<Match> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<Match> matches = (List<Match>) session.createQuery("from " + Match.TABLE).list();
+		List<Match> matches = (List<Match>) session.createQuery("from " + Match.class.getSimpleName()).list();
 				
 		session.close();
 		

@@ -1,10 +1,11 @@
 package edu.upc.fib.wordguess.domain.controllers.transaction;
 
-import edu.upc.fib.wordguess.data.dao.PlayerDAO;
-import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
-import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 
 /*
  *aquesta classe hereda de transaccio i l'implementa amb les funcionalitats del
@@ -25,17 +26,17 @@ public class LoginTransaction implements Transaction<Boolean> {
 	/**
 	 * agafa una instancia del jugador amb el username que s'ha rebut a la constructora
 	 * i comprova si te la mateixa contrasenya que l'atribut de la classe
-	 * llença la excepcio de contrasenya no valida
+	 * llenï¿½a la excepcio de contrasenya no valida
 	 * 
 	 * retrna un boolea que indica si el login es correcre
 	 */
-	public Boolean execute() throws PlayerNotExistsException, InvalidPasswordException {
+	public Boolean execute() throws UserNotExistsException, InvalidPasswordException {
 		//data controllers acquisition
-		MockDAOFactory dataFactory = MockDAOFactory.getInstance();
-		PlayerDAO userController = dataFactory.getPlayerDAO();
+		DAOFactory dataFactory = PostgresDAOFactory.getInstance();
+		RegisteredUserDAO userController = dataFactory.getRegisteredUserDAO();
 		
 		//fetch user
-		Player user = userController.get(username);
+		RegisteredUser user = userController.getUser(username);
 		
 		//if no UsernameNotExists has yet been propagated,
 		// the user exists -> check password

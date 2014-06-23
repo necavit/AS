@@ -1,25 +1,29 @@
 package edu.upc.fib.wordguess.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.HibernateException;
-
 import edu.upc.fib.wordguess.data.dao.WordDAO;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.util.HibernateUtil;
 
+/**
+ * Classe java corresponent a la classe "Paraula" del model de classes de domini
+ * */
 @Entity
 @Table(name=Word.TABLE)
 public class Word implements Serializable {
-	/**
-	 * Classe java corresponent a la classe "Paraula" del model de classes de domini
-	 * */
+	
     private static final long serialVersionUID = -7024212638179206833L;
     public static final String TABLE = "word";
 
@@ -30,8 +34,13 @@ public class Word implements Serializable {
     @Column
     private int numLetters;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="category_id")
     private Category category;
+    public static final String MAPPED_BY_CATEGORY = "category";
+    
+    @OneToMany(mappedBy=Match.MAPPED_BY_WORD)
+    private List<Match> matches;
     
     /**
      * WARNING! Never use this constructor!
@@ -42,34 +51,25 @@ public class Word implements Serializable {
     	//empty constructor for Hibernate to work
     }
     
-    private static WordDAO dao = MockDAOFactory.getInstance().getWordDAO();
+    private static WordDAO dao = PostgresDAOFactory.getInstance().getWordDAO();
     
-    public Word(String name, Category category) throws HibernateException {
+    public Word(String name, Category category) throws Exception {
         this.name = name;
         this.numLetters = name.length();
         this.category = category;
+        this.matches = new ArrayList<Match>();
+        dao.store(this);
         category.addWord(this);
-        try {
-			dao.store(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
 
     public String getName() {
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
         this.name = name;
         this.numLetters = name.length();
-        try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        dao.update(this);
     }
 
     public int getNumLetters() {
@@ -80,13 +80,29 @@ public class Word implements Serializable {
 		return category;
 	}
     
-    public void setCategory(Category category) {
-		this.category = category;
-		try {
-			dao.update(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public void setCategory(Category category) throws Exception {
+		this.category.deleteWord(this);
+    	this.category = category;
+    	category.addWord(this);
+		dao.update(this);
 	}
+    
+    public List<Match> getMatches() {
+		return matches;
+	}
+    
+    public void setMatches(List<Match> matches) throws Exception {
+		this.matches = matches;
+		dao.update(this);
+	}
+    
+    public void addMatch(Match match) throws Exception {
+    	getMatches().add(match);
+    	dao.update(this);
+    }
+    
+    public void deleteMatch(Match match) throws Exception {
+    	getMatches().remove(match);
+    	dao.update(this);
+    }
 }

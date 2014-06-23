@@ -6,6 +6,11 @@ import edu.upc.fib.wordguess.domain.model.Match;
 public class PenaltyScoringStrategy implements ScoringStrategy {
 
 	@Override
+	public StrategyValue getValue() {
+		return StrategyValue.penalty;
+	}
+	
+	@Override
 	public int getScoreOnSuccess() {
 		return 2; //just because it seemed right
 	}
@@ -19,11 +24,17 @@ public class PenaltyScoringStrategy implements ScoringStrategy {
 	public int getScore(Match match) {
 		int score = 0;
 		for (LetterBox letterBox : match.getLetterBoxes()) {
-			if (letterBox.isSuccess()) {
-				score += getScoreOnSuccess();
+			Boolean success = letterBox.isSuccess(); 
+			if (success != null) { //letter box has been answered
+				if (success) {
+					score += getScoreOnSuccess();
+				}
+				else {
+					score += getScoreOnError();
+				}
 			}
-			else {
-				score += getScoreOnError();
+			else { //letter box was not answered: do not sum nor penalize
+				//do nothing
 			}
 		}
 		return score;

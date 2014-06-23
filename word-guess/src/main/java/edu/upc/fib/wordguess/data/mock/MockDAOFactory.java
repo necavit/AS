@@ -1,7 +1,9 @@
 package edu.upc.fib.wordguess.data.mock;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
+import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
@@ -32,10 +34,14 @@ public class MockDAOFactory implements DAOFactory {
 	private CategoryDAO categoryDAO = null;
 	
 	private PlayerDAO playerDAO = null;
+	
+	private AdminDAO adminDAO = null;
 
 	private RegisteredUserDAO registeredUserDAO = null;
 
 	private ParamsDAO paramsDAO = null;
+
+	private LetterBoxDAO letterBoxDAO = null;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
@@ -56,6 +62,12 @@ public class MockDAOFactory implements DAOFactory {
 	 *  DAOFactory interface. See the Javadoc provided for
 	 *  each method in the interface file.
 	 */
+	
+	@Override
+	public AdminDAO getAdminDAO() {
+		if (adminDAO == null) adminDAO = new MockAdminDAO();
+		return adminDAO;
+	};
 	
 	@Override
 	public CategoryDAO getCategoryDAO() {
@@ -91,6 +103,12 @@ public class MockDAOFactory implements DAOFactory {
 	public ParamsDAO getParamsDAO() {
 		if (paramsDAO  == null) paramsDAO = new MockParamsDAO();
 		return paramsDAO;
+	}
+	
+	@Override
+	public LetterBoxDAO getLetterBoxDAO() {
+		if (letterBoxDAO == null) letterBoxDAO = new MockLetterBoxDAO();
+		return letterBoxDAO ;
 	}
 	
 }

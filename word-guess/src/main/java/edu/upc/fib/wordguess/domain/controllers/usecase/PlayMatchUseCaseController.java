@@ -8,16 +8,17 @@ import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.CategoryNotExistsException;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.controllers.transaction.FetchCategoriesTransaction;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Match;
 import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.Word;
 import edu.upc.fib.wordguess.domain.model.WordGuessParams;
 import edu.upc.fib.wordguess.service.ServiceLocator;
-import edu.upc.fib.wordguess.service.exception.NoSuchServiceException;
 import edu.upc.fib.wordguess.service.notification.NotificationService;
 import edu.upc.fib.wordguess.util.Log;
 
@@ -91,7 +92,7 @@ public class PlayMatchUseCaseController {
 	 * @throws PlayerNotExistsException
 	 * @throws InvalidPasswordException
 	 */
-	public boolean authenticate(String username, String pass) throws PlayerNotExistsException, InvalidPasswordException {
+	public boolean authenticate(String username, String pass) throws UserNotExistsException, InvalidPasswordException {
 		Log.debug(TAG, "authenticate username: " + username);
 		this.username = username;
 		LoginTransaction login = new LoginTransaction(username, pass);
@@ -104,19 +105,19 @@ public class PlayMatchUseCaseController {
 	 * 
 	 * @param categoryName
 	 * @return
+	 * @throws PlayerNotExistsException if the logged user is an admin
 	 */
-	public MatchInfoTuple createMatch(String categoryName) {
+	public MatchInfoTuple createMatch(String categoryName) throws PlayerNotExistsException {
 		Log.debug(TAG, "create match for category: " + categoryName);
-		DAOFactory daoFactory = MockDAOFactory.getInstance();
+		DAOFactory daoFactory = PostgresDAOFactory.getInstance();
 		
 		//retrieve the player that is to be assigned to the new match
 		PlayerDAO playerDAO = daoFactory.getPlayerDAO();
 		try {
 			player = playerDAO.get(username);
 		} catch (PlayerNotExistsException e) {
-			//this should never be the case, since this method (create match)
-			// is only called after having been logged in
-			e.printStackTrace();
+			//the logged user is an admin user
+			throw new PlayerNotExistsException();
 		}
 		
 		//retrieve the category of the word that the match will have
@@ -134,8 +135,19 @@ public class PlayMatchUseCaseController {
 		ParamsDAO paramsDAO = daoFactory.getParamsDAO();
 		WordGuessParams params = paramsDAO.getParams();
 		
-		match = new Match(params, player, category);
-		return match.getMatchInfoTuple();
+		Word word = category.getRandomWord();
+		
+		try {
+			match = new Match(params, player, word);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (match != null) {
+			return match.getMatchInfoTuple();
+		}
+		else {
+			return null;
+		}
 	}
 	
 	

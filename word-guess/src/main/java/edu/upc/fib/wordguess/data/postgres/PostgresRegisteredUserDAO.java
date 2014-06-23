@@ -16,7 +16,7 @@ public class PostgresRegisteredUserDAO extends PostgresGenericDAO<RegisteredUser
 	public List<RegisteredUser> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<RegisteredUser> words = (List<RegisteredUser>) session.createQuery("from " + RegisteredUser.TABLE_USER).list();
+		List<RegisteredUser> words = (List<RegisteredUser>) session.createQuery("from " + RegisteredUser.class.getSimpleName()).list();
 				
 		session.close();
 		

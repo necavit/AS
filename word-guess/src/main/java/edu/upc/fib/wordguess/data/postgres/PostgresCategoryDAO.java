@@ -16,7 +16,7 @@ public class PostgresCategoryDAO extends PostgresGenericDAO<Category> implements
 	public List<Category> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<Category> category = (List<Category>) session.createQuery("from " + Category.TABLE).list();
+		List<Category> category = (List<Category>) session.createQuery("from " + Category.class.getSimpleName()).list();
 				
 		session.close();
 		

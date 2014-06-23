@@ -41,7 +41,7 @@ public class PostgresPlayerDAO extends PostgresGenericDAO<Player> implements Pla
 	public List<Player> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<Player> players = (List<Player>) session.createQuery("from " + Player.TABLE_PLAYER).list();
+		List<Player> players = (List<Player>) session.createQuery("from " + Player.class.getSimpleName()).list();
 				
 		session.close();
 		

@@ -1,7 +1,9 @@
 package edu.upc.fib.wordguess.data.postgres;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
+import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
 import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
@@ -32,6 +34,10 @@ public class PostgresDAOFactory implements DAOFactory {
 	private RegisteredUserDAO registeredUserDAO = null;
 
 	private ParamsDAO paramsDAO = null;
+
+	private PostgresLetterBoxDAO letterBoxDAO = null;
+	
+	private AdminDAO adminDAO = null;
 	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
@@ -52,6 +58,12 @@ public class PostgresDAOFactory implements DAOFactory {
 	 *  DAOFactory interface. See the Javadoc provided for
 	 *  each method in the interface file.
 	 */
+	
+	@Override
+	public AdminDAO getAdminDAO() {
+		if (adminDAO == null) adminDAO = new PostgresAdminDAO();
+		return adminDAO;
+	}
 	
 	@Override
 	public CategoryDAO getCategoryDAO() {
@@ -85,8 +97,14 @@ public class PostgresDAOFactory implements DAOFactory {
 	
 	@Override
 	public ParamsDAO getParamsDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		if (paramsDAO == null) paramsDAO = new PostgresParamsDAO();
+		return paramsDAO;
+	}
+	
+	@Override
+	public LetterBoxDAO getLetterBoxDAO() {
+		if (letterBoxDAO == null) letterBoxDAO  = new PostgresLetterBoxDAO();
+		return letterBoxDAO;
 	}
 
 }

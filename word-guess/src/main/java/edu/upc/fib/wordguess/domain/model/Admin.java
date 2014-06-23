@@ -8,14 +8,15 @@ import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 
-import edu.upc.fib.wordguess.util.HibernateUtil;
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
+import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 
+/**
+ * Classe java corresponent a la classe "Admin" del model de classes de domini
+ */
 @Entity
 @Table(name=Admin.TABLE_ADMIN)
 public class Admin extends RegisteredUser implements Serializable {
-	/**
-	 * Classe java corresponent a la classe "Admin" del model de classes de domini
-	 * */
 	
 	public static final String TABLE_ADMIN = "admin";
 	
@@ -33,17 +34,21 @@ public class Admin extends RegisteredUser implements Serializable {
 		//
 	}
 	
-	public Admin(String name, String surname, String username, String password, String telephone) throws HibernateException {
+	private static AdminDAO dao = PostgresDAOFactory.getInstance().getAdminDAO();
+	
+	public Admin(String name, String surname, String username, String password, String telephone) throws Exception {
 		initialize(name, surname, username, password);
 		this.telephone = telephone;
+		dao.store(this);
 	}
 	
 	public String getTelephone() {
 		return telephone;
 	}
 	
-	public void setTelephone(String telephone) {
+	public void setTelephone(String telephone) throws Exception {
 		this.telephone = telephone;
+		dao.update(this);
 	}
 	
 }
