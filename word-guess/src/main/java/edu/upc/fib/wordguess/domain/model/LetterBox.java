@@ -40,7 +40,7 @@ public class LetterBox implements Serializable {
 	public LetterBox(int position, char correctLetter) {
 		this.position = position;
 		this.correctLetter = correctLetter;
-		this.success = false;
+		this.success = null;
 		//this.wrongLetters = new ArrayList<Character>();
 	}
 	

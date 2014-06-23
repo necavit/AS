@@ -8,6 +8,7 @@ import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.CategoryNotExistsException;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.controllers.transaction.FetchCategoriesTransaction;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;
@@ -91,7 +92,7 @@ public class PlayMatchUseCaseController {
 	 * @throws PlayerNotExistsException
 	 * @throws InvalidPasswordException
 	 */
-	public boolean authenticate(String username, String pass) throws PlayerNotExistsException, InvalidPasswordException {
+	public boolean authenticate(String username, String pass) throws UserNotExistsException, InvalidPasswordException {
 		Log.debug(TAG, "authenticate username: " + username);
 		this.username = username;
 		LoginTransaction login = new LoginTransaction(username, pass);
@@ -104,8 +105,9 @@ public class PlayMatchUseCaseController {
 	 * 
 	 * @param categoryName
 	 * @return
+	 * @throws PlayerNotExistsException if the logged user is an admin
 	 */
-	public MatchInfoTuple createMatch(String categoryName) {
+	public MatchInfoTuple createMatch(String categoryName) throws PlayerNotExistsException {
 		Log.debug(TAG, "create match for category: " + categoryName);
 		DAOFactory daoFactory = PostgresDAOFactory.getInstance();
 		
@@ -114,9 +116,8 @@ public class PlayMatchUseCaseController {
 		try {
 			player = playerDAO.get(username);
 		} catch (PlayerNotExistsException e) {
-			//this should never be the case, since this method (create match)
-			// is only called after having been logged in
-			e.printStackTrace();
+			//the logged user is an admin user
+			throw new PlayerNotExistsException();
 		}
 		
 		//retrieve the category of the word that the match will have

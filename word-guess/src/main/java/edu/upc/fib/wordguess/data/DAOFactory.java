@@ -1,5 +1,6 @@
 package edu.upc.fib.wordguess.data;
 
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
 import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
@@ -32,6 +33,14 @@ public interface DAOFactory {
 	 * @return an implementation of MatchDAO
 	 */
 	public MatchDAO getMatchDAO();
+	
+	/**
+	 * Retrieves a MatchDAO, to be able to query the persistency
+	 * layer for Match objects.
+	 * 
+	 * @return an implementation of AdminDAO
+	 */
+	public AdminDAO getAdminDAO();
 	
 	/**
 	 * Retrieves a PlayerDAO, to be able to query the persistency

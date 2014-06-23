@@ -1,12 +1,12 @@
 package edu.upc.fib.wordguess.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.domain.controllers.usecase.PlayMatchUseCaseController;
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.domain.controllers.usecase.MatchInfoTuple;
 import edu.upc.fib.wordguess.domain.controllers.usecase.PlayLetterInfoTuple;
+import edu.upc.fib.wordguess.domain.controllers.usecase.PlayMatchUseCaseController;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
 import edu.upc.fib.wordguess.domain.model.Category;
 
@@ -51,7 +51,7 @@ public class PlayMatchController {
 		boolean logged = false;
 		try {
 			logged = jpuc.authenticate(username, pass);
-		} catch (PlayerNotExistsException e) {
+		} catch (UserNotExistsException e) {
 			jpv.showMessage("L'usuari no existeix", 0);
 		} catch (InvalidPasswordException e) {
 			jpv.showMessage("La contrassenya és incorrecta", 0);
@@ -73,9 +73,15 @@ public class PlayMatchController {
 	 * Creates a new match taking a word from the given category.
 	 * 
 	 * @param categoryName
+	 * @throws UserIsNotPlayerException 
 	 */
-	public void PrStartMatch(String categoryName) {
-		MatchInfoTuple matchInfo = jpuc.createMatch(categoryName);		
+	public void PrStartMatch(String categoryName) throws UserIsNotPlayerException {
+		MatchInfoTuple matchInfo = null;
+		try {
+			matchInfo = jpuc.createMatch(categoryName);
+		} catch (PlayerNotExistsException e) {
+			throw new UserIsNotPlayerException();
+		}		
 		idPartida = matchInfo.matchId;
 		jpv.loadPointsPer(matchInfo.scoreOnSuccess, matchInfo.scoreOnError);
 		jpv.updateCurrentScoring(matchInfo.currentScore);

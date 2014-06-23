@@ -24,8 +24,14 @@ public class NonPenaltyScoring implements ScoringStrategy {
 	public int getScore(Match match) {
 		int score = 0;
 		for (LetterBox letterBox : match.getLetterBoxes()) {
-			if (letterBox.isSuccess()) {
-				score += getScoreOnSuccess();
+			Boolean success = letterBox.isSuccess();
+			if (success != null) { //letterBox was answered
+				if (letterBox.isSuccess()) {
+					score += getScoreOnSuccess();
+				}
+			}
+			else { //was not answered
+				//do nothing
 			}
 		}
 		return score;

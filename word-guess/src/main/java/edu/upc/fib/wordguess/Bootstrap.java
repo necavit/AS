@@ -2,6 +2,7 @@ package edu.upc.fib.wordguess;
 
 import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.domain.model.Admin;
 import edu.upc.fib.wordguess.domain.model.Category;
 import edu.upc.fib.wordguess.domain.model.Player;
 import edu.upc.fib.wordguess.domain.model.Word;
@@ -36,6 +37,9 @@ public class Bootstrap {
 					createWord("vaixell", transports);
 					createWord("moto", transports);
 					createWord("bici", transports);
+					
+				//admin
+				createAdmin("Admin", "Admin", "admin", "admin123", "9312345678");
 					
 				//players
 				createPlayer("David", "Martínez", "david", "test", "gollumdeagol@gmail.com");
@@ -94,6 +98,14 @@ public class Bootstrap {
 	private static void createPlayer(String name, String surname, String username, String password, String email) {
 		try {
 			new Player(name, surname, username, password, email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void createAdmin(String name, String surname, String username, String password, String telephone) {
+		try {
+			new Admin(name, surname, username, password, telephone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

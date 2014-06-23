@@ -1,6 +1,7 @@
 package edu.upc.fib.wordguess.data.mock;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
 import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
@@ -33,6 +34,8 @@ public class MockDAOFactory implements DAOFactory {
 	private CategoryDAO categoryDAO = null;
 	
 	private PlayerDAO playerDAO = null;
+	
+	private AdminDAO adminDAO = null;
 
 	private RegisteredUserDAO registeredUserDAO = null;
 
@@ -59,6 +62,12 @@ public class MockDAOFactory implements DAOFactory {
 	 *  DAOFactory interface. See the Javadoc provided for
 	 *  each method in the interface file.
 	 */
+	
+	@Override
+	public AdminDAO getAdminDAO() {
+		if (adminDAO == null) adminDAO = new MockAdminDAO();
+		return adminDAO;
+	};
 	
 	@Override
 	public CategoryDAO getCategoryDAO() {

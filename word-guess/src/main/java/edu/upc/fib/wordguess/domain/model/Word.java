@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import edu.upc.fib.wordguess.data.dao.WordDAO;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
+import edu.upc.fib.wordguess.util.HibernateUtil;
 
 /**
  * Classe java corresponent a la classe "Paraula" del model de classes de domini
@@ -96,12 +97,12 @@ public class Word implements Serializable {
 	}
     
     public void addMatch(Match match) throws Exception {
-    	this.matches.add(match);
+    	getMatches().add(match);
     	dao.update(this);
     }
     
     public void deleteMatch(Match match) throws Exception {
-    	this.matches.remove(match);
+    	getMatches().remove(match);
     	dao.update(this);
     }
 }

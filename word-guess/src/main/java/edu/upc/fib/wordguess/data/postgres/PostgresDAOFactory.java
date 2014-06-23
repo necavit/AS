@@ -1,6 +1,7 @@
 package edu.upc.fib.wordguess.data.postgres;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
+import edu.upc.fib.wordguess.data.dao.AdminDAO;
 import edu.upc.fib.wordguess.data.dao.CategoryDAO;
 import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
 import edu.upc.fib.wordguess.data.dao.MatchDAO;
@@ -36,6 +37,8 @@ public class PostgresDAOFactory implements DAOFactory {
 
 	private PostgresLetterBoxDAO letterBoxDAO = null;
 	
+	private AdminDAO adminDAO = null;
+	
 	/* **** **** SINGLETON MEMBER & METHODS ***** **** */
 	
 	private static PostgresDAOFactory instance = null;
@@ -55,6 +58,12 @@ public class PostgresDAOFactory implements DAOFactory {
 	 *  DAOFactory interface. See the Javadoc provided for
 	 *  each method in the interface file.
 	 */
+	
+	@Override
+	public AdminDAO getAdminDAO() {
+		if (adminDAO == null) adminDAO = new PostgresAdminDAO();
+		return adminDAO;
+	}
 	
 	@Override
 	public CategoryDAO getCategoryDAO() {

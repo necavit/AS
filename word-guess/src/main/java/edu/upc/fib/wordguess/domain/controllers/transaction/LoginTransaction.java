@@ -1,11 +1,11 @@
 package edu.upc.fib.wordguess.domain.controllers.transaction;
 
 import edu.upc.fib.wordguess.data.DAOFactory;
-import edu.upc.fib.wordguess.data.dao.PlayerDAO;
-import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
+import edu.upc.fib.wordguess.data.dao.RegisteredUserDAO;
+import edu.upc.fib.wordguess.data.exception.UserNotExistsException;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.exception.InvalidPasswordException;
-import edu.upc.fib.wordguess.domain.model.Player;
+import edu.upc.fib.wordguess.domain.model.RegisteredUser;
 
 /*
  *aquesta classe hereda de transaccio i l'implementa amb les funcionalitats del
@@ -30,13 +30,13 @@ public class LoginTransaction implements Transaction<Boolean> {
 	 * 
 	 * retrna un boolea que indica si el login es correcre
 	 */
-	public Boolean execute() throws PlayerNotExistsException, InvalidPasswordException {
+	public Boolean execute() throws UserNotExistsException, InvalidPasswordException {
 		//data controllers acquisition
 		DAOFactory dataFactory = PostgresDAOFactory.getInstance();
-		PlayerDAO userController = dataFactory.getPlayerDAO();
+		RegisteredUserDAO userController = dataFactory.getRegisteredUserDAO();
 		
 		//fetch user
-		Player user = userController.get(username);
+		RegisteredUser user = userController.getUser(username);
 		
 		//if no UsernameNotExists has yet been propagated,
 		// the user exists -> check password
