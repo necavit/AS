@@ -8,7 +8,6 @@ import edu.upc.fib.wordguess.data.dao.ParamsDAO;
 import edu.upc.fib.wordguess.data.dao.PlayerDAO;
 import edu.upc.fib.wordguess.data.exception.CategoryNotExistsException;
 import edu.upc.fib.wordguess.data.exception.PlayerNotExistsException;
-import edu.upc.fib.wordguess.data.mock.MockDAOFactory;
 import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
 import edu.upc.fib.wordguess.domain.controllers.transaction.FetchCategoriesTransaction;
 import edu.upc.fib.wordguess.domain.controllers.transaction.LoginTransaction;

@@ -5,9 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import edu.upc.fib.wordguess.data.dao.LetterBoxDAO;
-import edu.upc.fib.wordguess.data.postgres.PostgresDAOFactory;
-
 @Embeddable
 public class LetterBox implements Serializable {
 	/**
@@ -35,46 +32,40 @@ public class LetterBox implements Serializable {
 	  @Column
 	private List<Character> wrongLetters;
 	*/
-
-	private static LetterBoxDAO dao = PostgresDAOFactory.getInstance().getLetterBoxDAO();
 	
 	public LetterBox() {
 		//
 	}
 	
-	public LetterBox(int position, char correctLetter) throws Exception {
+	public LetterBox(int position, char correctLetter) {
 		this.position = position;
 		this.correctLetter = correctLetter;
 		this.success = false;
 		//this.wrongLetters = new ArrayList<Character>();
-		//dao.store(this);
 	}
 	
 	public int getPosition() {
 		return position;
 	}
 
-	public void setPosition(int position) throws Exception {
+	public void setPosition(int position) {
 		this.position = position;
-		//dao.update(this);
 	}
 
 	public char getCorrectLetter() {
 		return correctLetter;
 	}
 
-	public void setCorrectLetter(char correctLetter) throws Exception {
+	public void setCorrectLetter(char correctLetter) {
 		this.correctLetter = correctLetter;
-		//dao.update(this);
 	}
 
 	public Boolean isSuccess() {
 		return success;
 	}
 
-	public void setSuccess(Boolean success) throws Exception {
+	public void setSuccess(Boolean success) {
 		this.success =  success;
-		//dao.update(this);
 	}
 
 	public boolean checkLetter(char letter){
