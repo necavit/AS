@@ -1,0 +1,71 @@
+% !TeX document-id = {c8997a6a-2921-4608-9b2d-78af17b6575a}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{minted}
+\usemintedstyle{friendly}
+\usepackage{todonotes}
+\usepackage[section]{placeins}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{ifthen}
+
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
+\titlehead{\centering\includegraphics[width=3cm]{images/logo.png}}
+\title{Endevina Paraules (IV)}
+\date{Juny 2014}
+\author{Daniel Ariñez Soriano}
+\author{David Martínez Rodríguez}
+\author{Miquel Masriera Quevedo}
+\author{Marcel Pujol Navarro\vspace{11cm}}
+\affil{Arquitectura del Software\\Facultat d'Informàtica de Barcelona, UPC}
+
+\renewcommand\Authands{ i }
+
+\begin{document}
+	
+	\maketitle
+	%\begin{center}
+	%	\includegraphics[width=3cm]{images/logo.png}
+	%\end{center}
+	\thispagestyle{empty}
+	\newpage
+	\cleardoublepage
+
+	\section{Repositori de codi}
+	El repositori de codi de la pràctica es troba a la següent URL: \url{https://github.com/necavit/AS}.
+	El repositori és de lliure accés, de manera que no hauria de ser un problema per descarregar-se els
+	continguts o per navegar-hi.
+	El codi es troba comentat i en la seva última versió.
+	
+	A l'arrel del repositori hi figura el fitxer \texttt{README.md}, on es detallen alguns conceptes sobre
+	l'estructura de fitxers del repositori, la configuració del projecte o la seva execució.
+
+	\section{Canvis respecte la demostració}
+	Hem arreglat alguns dels defectes que presentava l'aplicació a la demostració d'avui, dilluns 23 de juny:
+	\begin{itemize}
+		\item \textbf{Usuaris administradors:} hem inclòs a la secció de bootstrapping (al fitxer \texttt{Bootstrap.java}
+		 a l'arrel del directori \texttt{src/main/java}) de l'aplicació un usuari administrador,
+		amb el qual es pot fer login (les credencials es troben al mateix fitxer de bootstrapping) i es pot comprovar
+		com, si intenta jugar una partida, el sistema l'informa que no és un jugador.
+		\item \textbf{Partides amb penalització:} les partides amb penalització comencen ara amb la puntuació inicial
+		correcta.
+	\end{itemize}
+    
+
+\end{document}
