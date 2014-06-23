@@ -2,15 +2,17 @@
 
 El codi de la pràctica es troba al directori `word-guess`.
 
-El codi del client de mail (servei extern) es troba al directori `mail-client`
-
-El codi del servidor de mail es troba al directori `mail-server`
-
 L'informe de la primera entrega es troba al directori `report1`.
 
 L'informe de la segona entrega es troba al directori `report2`.
 
 L'informe de la tercera entrega es troba al directori `report3`.
+
+##Execució
+
+Per executar el projecte, un cop configurat l'entorn (vegeu la secció Setup), podem seleccionar el fitxer `WordGuess` del directori `src/main/java` i executar-lo a través de l'IDE com una aplicació Java.
+
+Donat que la base de dades no és encastada, sinó que l'aplicació es connecta amb un servidor de PostgreSQL, no podem generar un arxiu JAR que es pugui executar de forma ubiqua. En el cas que haguéssim optat per, per exemple, SQLite, l'aplicació seria "standalone" i es podria exportar en un format executable.
 
 ##Setup
 
@@ -72,18 +74,4 @@ sudo -u postgres createdb astest
 ```
 
 D'aquesta manera, disposarem de dos esquemes on podrem executar la nostra aplicació o els tests, de la manera que volguem.
-
-
-####Dependències i servei extern
-
-A la pràctica fem ús d'un servei extern que és un client de mail. Aquest client, que també hem implementat nosaltres, es comporta com una llibreria de la qual depèn el projecte principal. Al seu torn, aquest depèn del servidor, també. Totes aquestes dependències es gestionen amb Maven, de manera "automàtica".
-
-Per tal que el projecte principal (word-guess) funcioni correctament, ens caldrà executar la següent comanda, situant-nos a l'arrel de cadascun dels projectes:
-
-```bash
-mvn install
-```
-
-Alternativament, podem 
-
 
