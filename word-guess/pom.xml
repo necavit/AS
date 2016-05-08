@@ -1,22 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<!-- Project properties -->
 	<groupId>edu.upc.fib.wordguess</groupId>
 	<artifactId>word-guess</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version> <!-- DO NOT CHANGE THIS -->
 	<name>word-guess</name>
-	
+
 	<!-- JBoss repository for Hibernate -->
 	<repositories>
 		<repository>
 			<id>JBoss repository</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
-		</repository> 
+		</repository>
 	</repositories>
-	
+
 	<dependencies>
 	    <dependency>
 		    <groupId>org.codemonkey.simplejavamail</groupId>
@@ -62,7 +62,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 	    <pluginManagement>
 	        <plugins>
@@ -75,6 +75,41 @@
 	                    <target>1.7</target>
 	                </configuration>
 	            </plugin>
+							<plugin>
+						      <groupId>org.apache.maven.plugins</groupId>
+						      <artifactId>maven-jar-plugin</artifactId>
+						      <configuration>
+						          <archive>
+						              <manifest>
+						                  <mainClass>edu.upc.fib.wordguess.WordGuess</mainClass>
+						              </manifest>
+						          </archive>
+						      </configuration>
+						  </plugin>
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+			          <artifactId>maven-assembly-plugin</artifactId>
+			          <version>2.6</version>
+							  <configuration>
+							    <archive>
+							      <manifest>
+							        <mainClass>edu.upc.fib.wordguess.WordGuess</mainClass>
+							      </manifest>
+							    </archive>
+							    <descriptorRefs>
+							      <descriptorRef>jar-with-dependencies</descriptorRef>
+							    </descriptorRefs>
+							  </configuration>
+							  <executions>
+							    <execution>
+							      <id>make-assembly</id>
+							      <phase>package</phase>
+							      <goals>
+							        <goal>single</goal>
+							      </goals>
+							    </execution>
+							  </executions>
+							</plugin>
 	        </plugins>
 	    </pluginManagement>
 	</build>
